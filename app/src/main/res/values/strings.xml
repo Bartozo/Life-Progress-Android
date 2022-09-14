@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Life Progress</string>
+    <string name="navigation">More Menu</string>
+    <string name="return_to_previous_screen">Return to previous screen</string>
+</resources>

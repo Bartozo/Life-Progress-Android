@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.LifeProgress" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="materialCalendarTheme">@style/ThemeOverlay.App.DatePicker</item>
+    </style>
+
+    <style name="ThemeOverlay.App.DatePicker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/colorSurface</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSurface">@color/colorOnPrimary</item>
+    </style>
+</resources>
