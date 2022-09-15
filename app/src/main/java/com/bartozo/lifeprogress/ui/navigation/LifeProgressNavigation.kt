@@ -2,6 +2,7 @@ package com.bartozo.lifeprogress.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -12,6 +13,7 @@ import com.bartozo.lifeprogress.ui.screens.WelcomeScreen
 import com.bartozo.lifeprogress.ui.viewmodels.AboutViewModel
 import com.bartozo.lifeprogress.ui.viewmodels.HomeViewModel
 import com.bartozo.lifeprogress.ui.viewmodels.ProfileViewModel
+import com.bartozo.lifeprogress.ui.viewmodels.WelcomeViewModel
 
 sealed class Screen(val route: String) {
     object Welcome: Screen("welcome")
@@ -25,12 +27,21 @@ fun LifeProgressNavigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route
+        startDestination = Screen.Welcome.route
     ) {
         composable(Screen.Welcome.route) {
+            val viewModel = hiltViewModel<WelcomeViewModel>()
             WelcomeScreen(
+                viewModel = viewModel,
                 navigateToHomeScreen = {
-
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Home.route) { inclusive = true }
+                    }
+                },
+                navigateToProfileScreen = {
+                    navController.navigate(Screen.Profile.route) {
+                        popUpTo(Screen.Welcome.route) { inclusive = true }
+                    }
                 }
             )
         }

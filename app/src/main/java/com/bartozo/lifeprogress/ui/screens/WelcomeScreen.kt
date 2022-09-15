@@ -5,6 +5,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -12,13 +15,28 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
+import com.bartozo.lifeprogress.ui.viewmodels.WelcomeEventState
+import com.bartozo.lifeprogress.ui.viewmodels.WelcomeViewModel
 import com.bartozo.lifeprogress.util.supportWideScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WelcomeScreen(
-    navigateToHomeScreen: () -> Unit
+    viewModel: WelcomeViewModel,
+    navigateToHomeScreen: () -> Unit,
+    navigateToProfileScreen: () -> Unit,
 ) {
+    val welcomeEvent: WelcomeEventState by viewModel.welcomeEvent
+        .collectAsState()
+
+    LaunchedEffect(key1 = welcomeEvent) {
+        when (welcomeEvent) {
+            WelcomeEventState.Idle -> {}
+            WelcomeEventState.OnDidSeeWelcomeScreen -> navigateToHomeScreen()
+            WelcomeEventState.NavigateToProfileScreen -> navigateToProfileScreen()
+        }
+    }
+
     Scaffold(
         content = { innerPaddings ->
             WelcomeContent(
@@ -34,7 +52,7 @@ fun WelcomeScreen(
                 modifier = Modifier
                     .supportWideScreen()
                     .padding(horizontal = 32.dp, vertical = 20.dp),
-                onContinueClick = navigateToHomeScreen
+                onContinueClick = { viewModel.navigateToProfileScreen() }
             )
         },
     )
@@ -118,13 +136,5 @@ private fun WelcomeContentPreview() {
 private fun WelcomeBottomBarPreview() {
     LifeProgressTheme {
         WelcomeBottomBar(onContinueClick = {})
-    }
-}
-
-@Preview
-@Composable
-private fun WelcomeScreenPreview() {
-    LifeProgressTheme {
-        WelcomeScreen(navigateToHomeScreen = {})
     }
 }
