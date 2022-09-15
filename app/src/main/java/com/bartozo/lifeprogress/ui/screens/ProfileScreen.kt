@@ -54,7 +54,6 @@ fun ProfileScreen(
                 modifier = Modifier
                     .padding(innerPaddings)
                     .verticalScroll(state = scrollState)
-                    .padding(horizontal = 2.dp)
             ) {
                 Header(text = "User")
                 BirthDayCard(

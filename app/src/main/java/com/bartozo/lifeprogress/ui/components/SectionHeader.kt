@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SectionHeader(
     modifier: Modifier = Modifier,
@@ -30,24 +31,22 @@ fun SectionHeader(
     }
 
     Column(modifier = modifier.fillMaxWidth()) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { isExpanded = !isExpanded }
-                .padding(horizontal = 16.dp, vertical = 12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = title,
-                style = titleStyle
-            )
-            Icon(
-                imageVector = icon,
-                contentDescription = "Arrow",
-                tint = iconColor
-            )
-        }
+        ListItem(
+            modifier = Modifier.clickable { isExpanded = !isExpanded },
+            headlineText = {
+                Text(
+                    text = title,
+                    style = titleStyle
+                )
+            },
+            trailingContent = {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = "Arrow",
+                    tint = iconColor
+                )
+            }
+        )
         AnimatedVisibility(visible = isExpanded) {
             section()
         }

@@ -33,7 +33,7 @@ fun AboutScreen(
     val scrollState = rememberScrollState()
     val life: Life by viewModel.lifeFlow
         .collectAsState(initial = Life.example)
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val uriHandler = LocalUriHandler.current
 
     Scaffold(
@@ -50,18 +50,8 @@ fun AboutScreen(
                     .padding(innerPaddings)
                     .verticalScroll(state = scrollState)
             ) {
-                Spacer(modifier = Modifier.height(20.dp))
-                HowItWorksSection(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    life = life
-                )
-                Spacer(modifier = Modifier.height(32.dp))
-                LearnMoreSection(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    onOpenUrl = {
-                        uriHandler.openUri(it)
-                    }
-                )
+                HowItWorksSection(life = life)
+                LearnMoreSection(onOpenUrl = { uriHandler.openUri(it) })
                 Spacer(modifier = Modifier.height(32.dp))
             }
         }
@@ -75,11 +65,9 @@ private fun AboutTopBar(
     scrollBehavior: TopAppBarScrollBehavior,
     onBackButtonClick: () -> Unit
 ) {
-    SmallTopAppBar(
+    LargeTopAppBar(
         modifier = modifier,
-        title = {
-            Text("About Life Progress")
-        },
+        title = { Text("About Life Progress") },
         navigationIcon = {
             IconButton(
                 onClick = onBackButtonClick
@@ -105,20 +93,23 @@ private fun HowItWorksSection(
         title = "How it works",
         section = {
             Card(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
                 elevation = CardDefaults.elevatedCardElevation(),
             ) {
                 ListItem(
                     headlineText = {
                         Text(
                             text = "A calendar for your life",
-                            fontWeight = FontWeight.Bold
+                            style = MaterialTheme.typography.titleMedium
                         )
                     },
                     supportingText = {
                         Text(
                             text = "Each square you see on screen represents a week in your life." +
                                     " The first square (the one at the top left) is the week you were born.",
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
                 )
@@ -148,13 +139,14 @@ private fun HowItWorksSection(
                     headlineText = {
                         Text(
                             text = "Each row of 52 weeks makes up one year",
-                            fontWeight = FontWeight.Bold
+                            style = MaterialTheme.typography.titleMedium
                         )
                     },
                     supportingText = {
                         Text(
                             text = "This is what your current year looks like," +
                                     " see if you can spot it on the calendar.",
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
                 )
@@ -175,12 +167,14 @@ private fun HowItWorksSection(
                     headlineText = {
                         Text(
                             text = "Last thing!",
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.titleMedium
                         )
                     },
                     supportingText = {
                         Text(
                             text = "Try tapping on the calendar and see what happens.",
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
                 )
@@ -200,7 +194,9 @@ private fun LearnMoreSection(
         title = "Learn more",
         section = {
             Card(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
                 elevation = CardDefaults.elevatedCardElevation(),
             ) {
                 ListItem(
@@ -210,7 +206,7 @@ private fun LearnMoreSection(
                     headlineText = {
                         Text(
                             text = "\"Your Life in Weeks\"",
-                            fontWeight = FontWeight.Bold
+                            style = MaterialTheme.typography.titleMedium
                         )
                     },
                     supportingText = {
@@ -228,7 +224,8 @@ private fun LearnMoreSection(
                                 ) {
                                     append("\nVisit the article")
                                 }
-                            }
+                            },
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
                 )
@@ -240,7 +237,7 @@ private fun LearnMoreSection(
                     headlineText = {
                         Text(
                             text = "\"What Are You Doing With Your Life? The Tail End\"",
-                            fontWeight = FontWeight.Bold
+                            style = MaterialTheme.typography.titleMedium
                         )
                     },
                     supportingText = {
@@ -259,7 +256,8 @@ private fun LearnMoreSection(
                                 ) {
                                     append("\nSee the video on YouTube")
                                 }
-                            }
+                            },
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
                 )
@@ -271,7 +269,7 @@ private fun LearnMoreSection(
                     headlineText = {
                         Text(
                             text = "The project is open source!",
-                            fontWeight = FontWeight.Bold
+                            style = MaterialTheme.typography.titleMedium
                         )
                     },
                     supportingText = {
@@ -286,7 +284,8 @@ private fun LearnMoreSection(
                                 ) {
                                     append("\nCheck out the code on GitHub")
                                 }
-                            }
+                            },
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
                 )
