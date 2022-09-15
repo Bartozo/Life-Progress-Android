@@ -2,11 +2,15 @@ package com.bartozo.lifeprogress.ui.components
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -15,6 +19,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.bartozo.lifeprogress.data.AgeGroup
 import com.bartozo.lifeprogress.data.Life
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
+import kotlin.math.min
+import kotlin.math.roundToInt
 
 enum class LifeCalendarDisplayMode {
     CURRENT_YEAR,
@@ -26,33 +32,38 @@ enum class LifeCalendarDisplayMode {
 fun CanvasLifeCalendar(
     modifier: Modifier = Modifier,
     life: Life,
-    displayMode: LifeCalendarDisplayMode
+    displayMode: LifeCalendarDisplayMode,
 ) {
-    // TODO fix problem with aspect ratio
-    val fullCalendarAspectRatio = Life.totalWeeksInAYear / life.lifeExpectancy.toFloat()
+    val aspectRatio: Float by animateFloatAsState(
+        when (displayMode) {
+            LifeCalendarDisplayMode.CURRENT_YEAR -> {
+                val currentYearModeColumnCount = 6
+                currentYearModeColumnCount.toFloat() /
+                        (Life.totalWeeksInAYear / currentYearModeColumnCount.toFloat()).roundToInt()
+            }
+            LifeCalendarDisplayMode.LIFE -> Life.totalWeeksInAYear / life.lifeExpectancy.toFloat()
+        }
+    )
 
-
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-    ) {
-        AnimatedContent(
-            targetState = displayMode,
-        ) { title ->
-            if (displayMode == LifeCalendarDisplayMode.LIFE) {
-                CalendarWithoutCurrentYear(
-                    modifier = Modifier.animateEnterExit(
-                        enter = scaleIn(),
-                        exit = scaleOut()
-                    ),
-                    life = life
+    Box(modifier = modifier.fillMaxSize()) {
+        Box(modifier = Modifier.align(Alignment.Center)) {
+            AnimatedContent(targetState = displayMode) { displayMode ->
+                if (displayMode == LifeCalendarDisplayMode.LIFE) {
+                    CalendarWithoutCurrentYear(
+                        modifier = Modifier
+                            .animateEnterExit(enter = scaleIn(), exit = scaleOut())
+                            .aspectRatio(aspectRatio),
+                        life = life
+                    )
+                }
+                CalendarWithCurrentYear(
+                    modifier = Modifier
+                        .animateEnterExit(enter = scaleIn(), exit = scaleOut())
+                        .aspectRatio(aspectRatio),
+                    life = life,
+                    displayMode = displayMode
                 )
             }
-            CalendarWithCurrentYear(
-                modifier = Modifier.animateEnterExit(enter = scaleIn(), exit = scaleOut()),
-                life = life,
-                displayMode = displayMode
-            )
         }
     }
 }
