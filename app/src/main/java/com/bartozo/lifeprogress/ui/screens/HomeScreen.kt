@@ -11,11 +11,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bartozo.lifeprogress.R
@@ -35,18 +30,20 @@ fun HomeScreen(
         .collectAsState(initial = Life.example)
     val displayMode: LifeCalendarDisplayMode by viewModel.displayModeState
         .collectAsState()
+    val title = when (displayMode) {
+        LifeCalendarDisplayMode.CURRENT_YEAR -> "Year Progress: ${life.formattedCurrentYearProgress}"
+        LifeCalendarDisplayMode.LIFE -> "Life Progress: ${life.formattedProgress}"
+    }
+    val subtitle = when (displayMode) {
+        LifeCalendarDisplayMode.CURRENT_YEAR -> "${(life.currentYearRemainingWeeks)} weeks until your birthday"
+        LifeCalendarDisplayMode.LIFE -> "${(life.numberOfWeeksSpent)} weeks spent • ${(life.numberOfWeeksLeft)} weeks left"
+    }
 
     Scaffold(
         topBar = {
             HomeTopBar(
-                title = when (displayMode) {
-                    LifeCalendarDisplayMode.CURRENT_YEAR -> "Year Progress: ${life.formattedCurrentYearProgress}"
-                    LifeCalendarDisplayMode.LIFE -> "Life Progress: ${life.formattedProgress}"
-                },
-                subtitle = when (displayMode) {
-                    LifeCalendarDisplayMode.CURRENT_YEAR -> "${(life.currentYearRemainingWeeks)} weeks until your birthday"
-                    LifeCalendarDisplayMode.LIFE -> "${(life.numberOfWeeksSpent)} weeks spent • ${(life.numberOfWeeksLeft)} weeks left"
-                },
+                title = title,
+                subtitle = subtitle,
                 navigateToProfileScreen = navigateToProfileScreen,
                 navigateToAboutScreen = navigateToAboutScreen
             )
@@ -101,7 +98,7 @@ private fun HomeTopBar(
             )
         },
         colors = TopAppBarDefaults.largeTopAppBarColors(
-            titleContentColor=MaterialTheme.colorScheme.onSurface
+            titleContentColor = MaterialTheme.colorScheme.onSurface
         )
     )
 }
@@ -115,7 +112,7 @@ private fun NavigationDropDownMenu(
     val isExpanded = remember { mutableStateOf(false) }
 
     Box(modifier = modifier.wrapContentSize(Alignment.TopEnd)) {
-        FilledTonalIconButton(onClick = { isExpanded.value = true }) {
+        IconButton(onClick = { isExpanded.value = true }) {
             Icon(
                 Icons.Filled.MoreVert,
                 contentDescription = stringResource(id = R.string.navigation)
@@ -130,7 +127,7 @@ private fun NavigationDropDownMenu(
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Person,
-                        contentDescription = null
+                        contentDescription = "Person Icon"
                     )
                 },
                 onClick = {
@@ -144,7 +141,7 @@ private fun NavigationDropDownMenu(
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Info,
-                        contentDescription = null
+                        contentDescription = "Info Icon"
                     )
                 },
                 onClick = {
