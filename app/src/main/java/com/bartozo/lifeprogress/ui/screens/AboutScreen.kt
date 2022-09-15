@@ -28,7 +28,7 @@ import com.bartozo.lifeprogress.ui.viewmodels.AboutViewModel
 @Composable
 fun AboutScreen(
     viewModel: AboutViewModel,
-    onBackClick: () -> Unit
+    navigateBackToHomeScreen: () -> Unit
 ) {
     val scrollState = rememberScrollState()
     val life: Life by viewModel.lifeFlow
@@ -41,7 +41,7 @@ fun AboutScreen(
         topBar = {
             AboutTopBar(
                 scrollBehavior = scrollBehavior,
-                onBackButtonClick = onBackClick
+                onBackButtonClick = navigateBackToHomeScreen
             )
          },
         content = { innerPaddings ->

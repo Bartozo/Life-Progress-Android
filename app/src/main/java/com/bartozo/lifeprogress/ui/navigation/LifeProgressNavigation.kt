@@ -1,8 +1,9 @@
 package com.bartozo.lifeprogress.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -23,11 +24,15 @@ sealed class Screen(val route: String) {
 }
 
 @Composable
-fun LifeProgressNavigation() {
-    val navController = rememberNavController()
+fun LifeProgressNavigation(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController(),
+    startDestination: Screen = Screen.Welcome,
+) {
     NavHost(
+        modifier = modifier,
         navController = navController,
-        startDestination = Screen.Welcome.route
+        startDestination = startDestination.route
     ) {
         composable(Screen.Welcome.route) {
             val viewModel = hiltViewModel<WelcomeViewModel>()
@@ -35,7 +40,7 @@ fun LifeProgressNavigation() {
                 viewModel = viewModel,
                 navigateToHomeScreen = {
                     navController.navigate(Screen.Home.route) {
-                        popUpTo(Screen.Home.route) { inclusive = true }
+                        popUpTo(Screen.Welcome.route) { inclusive = true }
                     }
                 },
                 navigateToProfileScreen = {
@@ -57,14 +62,24 @@ fun LifeProgressNavigation() {
             val viewModel = hiltViewModel<ProfileViewModel>()
             ProfileScreen(
                 viewModel = viewModel,
-                navigateBackToHomeScreen = {}
+                navigateBackToHomeScreen = {
+                    navController.popBackStack(
+                        route = Screen.Home.route,
+                        inclusive = false
+                    )
+                }
             )
         }
         composable(Screen.About.route) {
             val viewModel = hiltViewModel<AboutViewModel>()
             AboutScreen(
                 viewModel = viewModel,
-                onBackClick = {}
+                navigateBackToHomeScreen = {
+                    navController.popBackStack(
+                        route = Screen.Home.route,
+                        inclusive = false
+                    )
+                }
             )
         }
     }
