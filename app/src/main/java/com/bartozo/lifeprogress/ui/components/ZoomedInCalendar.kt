@@ -10,12 +10,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bartozo.lifeprogress.data.AgeGroup
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
+import kotlin.math.min
 
 @Composable
 fun ZoomedInCalendar(
@@ -62,9 +64,13 @@ fun ZoomedInCalendar(
                                 0.2f
                             }
 
-                            drawRect(
+                            drawRoundRect(
                                 color = color.copy(alpha = alpha),
                                 topLeft = cellOffset,
+                                cornerRadius = CornerRadius(
+                                    x = min(cellSize * 0.16f, 16f),
+                                    y = min(cellSize * 0.16f, 16f)
+                                ),
                                 size = Size(
                                     width = cellSize - cellPadding * 2,
                                     height = cellSize - cellPadding * 2

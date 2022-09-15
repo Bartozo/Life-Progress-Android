@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -95,9 +96,13 @@ private fun CalendarWithoutCurrentYear(
                     Color.Transparent
                 }
 
-                drawRect(
+                drawRoundRect(
                     color = cellColor,
                     topLeft = cellOffset,
+                    cornerRadius = CornerRadius(
+                        x = min(cellSize * 0.16f, 16f),
+                        y = min(cellSize * 0.16f, 16f)
+                    ),
                     size = Size(
                         width = cellSize - cellPadding * 2,
                         height = cellSize - cellPadding * 2
@@ -143,9 +148,13 @@ private fun CalendarWithCurrentYear(
                 Color.Gray
             }
 
-            drawRect(
+            drawRoundRect(
                 color = cellColor,
                 topLeft = cellOffset,
+                cornerRadius = CornerRadius(
+                    x = min(cellSize * 0.16f, 16f),
+                    y = min(cellSize * 0.16f, 16f)
+                ),
                 size = Size(
                     width = cellSize - cellPadding * 2,
                     height = cellSize - cellPadding * 2
