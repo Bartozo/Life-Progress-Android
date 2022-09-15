@@ -266,7 +266,7 @@ private fun LearnMoreSection(
                 Divider(modifier = Modifier.padding(horizontal = 16.dp))
                 ListItem(
                     modifier = Modifier.clickable {
-                        onOpenUrl("https://twitter.com/Bartozo_")
+                        onOpenUrl("https://github.com/Bartozo/Life-Progress-Android")
                     },
                     headlineText = {
                         Text(
