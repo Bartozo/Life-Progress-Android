@@ -60,7 +60,7 @@ fun HomeScreen(
                         }
                         viewModel.updateDisplayMode(displayMode = newDisplayMode)
                     }
-                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                    .padding(16.dp),
                 life = life,
                 displayMode = displayMode
             )
@@ -77,30 +77,34 @@ private fun HomeTopBar(
     navigateToProfileScreen: () -> Unit,
     navigateToAboutScreen: () -> Unit
 ) {
-    LargeTopAppBar(
-        modifier = modifier,
-        title = {
-            Column {
+    Column {
+        LargeTopAppBar(
+            modifier = modifier,
+            title = {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.headlineMedium,
                 )
-                Text(
-                    text = subtitle,
-                    style = MaterialTheme.typography.titleSmall,
+            },
+            actions = {
+                NavigationDropDownMenu(
+                    navigateToProfileScreen = navigateToProfileScreen,
+                    navigateToAboutScreen = navigateToAboutScreen
                 )
-            }
-        },
-        actions = {
-            NavigationDropDownMenu(
-                navigateToProfileScreen = navigateToProfileScreen,
-                navigateToAboutScreen = navigateToAboutScreen
+            },
+            colors = TopAppBarDefaults.largeTopAppBarColors(
+                titleContentColor = MaterialTheme.colorScheme.onSurface
             )
-        },
-        colors = TopAppBarDefaults.largeTopAppBarColors(
-            titleContentColor = MaterialTheme.colorScheme.onSurface
         )
-    )
+        Text(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .offset(y = (-20).dp),
+            text = subtitle,
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
 }
 
 @Composable
