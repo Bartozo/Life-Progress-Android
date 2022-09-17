@@ -26,16 +26,18 @@ fun InformationCard(
     onClick: (() -> Unit)? = null,
 ) {
     Card(
-        modifier = modifier.clickable(
-            enabled = onClick != null,
-            onClick = { onClick?.invoke() }
-        ),
+        modifier = modifier,
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(6.dp)
         ),
         shape = RoundedCornerShape(size = 28.dp)
     ) {
-        Column {
+        Column(
+            modifier = Modifier.clickable(
+                enabled = onClick != null,
+                onClick = { onClick?.invoke() }
+            )
+        ) {
             if (header != null) {
                  Box(
                      modifier = Modifier
@@ -53,6 +55,9 @@ fun InformationCard(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(end = 16.dp),
                         text = headline,
                         style = MaterialTheme.typography.headlineSmall,
                         color = MaterialTheme.colorScheme.onSurface
