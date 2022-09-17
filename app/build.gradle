@@ -67,6 +67,7 @@ dependencies {
     // Material design
     implementation 'androidx.compose.material3:material3:1.0.0-beta01'
     implementation 'com.google.android.material:material:1.8.0-alpha01'
+    implementation 'androidx.compose.material:material-icons-extended:1.2.1'
 
     // Compose Material Dialogs
     implementation "io.github.vanpra.compose-material-dialogs:datetime:0.8.1-rc"

@@ -7,7 +7,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Cake
 import androidx.compose.material.icons.outlined.Face
+import androidx.compose.material.icons.rounded.Cake
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -55,17 +57,28 @@ fun ProfileScreen(
                     .padding(innerPaddings)
                     .verticalScroll(state = scrollState)
             ) {
-                Header(text = "User")
+                Header(
+                    modifier = Modifier.padding(top = 8.dp, start = 16.dp),
+                    text = "User"
+                )
                 BirthDayCard(
+                    modifier = Modifier.padding(top = 16.dp),
                     birthDay = birthDay ?: LocalDate.now(),
                     onBirthDaySelect = { viewModel.updateBirthDay(it) }
                 )
                 LifeExpectancyCard(
+                    modifier = Modifier.padding(top = 30.dp),
                     lifeExpectancy = lifeExpectancy ?: 30,
                     onLifeExpectancySelect = { viewModel.updateLifeExpectancy(it) }
                 )
-                Divider(modifier = Modifier.padding(horizontal = 8.dp))
-                Header(text = "Themes")
+                Divider(
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant
+                )
+                Header(
+                    modifier = Modifier.padding(top = 16.dp, start = 16.dp),
+                    text = "Themes"
+                )
                 WorkInProgressCard()
             }
         }
@@ -97,21 +110,16 @@ private fun ProfileTopBar(
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun Header(
     modifier: Modifier = Modifier,
     text: String
 ) {
-    ListItem(
+    Text(
         modifier = modifier,
-        headlineText = {
-            Text(
-                text = text,
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
+        text = text,
+        style = MaterialTheme.typography.titleMedium,
+        color = MaterialTheme.colorScheme.primary
     )
 }
 
@@ -142,15 +150,25 @@ private fun BirthDayCard(
 
     ListItem(
         modifier = modifier.clickable { dialogState.show() },
+        leadingContent = {
+             Icon(
+                 imageVector = Icons.Outlined.Cake,
+                 contentDescription = "Cake Icon",
+                 tint = MaterialTheme.colorScheme.onSurfaceVariant
+             )
+        },
         headlineText = {
             Text(
                 text = "Your Birthday",
+                color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.titleMedium
             )
         },
         supportingText = {
             Text(
+                modifier = Modifier.padding(top = 4.dp),
                 text = birthDay.toString(),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodyMedium
             )
          },
@@ -170,62 +188,62 @@ private fun LifeExpectancyCard(
         sliderPosition = lifeExpectancy.toFloat()
     }
 
-    Column(modifier = modifier.fillMaxWidth()) {
-        ListItem(
-            headlineText = {
-                Text(
-                    text = "Life Expectancy",
-                    style = MaterialTheme.typography.titleMedium
-                )
-           },
-            leadingContent = {
-                Icon(
-                    modifier = Modifier.padding(end = 16.dp),
-                    imageVector = Icons.Outlined.Face,
-                    contentDescription = ""
-                )
-            },
-            trailingContent = {
-                AnimatedContent(
-                    targetState = lifeExpectancy,
-                    transitionSpec = {
-                        if (targetState > initialState) {
-                            slideInVertically { height -> height } + fadeIn() with
-                                    slideOutVertically { height -> -height } + fadeOut()
-                        } else {
-                            slideInVertically { height -> -height } + fadeIn() with
-                                    slideOutVertically { height -> height } + fadeOut()
-                        }.using(
-                            SizeTransform(clip = false)
-                        )
-                    }
-                ) { targetCount ->
-                    Text(
-                        modifier = Modifier.width(25.dp),
-                        text = "$targetCount",
-                        style = MaterialTheme.typography.bodyMedium,
-                        textAlign = TextAlign.Center
+    ListItem(
+        modifier = modifier,
+        headlineText = {
+            Text(
+                text = "Life Expectancy",
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.titleMedium
+            )
+        },
+        leadingContent = {
+            Icon(
+                imageVector = Icons.Outlined.Face,
+                contentDescription = "Face Icon",
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        },
+        trailingContent = {
+            AnimatedContent(
+                targetState = lifeExpectancy,
+                transitionSpec = {
+                    if (targetState > initialState) {
+                        slideInVertically { height -> height } + fadeIn() with
+                                slideOutVertically { height -> -height } + fadeOut()
+                    } else {
+                        slideInVertically { height -> -height } + fadeIn() with
+                                slideOutVertically { height -> height } + fadeOut()
+                    }.using(
+                        SizeTransform(clip = false)
                     )
                 }
-            },
-            supportingText = {
-                Slider(
-                    modifier = Modifier.offset(
-                        x = (-8).dp
-                    ),
-                    value = sliderPosition,
-                    onValueChange = {
-                        sliderPosition = it
-                        onLifeExpectancySelect(it.roundToInt())
-                    },
-                    valueRange = 18f..150f,
-                    onValueChangeFinished = {
-                        onLifeExpectancySelect(sliderPosition.roundToInt())
-                    },
+            ) { targetCount ->
+                Text(
+                    modifier = Modifier.width(25.dp),
+                    text = "$targetCount",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
-        )
-    }
+        },
+        supportingText = {
+            Slider(
+                modifier = Modifier.offset(
+                    x = (-8).dp
+                ),
+                value = sliderPosition,
+                onValueChange = {
+                    sliderPosition = it
+                    onLifeExpectancySelect(it.roundToInt())
+                },
+                valueRange = 18f..150f,
+                onValueChangeFinished = {
+                    onLifeExpectancySelect(sliderPosition.roundToInt())
+                },
+            )
+        }
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
