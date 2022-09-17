@@ -4,6 +4,7 @@ import androidx.compose.animation.*
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bartozo.lifeprogress.R
@@ -120,14 +122,34 @@ private fun BirthDayCard(
     MaterialDialog(
         dialogState = dialogState,
         buttons = {
-            positiveButton("Ok")
-            negativeButton("Cancel")
+            positiveButton(
+                text = "Ok",
+                textStyle = MaterialTheme.typography.labelLarge.copy(
+                    color = MaterialTheme.colorScheme.primary
+                )
+            )
+            negativeButton(
+                text = "Cancel",
+                textStyle = MaterialTheme.typography.labelLarge.copy(
+                    color = MaterialTheme.colorScheme.secondary
+                )
+            )
         },
+        shape = RoundedCornerShape(28.dp),
         onCloseRequest =  { dialogState.hide() },
+        backgroundColor = MaterialTheme.colorScheme.surface
     ) {
         datepicker(
             initialDate = birthDay,
-            colors = DatePickerDefaults.colors(headerBackgroundColor = Color.Red)
+            colors = DatePickerDefaults.colors(
+                headerBackgroundColor = MaterialTheme.colorScheme.surface,
+                headerTextColor = MaterialTheme.colorScheme.onSurface,
+                calendarHeaderTextColor = MaterialTheme.colorScheme.onSurface,
+                dateActiveBackgroundColor = MaterialTheme.colorScheme.primaryContainer,
+                dateActiveTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                dateInactiveBackgroundColor = MaterialTheme.colorScheme.surface,
+                dateInactiveTextColor = MaterialTheme.colorScheme.surfaceVariant
+            )
         ) { date ->
             onBirthDaySelect(date)
         }
