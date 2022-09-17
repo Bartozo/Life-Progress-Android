@@ -31,7 +31,7 @@ fun ZoomedInCalendar(
             .clip(CircleShape)
             .background(color = MaterialTheme.colorScheme.background)
             .border(
-                border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline),
+                border = BorderStroke(2.dp, MaterialTheme.colorScheme.surfaceVariant),
                 shape = CircleShape
             )
     ) {
