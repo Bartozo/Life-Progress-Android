@@ -79,8 +79,8 @@ private fun CalendarWithoutCurrentYear(
         val cellSize = canvasWidth / Life.totalWeeksInAYear
         val cellPadding = cellSize / 12
 
-        for (yearIndex in 0..life.lifeExpectancy) {
-            for (weekIndex in 0..Life.totalWeeksInAYear) {
+        for (yearIndex in 0 until life.lifeExpectancy) {
+            for (weekIndex in 0 until Life.totalWeeksInAYear) {
                 val cellOffset = Offset(
                     x = weekIndex * cellSize + cellPadding,
                     y = yearIndex * cellSize + cellPadding
@@ -128,7 +128,7 @@ private fun CalendarWithCurrentYear(
         }
         val cellPadding = cellSize / 12
 
-        for (weekIndex in 0..Life.totalWeeksInAYear) {
+        for (weekIndex in 0 until Life.totalWeeksInAYear) {
             val rowIndex = when (displayMode) {
                 LifeCalendarDisplayMode.CURRENT_YEAR -> weekIndex / currentYearModeColumnCount
                 LifeCalendarDisplayMode.LIFE -> life.age - 1

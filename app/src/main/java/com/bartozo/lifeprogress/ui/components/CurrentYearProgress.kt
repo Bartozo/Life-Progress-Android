@@ -22,7 +22,7 @@ fun CurrentYearProgress(
         val cellSize = canvasWidth / Life.totalWeeksInAYear
         val cellPadding = cellSize / 12
 
-        for (weekIndex in 0..Life.totalWeeksInAYear) {
+        for (weekIndex in 0 until Life.totalWeeksInAYear) {
             val cellOffset = Offset(
                 x = weekIndex * cellSize + cellPadding,
                 y = cellSize + cellPadding
