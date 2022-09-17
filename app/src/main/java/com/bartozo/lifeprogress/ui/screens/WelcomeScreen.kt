@@ -1,13 +1,12 @@
 package com.bartozo.lifeprogress.ui.screens
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -62,32 +61,39 @@ fun WelcomeScreen(
 private fun WelcomeContent(
     modifier: Modifier = Modifier,
 ) {
+    val scrollState = rememberScrollState()
+
     Column(
-        modifier = modifier,
+        modifier = modifier.verticalScroll(scrollState),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.Start
     ) {
         Icon(
-            modifier = Modifier.size(100.dp),
+            modifier = Modifier
+                .size(120.dp)
+                .padding(bottom = 24.dp),
             imageVector = Icons.Default.AccountBox,
             contentDescription = "App icon"
         )
 
-        Column(modifier = Modifier.padding(bottom = 4.dp)) {
+        Column(modifier = Modifier.padding(bottom = 16.dp)) {
             Text(
                 "Welcome to",
-                style = MaterialTheme.typography.headlineLarge
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onSurface
             )
             Text(
                 "Life Progress",
                 fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.headlineLarge
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
 
         Text(
             "Friendly reminder that you're not gonna live forever.",
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Start
         )
     }
@@ -100,19 +106,20 @@ private fun WelcomeBottomBar(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = "Before we continue, let's set up your profile",
             style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
 
-        Button(
+        FilledTonalButton(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(44.dp),
+                .heightIn(min = 48.dp),
             onClick = onContinueClick
         ) {
             Text(
