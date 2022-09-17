@@ -63,10 +63,13 @@ fun LifeProgressNavigation(
             ProfileScreen(
                 viewModel = viewModel,
                 navigateBackToHomeScreen = {
-                    navController.popBackStack(
-                        route = Screen.Home.route,
-                        inclusive = false
-                    )
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Profile.route) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 }
             )
         }
