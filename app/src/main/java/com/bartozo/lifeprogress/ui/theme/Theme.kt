@@ -65,4 +65,12 @@ fun LifeProgressTheme(
         typography = Typography,
         content = content
     )
+
+    val systemUiController = rememberSystemUiController()
+    SideEffect {
+        systemUiController.setSystemBarsColor(
+            color = Color.Transparent,
+            darkIcons = !darkTheme
+        )
+    }
 }
