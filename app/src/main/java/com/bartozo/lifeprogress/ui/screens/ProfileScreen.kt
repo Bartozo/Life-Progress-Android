@@ -24,6 +24,7 @@ import com.bartozo.lifeprogress.ui.components.Header
 import com.bartozo.lifeprogress.ui.components.WorkInProgressCard
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.viewmodels.ProfileViewModel
+import com.bartozo.lifeprogress.util.rangeOfYearsFromNowTo
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.DatePickerDefaults
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
@@ -144,12 +145,16 @@ private fun BirthDayCard(
             colors = DatePickerDefaults.colors(
                 headerBackgroundColor = MaterialTheme.colorScheme.surface,
                 headerTextColor = MaterialTheme.colorScheme.onSurface,
-                calendarHeaderTextColor = MaterialTheme.colorScheme.onSurface,
+                calendarHeaderTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 dateActiveBackgroundColor = MaterialTheme.colorScheme.primaryContainer,
                 dateActiveTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 dateInactiveBackgroundColor = MaterialTheme.colorScheme.surface,
-                dateInactiveTextColor = MaterialTheme.colorScheme.surfaceVariant
-            )
+                dateInactiveTextColor = MaterialTheme.colorScheme.onSurface,
+            ),
+            yearRange = rangeOfYearsFromNowTo(150),
+            allowedDateValidator = {
+                it.isBefore(LocalDate.now()) || it.isEqual(LocalDate.now())
+            },
         ) { date ->
             onBirthDaySelect(date)
         }
