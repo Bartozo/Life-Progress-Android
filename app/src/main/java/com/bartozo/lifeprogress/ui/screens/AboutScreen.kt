@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.bartozo.lifeprogress.R
 import com.bartozo.lifeprogress.data.Life
 import com.bartozo.lifeprogress.ui.components.*
+import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.viewmodels.AboutViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -198,20 +199,26 @@ private fun LearnMoreSection(
 @Preview
 @Composable
 private fun AboutTopBarPreview() {
-    AboutTopBar(
-        scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
-        onBackButtonClick = {}
-    )
+    LifeProgressTheme {
+        AboutTopBar(
+            scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
+            onBackButtonClick = {}
+        )
+    }
 }
 
 @Preview
 @Composable
 private fun HowItWorksSectionPreview() {
-    HowItWorksSection(life = Life.example)
+    LifeProgressTheme {
+        HowItWorksSection(life = Life.example)
+    }
 }
 
 @Preview
 @Composable
 private fun LearnMoreSectionPreview() {
-    LearnMoreSection(onOpenUrl = {})
+    LifeProgressTheme{
+        LearnMoreSection(onOpenUrl = {})
+    }
 }
