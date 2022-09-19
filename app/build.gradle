@@ -82,4 +82,7 @@ dependencies {
 
     // Accompanist
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.26.3-beta"
+
+    // Glance
+    implementation("androidx.glance:glance-appwidget:1.0.0-alpha04")
 }
