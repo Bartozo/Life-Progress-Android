@@ -50,7 +50,7 @@ fun WelcomeScreen(
             WelcomeBottomBar(
                 modifier = Modifier
                     .supportWideScreen()
-                    .safeContentPadding()
+                    .systemBarsPadding()
                     .padding(horizontal = 32.dp, vertical = 20.dp),
                 onContinueClick = { viewModel.navigateToProfileScreen() }
             )
