@@ -2,7 +2,7 @@ package com.bartozo.lifeprogress.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import com.bartozo.lifeprogress.data.Life
-import com.bartozo.lifeprogress.db.PrefsStore
+import com.bartozo.lifeprogress.repository.UserRepository
 import com.bartozo.lifeprogress.ui.components.LifeCalendarDisplayMode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,12 +13,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val prefsStore: PrefsStore
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     val lifeFlow = combine(
-        prefsStore.birthDayFlow(),
-        prefsStore.lifeExpectancyFlow()
+        userRepository.birthDay,
+        userRepository.lifeExpectancy
     ) { birthDay: LocalDate, lifeExpectancy: Int ->
         return@combine Life.invoke(
             birthday = birthDay,

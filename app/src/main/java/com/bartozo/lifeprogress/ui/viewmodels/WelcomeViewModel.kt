@@ -2,7 +2,7 @@ package com.bartozo.lifeprogress.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bartozo.lifeprogress.db.PrefsStore
+import com.bartozo.lifeprogress.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -16,7 +16,7 @@ sealed class WelcomeEventState {
 
 @HiltViewModel
 class WelcomeViewModel @Inject constructor(
-    private val prefsStore: PrefsStore
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     private val _welcomeEvent = MutableStateFlow<WelcomeEventState>(value = WelcomeEventState.Idle)
@@ -24,14 +24,14 @@ class WelcomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            if (prefsStore.didSeeWelcomeFlow().first()) {
+            if (userRepository.didSeeWelcome.first()) {
                 _welcomeEvent.value = WelcomeEventState.OnDidSeeWelcomeScreen
             }
         }
     }
 
     fun navigateToProfileScreen() = viewModelScope.launch {
-        prefsStore.updatedDidSeeWelcome(true)
+        userRepository.updateDidSeeWelcome(true)
         _welcomeEvent.value = WelcomeEventState.NavigateToProfileScreen
     }
  }
