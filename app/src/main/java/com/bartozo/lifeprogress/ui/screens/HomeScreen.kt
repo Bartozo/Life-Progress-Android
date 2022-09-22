@@ -163,8 +163,8 @@ private fun NavigationDropDownMenu(
 private fun HomeTopBarPreview() {
     LifeProgressTheme {
         HomeTopBar(
-            title = "Hello World!",
-            subtitle = "this is my subtitle",
+            title = "Year Progress: ${Life.example.formattedCurrentYearProgress}",
+            subtitle = "${(Life.example.currentYearRemainingWeeks)} weeks until your birthday",
             navigateToProfileScreen = {},
             navigateToAboutScreen = {}
         )
