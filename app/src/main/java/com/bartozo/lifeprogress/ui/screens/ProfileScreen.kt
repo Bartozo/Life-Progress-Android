@@ -1,27 +1,33 @@
 package com.bartozo.lifeprogress.ui.screens
 
+import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
+import android.appwidget.AppWidgetProviderInfo
+import android.content.Context
+import android.content.Intent
 import androidx.compose.animation.*
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Cake
+import androidx.compose.material.icons.outlined.Error
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bartozo.lifeprogress.R
-import com.bartozo.lifeprogress.ui.components.Header
-import com.bartozo.lifeprogress.ui.components.WorkInProgressCard
+import com.bartozo.lifeprogress.data.Life
+import com.bartozo.lifeprogress.ui.appwidgets.AppWidgetPinnedReceiver
+import com.bartozo.lifeprogress.ui.components.*
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.viewmodels.ProfileViewModel
 import com.bartozo.lifeprogress.util.rangeOfYearsFromNowTo
@@ -42,8 +48,14 @@ fun ProfileScreen(
         .collectAsState(initial = LocalDate.now())
     val lifeExpectancy: Int? by viewModel.lifeExpectancy
         .collectAsState(initial = 30)
+
     val scrollState = rememberScrollState()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+
+    val context = LocalContext.current
+    val widgetManager = AppWidgetManager.getInstance(context)
+    // Get a list of our app widget providers to retrieve their info
+    val widgetProviders = widgetManager.getInstalledProvidersForPackage(context.packageName, null)
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -66,15 +78,15 @@ fun ProfileScreen(
                 BirthDayCard(
                     modifier = Modifier.padding(top = 16.dp),
                     birthDay = birthDay ?: LocalDate.now(),
-                    onBirthDaySelect = { viewModel.updateBirthDay(it) }
+                    onBirthDaySelect = { viewModel.updateBirthDay(it, context) }
                 )
                 LifeExpectancyCard(
                     modifier = Modifier.padding(top = 30.dp),
                     lifeExpectancy = lifeExpectancy ?: 30,
-                    onLifeExpectancySelect = { viewModel.updateLifeExpectancy(it) }
+                    onLifeExpectancySelect = { viewModel.updateLifeExpectancy(it, context) }
                 )
                 Divider(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+                    modifier = Modifier.padding(horizontal = 16.dp),
                     color = MaterialTheme.colorScheme.surfaceVariant
                 )
                 Header(
@@ -82,6 +94,22 @@ fun ProfileScreen(
                     text = "Themes"
                 )
                 WorkInProgressCard()
+                Divider(
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant
+                )
+                Header(
+                    modifier = Modifier.padding(top = 16.dp, start = 16.dp),
+                    text = "App widgets"
+                )
+                AppWidgetCard(
+                    modifier =  Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+                    isRequestPinAppWidgetSupported = widgetManager.isRequestPinAppWidgetSupported,
+                    onPinAppWidgetClick = {
+                        // The application has only one widget
+                        widgetProviders.first().pin(context)
+                    }
+                )
             }
         }
     )
@@ -258,6 +286,83 @@ private fun LifeExpectancyCard(
     )
 }
 
+@Composable
+private fun AppWidgetCard(
+    modifier: Modifier = Modifier,
+    isRequestPinAppWidgetSupported: Boolean,
+    onPinAppWidgetClick: () -> Unit
+) {
+
+    Column(modifier = modifier) {
+        if (!isRequestPinAppWidgetSupported) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(MaterialTheme.colorScheme.error)
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Error,
+                    contentDescription = "Error Icon",
+                    tint = MaterialTheme.colorScheme.onError
+                )
+                Spacer(modifier = Modifier.padding(8.dp))
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = stringResource(id = R.string.pin_unavailable),
+                    color = MaterialTheme.colorScheme.onError
+                )
+            }
+        }
+        InformationCard(
+            modifier = Modifier.padding(top = 16.dp),
+            headline = "Simplified life calendar",
+            supportingText = "See the current life progress with this helpful widget " +
+                    "on your home screen.",
+            onClick = onPinAppWidgetClick,
+            header = {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp, vertical = 16.dp)
+                ) {
+                    Spacer(modifier = Modifier.weight(1f))
+                    Box(modifier = Modifier.weight(1f)) {
+                        SimplifiedLifeCalendar(
+                            modifier = Modifier
+                                .align(alignment = Alignment.BottomCenter)
+                                .offset(x = 50.dp, y = 50.dp),
+                            life = Life.example
+                        )
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
+                }
+            }
+        )
+    }
+}
+
+/**
+ * Extension method to request the launcher to pin the given AppWidgetProviderInfo
+ *
+ * Note: the optional success callback to retrieve if the widget was placed might be unreliable
+ * depending on the default launcher implementation. Also, it does not callback if user cancels the
+ * request.
+ */
+private fun AppWidgetProviderInfo.pin(context: Context) {
+    val successCallback = PendingIntent.getBroadcast(
+        context,
+        0,
+        Intent(context, AppWidgetPinnedReceiver::class.java),
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+    )
+
+    AppWidgetManager.getInstance(context).requestPinAppWidget(provider, null, successCallback)
+}
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
@@ -290,4 +395,15 @@ private fun LifeExpectancyCardPreview() {
            onLifeExpectancySelect = {}
        )
    }
+}
+
+@Preview
+@Composable
+fun AppWidgetCardPreview() {
+    LifeProgressTheme {
+        AppWidgetCard(
+            isRequestPinAppWidgetSupported = false,
+            onPinAppWidgetClick = {}
+        )
+    }
 }

@@ -1,8 +1,6 @@
 package com.bartozo.lifeprogress.data
 
-import android.icu.util.Calendar
 import java.time.LocalDate
-import java.time.temporal.ChronoField
 import java.time.temporal.ChronoUnit
 
 data class Life(

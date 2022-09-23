@@ -25,6 +25,18 @@ enum class AgeGroup(val age: Int = 0) {
         }
     }
 
+    fun getAgeInRange(): IntRange {
+        return when (this) {
+            BABY -> BABY.age until CHILD.age
+            CHILD -> CHILD.age until ADOLESCENT.age
+            ADOLESCENT -> ADOLESCENT.age until YOUNGADULT.age
+            YOUNGADULT -> YOUNGADULT.age until ADULT.age
+            ADULT -> ADULT.age until MIDDLEAGE.age
+            MIDDLEAGE -> MIDDLEAGE.age until OLDAGE.age
+            OLDAGE -> OLDAGE.age until 150
+        }
+    }
+
     // TODO update colors
     fun getColor(): Color {
         return when (this) {

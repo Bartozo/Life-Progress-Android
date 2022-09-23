@@ -2,4 +2,6 @@
     <string name="app_name">Life Progress</string>
     <string name="navigation">More Menu</string>
     <string name="return_to_previous_screen">Return to previous screen</string>
+    <string name="app_widget_life_calendar_description">Widget for Life Calendar</string>
+    <string name="pin_unavailable">Pinning is not supported in the default launcher</string>
 </resources>
