@@ -44,6 +44,10 @@
             android:authorities="${applicationId}.androidx-startup"
             tools:node="remove">
         </provider>
+
+        <receiver
+            android:name=".ui.appwidgets.AppWidgetPinnedReceiver"
+            android:exported="false" />
     </application>
 
 </manifest>
