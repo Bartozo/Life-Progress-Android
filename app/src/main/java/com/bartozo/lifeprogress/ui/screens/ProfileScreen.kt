@@ -6,20 +6,19 @@ import android.appwidget.AppWidgetProviderInfo
 import android.content.Context
 import android.content.Intent
 import androidx.compose.animation.*
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Cake
+import androidx.compose.material.icons.outlined.Error
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -87,7 +86,7 @@ fun ProfileScreen(
                     onLifeExpectancySelect = { viewModel.updateLifeExpectancy(it) }
                 )
                 Divider(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+                    modifier = Modifier.padding(horizontal = 16.dp),
                     color = MaterialTheme.colorScheme.surfaceVariant
                 )
                 Header(
@@ -96,7 +95,7 @@ fun ProfileScreen(
                 )
                 WorkInProgressCard()
                 Divider(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+                    modifier = Modifier.padding(horizontal = 16.dp),
                     color = MaterialTheme.colorScheme.surfaceVariant
                 )
                 Header(
@@ -296,14 +295,26 @@ private fun AppWidgetCard(
 
     Column(modifier = modifier) {
         if (!isRequestPinAppWidgetSupported) {
-            Text(
-                text = stringResource(id = R.string.pin_unavailable),
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .clip(RoundedCornerShape(16.dp))
                     .background(MaterialTheme.colorScheme.error)
                     .padding(16.dp),
-                color = MaterialTheme.colorScheme.onError
-            )
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Error,
+                    contentDescription = "Error Icon",
+                    tint = MaterialTheme.colorScheme.onError
+                )
+                Spacer(modifier = Modifier.padding(8.dp))
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = stringResource(id = R.string.pin_unavailable),
+                    color = MaterialTheme.colorScheme.onError
+                )
+            }
         }
         InformationCard(
             modifier = Modifier.padding(top = 16.dp),
