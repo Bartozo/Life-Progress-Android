@@ -78,12 +78,12 @@ fun ProfileScreen(
                 BirthDayCard(
                     modifier = Modifier.padding(top = 16.dp),
                     birthDay = birthDay ?: LocalDate.now(),
-                    onBirthDaySelect = { viewModel.updateBirthDay(it) }
+                    onBirthDaySelect = { viewModel.updateBirthDay(it, context) }
                 )
                 LifeExpectancyCard(
                     modifier = Modifier.padding(top = 30.dp),
                     lifeExpectancy = lifeExpectancy ?: 30,
-                    onLifeExpectancySelect = { viewModel.updateLifeExpectancy(it) }
+                    onLifeExpectancySelect = { viewModel.updateLifeExpectancy(it, context) }
                 )
                 Divider(
                     modifier = Modifier.padding(horizontal = 16.dp),
