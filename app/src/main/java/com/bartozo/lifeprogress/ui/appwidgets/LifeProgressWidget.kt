@@ -1,12 +1,16 @@
 package com.bartozo.lifeprogress.ui.appwidgets
 
+import android.content.Context
 import android.os.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.*
+import androidx.glance.action.ActionParameters
 import androidx.glance.appwidget.*
+import androidx.glance.appwidget.action.ActionCallback
+import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.layout.*
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
@@ -48,7 +52,7 @@ class LifeProgressWidget : GlanceAppWidget() {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text("Data not available ${lifeState.message}")
-//                        Button("Refresh", actionRunCallback<UpdateWeatherAction>())
+                        Button("Refresh", actionRunCallback<UpdateLifeProgressAction>())
                     }
                 }
             }
@@ -213,4 +217,18 @@ fun GlanceModifier.appWidgetBackgroundCornerRadius(): GlanceModifier {
         cornerRadius(16.dp)
     }
     return this
+}
+
+/**
+ * Force update the weather info after user click
+ */
+class UpdateLifeProgressAction : ActionCallback {
+    override suspend fun onAction(
+        context: Context,
+        glanceId: GlanceId,
+        parameters: ActionParameters
+    ) {
+        // Force the worker to refresh
+        LifeProgressWorker.enqueue(context = context, force = true)
+    }
 }
