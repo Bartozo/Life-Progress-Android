@@ -3,16 +3,21 @@ package com.bartozo.lifeprogress.ui.appwidgets
 import android.os.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.glance.*
 import androidx.glance.appwidget.*
 import androidx.glance.layout.*
+import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
+import androidx.glance.text.TextStyle
 import com.bartozo.lifeprogress.data.AgeGroup
 import com.bartozo.lifeprogress.data.Life
 import com.bartozo.lifeprogress.data.LifeState
 import kotlin.math.abs
+
+private const val HEADER_HEIGHT = 16 + 12 + 12
+private const val WIDGET_PADDING = 16
 
 class LifeProgressWidget : GlanceAppWidget() {
 
@@ -26,7 +31,6 @@ class LifeProgressWidget : GlanceAppWidget() {
         // Get the stored stated based on our custom state definition.
         val lifeState = currentState<LifeState>()
 
-        val size = LocalSize.current
         GlanceTheme {
             when (lifeState) {
                 is LifeState.Available -> {
@@ -57,18 +61,10 @@ fun LifeCalendarThin(
     life: Life
 ) {
     AppWidgetColumn {
-//        Text(
-//            text = life.formattedProgress,
-//            style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 16.sp)
-//        )
-//        Text(
-//            text = "${life.numberOfWeeksLeft} weeks left",
-//            style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 12.sp)
-//        )
-//        Spacer(modifier = GlanceModifier.size(12.dp))
-//        Box {
-//           Text(text = LocalSize.current.toString())
-//        }
+        Header(
+            modifier = GlanceModifier.fillMaxWidth(),
+            life = life
+        )
         LifeCalendar(
             modifier = GlanceModifier
                 .fillMaxWidth()
@@ -79,21 +75,44 @@ fun LifeCalendarThin(
 }
 
 @Composable
+fun Header(
+    modifier: GlanceModifier = GlanceModifier,
+    height: Int = HEADER_HEIGHT,
+    life: Life
+) {
+    Column(
+        modifier = modifier.height(height.dp)
+    ) {
+        Text(
+            text = life.formattedProgress,
+            style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 16.sp),
+            maxLines = 1
+        )
+        Text(
+            text = "${life.numberOfWeeksLeft} weeks left",
+            style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 12.sp),
+            maxLines = 1
+        )
+        Spacer(modifier = GlanceModifier.size(12.dp))
+    }
+}
+
+@Composable
 fun LifeCalendar(
     modifier: GlanceModifier = GlanceModifier,
     life: Life
 ) {
+    // TODO - refactor this code to use weight in the future glance versions
     val size = LocalSize.current
-
+    val widgetHeight = size.height.value - HEADER_HEIGHT - (2 * WIDGET_PADDING)
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(Color.Gray)
     ) {
-        val progressWithoutCurrentYear = life.age / life.lifeExpectancy.toFloat()
         for (group in AgeGroup.values().reversed()) {
             val groupProportion = group.getAgeInRange().last / life.lifeExpectancy.toFloat()
-            val groupFullHeight = size.height.value * groupProportion
+            val groupFullHeight = widgetHeight * groupProportion
             val currentAgeInGroup = abs(group.getAgeInRange().first - life.age)
             val totalYearsInGroup = group.getAgeInRange().last - group.getAgeInRange().first
 
@@ -102,23 +121,6 @@ fun LifeCalendar(
             } else {
                 Color.Gray
             }
-
-//            val height: Float = if (life.age > group.getAgeInRange().last) {
-//                groupFullHeight
-//            } else {
-//                val previousGroup = AgeGroup.values().getOrNull(group.ordinal - 1)
-//                if (previousGroup != null) {
-//                    val previousGroupProportion = previousGroup.getAgeInRange().last /
-//                            life.lifeExpectancy.toFloat()
-//                    val previousGroupHeight = size.height.value * previousGroupProportion
-//
-//                    val groupHeight = groupFullHeight - previousGroupHeight
-//
-//                    groupFullHeight - groupHeight + (groupHeight * (currentAgeInGroup.toFloat() / totalYearsInGroup.toFloat()))
-//                } else {
-//                    groupFullHeight
-//                }
-//            }
 
             if (life.age > group.getAgeInRange().last) {
                 // Draw full group progress
@@ -132,7 +134,7 @@ fun LifeCalendar(
                 if (previousGroup != null) {
                     val previousGroupProportion = previousGroup.getAgeInRange().last /
                             life.lifeExpectancy.toFloat()
-                    val previousGroupHeight = size.height.value * previousGroupProportion
+                    val previousGroupHeight = widgetHeight * previousGroupProportion
 
                     val groupHeight = groupFullHeight - previousGroupHeight
 
@@ -145,14 +147,22 @@ fun LifeCalendar(
                     ) {
                     }
 
-                    // Current year progress
-//                    Row(modifier = GlanceModifier.size(
-//                        height = groupFullHeight.dp,
-//                        width = size.width * (currentAgeInGroup.toFloat() / totalYearsInGroup.toFloat())
-//                    ).background(color)
-//                    ) {
-//
-//                    }
+                    if (life.currentYearRemainingWeeks < 52) {
+                        // Current year progress
+                        val currentYearHeight = groupFullHeight - groupHeight + (groupHeight * ((currentAgeInGroup.toFloat() + 1) / totalYearsInGroup.toFloat()))
+                        val currentYearHeightWidth = if (life.currentYearRemainingWeeks == Life.totalWeeksInAYear) {
+                            size.width
+                        } else {
+                            size.width * ((Life.totalWeeksInAYear - life.currentYearRemainingWeeks).toFloat() / Life.totalWeeksInAYear)
+                        }
+                        Row(modifier = GlanceModifier.size(
+                            height = currentYearHeight.dp,
+                            width =  currentYearHeightWidth
+                        ).background(color)
+                        ) {
+
+                        }
+                    }
                 } else {
                     // Draw full group progress
                     Row(modifier = GlanceModifier.fillMaxWidth()
@@ -190,7 +200,7 @@ fun AppWidgetColumn(
 @Composable
 fun appWidgetBackgroundModifier() = GlanceModifier
     .fillMaxSize()
-    .padding(16.dp)
+    .padding(WIDGET_PADDING.dp)
     .appWidgetBackground()
     .background(GlanceTheme.colors.background)
     .appWidgetBackgroundCornerRadius()
@@ -201,15 +211,6 @@ fun GlanceModifier.appWidgetBackgroundCornerRadius(): GlanceModifier {
         cornerRadius(android.R.dimen.system_app_widget_background_radius)
     } else {
         cornerRadius(16.dp)
-    }
-    return this
-}
-
-fun GlanceModifier.appWidgetInnerCornerRadius(): GlanceModifier {
-    if (Build.VERSION.SDK_INT >= 31) {
-        cornerRadius(android.R.dimen.system_app_widget_inner_radius)
-    } else {
-        cornerRadius(8.dp)
     }
     return this
 }
