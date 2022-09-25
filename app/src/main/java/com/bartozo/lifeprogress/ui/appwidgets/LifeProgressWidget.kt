@@ -249,6 +249,8 @@ fun GlanceModifier.appWidgetBackgroundCornerRadius(): GlanceModifier {
     if (Build.VERSION.SDK_INT >= 31) {
         cornerRadius(android.R.dimen.system_app_widget_background_radius)
     } else {
+        // TODO - find a way to display corner radius on SDK < 31
+        // At the moment in current glance alpha04 version this is not supported for SDK < 31
         cornerRadius(16.dp)
     }
     return this
