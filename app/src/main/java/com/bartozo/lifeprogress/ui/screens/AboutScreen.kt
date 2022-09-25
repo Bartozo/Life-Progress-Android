@@ -117,7 +117,7 @@ private fun HowItWorksSection(
                             modifier = Modifier
                                 .align(alignment = Alignment.BottomCenter)
                                 .offset(x = 50.dp, y = 50.dp),
-                            life = Life.example
+                            life = life
                         )
                         ZoomedInCalendar(
                             modifier = Modifier
