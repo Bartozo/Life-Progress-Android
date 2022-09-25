@@ -10,7 +10,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.Cake
 import androidx.compose.material.icons.outlined.Error
 import androidx.compose.material.icons.outlined.Face
@@ -36,6 +36,8 @@ import com.vanpra.composematerialdialogs.datetime.date.DatePickerDefaults
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,6 +50,8 @@ fun ProfileScreen(
         .collectAsState(initial = LocalDate.now())
     val lifeExpectancy: Int? by viewModel.lifeExpectancy
         .collectAsState(initial = 30)
+    val life: Life by viewModel.lifeFlow
+        .collectAsState(initial = Life.example)
 
     val scrollState = rememberScrollState()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
@@ -104,6 +108,7 @@ fun ProfileScreen(
                 )
                 AppWidgetCard(
                     modifier =  Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+                    life = life,
                     isRequestPinAppWidgetSupported = widgetManager.isRequestPinAppWidgetSupported,
                     onPinAppWidgetClick = {
                         // The application has only one widget
@@ -289,10 +294,10 @@ private fun LifeExpectancyCard(
 @Composable
 private fun AppWidgetCard(
     modifier: Modifier = Modifier,
+    life: Life,
     isRequestPinAppWidgetSupported: Boolean,
     onPinAppWidgetClick: () -> Unit
 ) {
-
     Column(modifier = modifier) {
         if (!isRequestPinAppWidgetSupported) {
             Row(
@@ -318,26 +323,88 @@ private fun AppWidgetCard(
         }
         InformationCard(
             modifier = Modifier.padding(top = 16.dp),
-            headline = "Simplified life calendar",
+            headline = "Life calendar as a widget",
             supportingText = "See the current life progress with this helpful widget " +
                     "on your home screen.",
             onClick = onPinAppWidgetClick,
             header = {
-                Row(
+                Box(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 24.dp, vertical = 16.dp)
-                ) {
-                    Spacer(modifier = Modifier.weight(1f))
-                    Box(modifier = Modifier.weight(1f)) {
-                        SimplifiedLifeCalendar(
-                            modifier = Modifier
-                                .align(alignment = Alignment.BottomCenter)
-                                .offset(x = 50.dp, y = 50.dp),
-                            life = Life.example
+                        .padding(
+                            top = 16.dp,
+                            start = 48.dp,
+                            end = 48.dp
                         )
+                        .offset(y = 16.dp) // Hide the bottom line of the border
+                        .fillMaxSize()
+                        .border(
+                            width = 4.dp,
+                            color = MaterialTheme.colorScheme.outlineVariant,
+                            shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
+                        )
+                        .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+                        .background(MaterialTheme.colorScheme.surface)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")),
+                                style = MaterialTheme.typography.labelSmall
+                            )
+                            Row {
+                                val iconSize = MaterialTheme.typography.labelSmall.fontSize.value.dp
+                                Icon(
+                                    modifier = Modifier.size(iconSize),
+                                    imageVector = Icons.Filled.NetworkWifi3Bar,
+                                    contentDescription = "Wifi Icon",
+                                )
+                                Icon(
+                                    modifier = Modifier.size(iconSize),
+                                    imageVector = Icons.Filled.SignalCellular4Bar,
+                                    contentDescription = "Signal Cellular Icon",
+                                )
+                                Icon(
+                                    modifier = Modifier.size(iconSize),
+                                    imageVector = Icons.Filled.Battery3Bar,
+                                    contentDescription = "Battery Icon",
+                                )
+                            }
+                        }
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            Spacer(modifier = Modifier.weight(1f))
+                            Box(
+                                modifier = Modifier
+                                    .weight(2f)
+                                    .padding(top = 8.dp, bottom = 16.dp)
+                            ) {
+                                Card {
+                                    Column(modifier = Modifier.padding(8.dp)) {
+                                        Text(
+                                            text = life.formattedProgress,
+                                            style = MaterialTheme.typography.labelMedium,
+                                            maxLines = 1
+                                        )
+                                        Text(
+                                            text = "${life.numberOfWeeksLeft} weeks left",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            maxLines = 1
+                                        )
+                                        Spacer(modifier = Modifier.height(4.dp))
+                                        SimplifiedLifeCalendar(life = life)
+                                    }
+                                }
+                            }
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
                     }
-                    Spacer(modifier = Modifier.weight(1f))
                 }
             }
         )
@@ -402,6 +469,7 @@ private fun LifeExpectancyCardPreview() {
 fun AppWidgetCardPreview() {
     LifeProgressTheme {
         AppWidgetCard(
+            life = Life.example,
             isRequestPinAppWidgetSupported = false,
             onPinAppWidgetClick = {}
         )
