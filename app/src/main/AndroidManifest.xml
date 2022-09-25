@@ -30,7 +30,7 @@
             android:name=".ui.appwidgets.LifeProgressWidgetReceiver"
             android:enabled="@bool/glance_appwidget_available"
             android:exported="false"
-            android:label="TEST-LABEL">
+            android:label="@string/app_widget_life_calendar_description">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
