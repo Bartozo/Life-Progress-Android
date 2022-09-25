@@ -2,10 +2,10 @@ package com.bartozo.lifeprogress.ui.appwidgets
 
 import android.content.Context
 import android.os.Build
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.glance.*
 import androidx.glance.action.ActionParameters
 import androidx.glance.appwidget.*
@@ -20,7 +20,6 @@ import com.bartozo.lifeprogress.data.Life
 import com.bartozo.lifeprogress.data.LifeState
 import kotlin.math.abs
 
-private const val HEADER_HEIGHT = 16 + 12 + 12
 private const val WIDGET_PADDING = 16
 
 class LifeProgressWidget : GlanceAppWidget() {
@@ -38,14 +37,21 @@ class LifeProgressWidget : GlanceAppWidget() {
         GlanceTheme {
             when (lifeState) {
                 is LifeState.Available -> {
-                    val life = Life(
-                        age = lifeState.age,
-                        lifeExpectancy = lifeState.lifeExpectancy,
-                        weekOfYear = lifeState.weekOfYear
-                    )
-                    LifeCalendarThin(life = life)
+                    AppWidgetColumn {
+                        LifeCalendarThin(
+                            life = Life(
+                                age = lifeState.age,
+                                lifeExpectancy = lifeState.lifeExpectancy,
+                                weekOfYear = lifeState.weekOfYear
+                            )
+                        )
+                    }
                 }
-                is LifeState.Loading -> CircularProgressIndicator()
+                is LifeState.Loading -> Box {
+                    AppWidgetBox(contentAlignment = Alignment.Center) {
+                        CircularProgressIndicator()
+                    }
+                }
                 is LifeState.Unavailable -> {
                     AppWidgetColumn(
                         verticalAlignment = Alignment.CenterVertically,
@@ -62,9 +68,10 @@ class LifeProgressWidget : GlanceAppWidget() {
 
 @Composable
 fun LifeCalendarThin(
+    modifier: GlanceModifier = GlanceModifier,
     life: Life
 ) {
-    AppWidgetColumn {
+    Column(modifier = modifier) {
         Header(
             modifier = GlanceModifier.fillMaxWidth(),
             life = life
@@ -81,20 +88,28 @@ fun LifeCalendarThin(
 @Composable
 fun Header(
     modifier: GlanceModifier = GlanceModifier,
-    height: Int = HEADER_HEIGHT,
     life: Life
 ) {
-    Column(
-        modifier = modifier.height(height.dp)
-    ) {
+    Column(modifier = modifier) {
+        val header = MaterialTheme.typography.titleMedium
+        val body = MaterialTheme.typography.bodyMedium
+
         Text(
             text = life.formattedProgress,
-            style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 16.sp),
+            style = TextStyle(
+                fontWeight = FontWeight.Bold,
+                fontSize = header.fontSize,
+                color = GlanceTheme.colors.textColorPrimary,
+            ),
             maxLines = 1
         )
         Text(
             text = "${life.numberOfWeeksLeft} weeks left",
-            style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 12.sp),
+            style = TextStyle(
+                fontWeight = FontWeight.Normal,
+                fontSize = body.fontSize,
+                color = GlanceTheme.colors.textColorSecondary,
+            ),
             maxLines = 1
         )
         Spacer(modifier = GlanceModifier.size(12.dp))
@@ -108,7 +123,10 @@ fun LifeCalendar(
 ) {
     // TODO - refactor this code to use weight in the future glance versions
     val size = LocalSize.current
-    val widgetHeight = size.height.value - HEADER_HEIGHT - (2 * WIDGET_PADDING)
+    val headerFontSize = MaterialTheme.typography.titleMedium.fontSize.value
+    val headerSubtitleFontSize = MaterialTheme.typography.bodyMedium.fontSize.value
+    val widgetHeight = size.height.value - headerFontSize - headerSubtitleFontSize - (2 * WIDGET_PADDING)
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -200,11 +218,28 @@ fun AppWidgetColumn(
     )
 }
 
+/**
+ * Provide a Box composable using the system parameters for app widgets background with rounded
+ * corners and background color.
+ */
+@Composable
+fun AppWidgetBox(
+    modifier: GlanceModifier = GlanceModifier,
+    contentAlignment: Alignment = Alignment.TopStart,
+    content: @Composable () -> Unit
+) {
+    Box(
+        modifier = appWidgetBackgroundModifier().then(modifier),
+        contentAlignment = contentAlignment,
+        content = content
+    )
+}
+
 
 @Composable
 fun appWidgetBackgroundModifier() = GlanceModifier
     .fillMaxSize()
-    .padding(WIDGET_PADDING.dp)
+    .padding(16.dp)
     .appWidgetBackground()
     .background(GlanceTheme.colors.background)
     .appWidgetBackgroundCornerRadius()

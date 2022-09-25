@@ -39,7 +39,7 @@ object LifeProgressStateDefinition : GlanceStateDefinition<LifeState> {
      * Custom serializer for Life using Json.
      */
     object LifeCalendarSerializer : Serializer<LifeState> {
-        override val defaultValue = LifeState.Unavailable("No't working :(")
+        override val defaultValue = LifeState.Loading
 
         override suspend fun readFrom(input: InputStream): LifeState = try {
             Json.decodeFromString(
