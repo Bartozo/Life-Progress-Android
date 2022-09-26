@@ -38,11 +38,6 @@ fun LifeProgressNavigation(
             val viewModel = hiltViewModel<WelcomeViewModel>()
             WelcomeScreen(
                 viewModel = viewModel,
-                navigateToHomeScreen = {
-                    navController.navigate(Screen.Home.route) {
-                        popUpTo(Screen.Welcome.route) { inclusive = true }
-                    }
-                },
                 navigateToProfileScreen = {
                     navController.navigate(Screen.Profile.route) {
                         popUpTo(Screen.Welcome.route) { inclusive = true }
