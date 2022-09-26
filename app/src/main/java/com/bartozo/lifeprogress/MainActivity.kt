@@ -27,12 +27,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        super.onCreate(savedInstanceState)
         installSplashScreen().apply {
             setKeepOnScreenCondition {
                 viewModel.mainUiState.value == MainEventState.Loading
             }
         }
+        super.onCreate(savedInstanceState)
 
         setContent {
             LifeProgressTheme {
