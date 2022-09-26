@@ -18,7 +18,6 @@ import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.viewmodels.MainEventState
 import com.bartozo.lifeprogress.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
