@@ -11,7 +11,6 @@ import javax.inject.Inject
 sealed class WelcomeEventState {
     object Idle : WelcomeEventState()
     object NavigateToProfileScreen : WelcomeEventState()
-    object OnDidSeeWelcomeScreen : WelcomeEventState()
 }
 
 @HiltViewModel
@@ -21,14 +20,6 @@ class WelcomeViewModel @Inject constructor(
 
     private val _welcomeEvent = MutableStateFlow<WelcomeEventState>(value = WelcomeEventState.Idle)
     val welcomeEvent: StateFlow<WelcomeEventState> = _welcomeEvent
-
-    init {
-        viewModelScope.launch {
-            if (userRepository.didSeeWelcome.first()) {
-                _welcomeEvent.value = WelcomeEventState.OnDidSeeWelcomeScreen
-            }
-        }
-    }
 
     fun navigateToProfileScreen() = viewModelScope.launch {
         userRepository.updateDidSeeWelcome(true)

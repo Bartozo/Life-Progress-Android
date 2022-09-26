@@ -22,7 +22,6 @@ import com.bartozo.lifeprogress.util.supportWideScreen
 @Composable
 fun WelcomeScreen(
     viewModel: WelcomeViewModel,
-    navigateToHomeScreen: () -> Unit,
     navigateToProfileScreen: () -> Unit,
 ) {
     val welcomeEvent: WelcomeEventState by viewModel.welcomeEvent
@@ -31,7 +30,6 @@ fun WelcomeScreen(
     LaunchedEffect(key1 = welcomeEvent) {
         when (welcomeEvent) {
             WelcomeEventState.Idle -> {}
-            WelcomeEventState.OnDidSeeWelcomeScreen -> navigateToHomeScreen()
             WelcomeEventState.NavigateToProfileScreen -> navigateToProfileScreen()
         }
     }
