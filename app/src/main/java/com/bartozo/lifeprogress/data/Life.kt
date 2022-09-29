@@ -64,6 +64,10 @@ data class Life(
         totalWeeksInAYear - weekOfYear
     }
 
+    val currentYearSpentWeeks: Int by lazy {
+        totalWeeksInAYear - currentYearRemainingWeeks
+    }
+
     val numberOfWeeksSpent: Int by lazy {
         totalWeeksInAYear * age + weekOfYear
     }
@@ -71,5 +75,4 @@ data class Life(
     val numberOfWeeksLeft: Int by lazy {
         totalWeeksInAYear * lifeExpectancy - numberOfWeeksSpent
     }
-
 }

@@ -28,12 +28,21 @@ fun SimplifiedLifeCalendar(
     ) {
         val canvasWidth = size.width
         val canvasHeight = size.height
-        val progressWithoutCurrentYear = life.age / life.lifeExpectancy.toFloat()
+        val cellHeight = canvasHeight / life.lifeExpectancy
 
-        for (group in AgeGroup.values()) {
-            val previousAgeGroupProportion = group.age / life.lifeExpectancy.toFloat()
-            val color = if (life.age > group.age) {
-                group.getColor()
+        for (yearIndex in 0 until life.lifeExpectancy) {
+            val currentYear = yearIndex + 1
+
+            val width = if (currentYear < life.age) {
+                canvasWidth
+            } else {
+                canvasWidth * (life.currentYearSpentWeeks.toFloat() / Life.totalWeeksInAYear.toFloat())
+            }
+
+            val color = if (currentYear < life.age) {
+                AgeGroup.getGroupForAge(currentYear).getColor()
+            } else if (currentYear == life.age) {
+                AgeGroup.getGroupForAge(currentYear).getColor()
             } else {
                 Color.Gray
             }
@@ -41,13 +50,15 @@ fun SimplifiedLifeCalendar(
             drawRect(
                 color = color,
                 topLeft = Offset(
-                    y = canvasHeight * previousAgeGroupProportion,
-                    x = 0f
+                    x = 0f,
+                    y = yearIndex * cellHeight
                 ),
                 size = Size(
-                    width = canvasWidth,
-                    height = canvasHeight * progressWithoutCurrentYear
-                )
+                    width = width,
+                    // By adding extra height, we get rid of empty lines caused by
+                    // inaccuracies in drawing (offset .. etc).
+                    height = cellHeight + 1
+                ),
             )
         }
     }
