@@ -37,16 +37,15 @@ enum class AgeGroup(val age: Int = 0) {
         }
     }
 
-    // TODO update colors
     fun getColor(): Color {
         return when (this) {
-            BABY -> Color.Blue
-            CHILD -> Color.Green
-            ADOLESCENT -> Color.Yellow
-            YOUNGADULT -> Color(255, 165, 0) // orange
-            ADULT -> Color.Red
-            MIDDLEAGE -> Color(160, 32, 240) // purple
-            OLDAGE -> Color(150, 75, 0) // brown
+            BABY -> Color(0xFF069DDE)
+            CHILD -> Color(0xFF5FB945)
+            ADOLESCENT -> Color(0xFFF9B828)
+            YOUNGADULT -> Color(0xFFF7801A)
+            ADULT -> Color(0xFFDF3B3C)
+            MIDDLEAGE -> Color(0xFF943B95)
+            OLDAGE -> Color(0xFF955F3B)
         }
     }
 }
