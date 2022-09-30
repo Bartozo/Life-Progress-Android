@@ -8,6 +8,8 @@ import android.content.Intent
 import androidx.compose.animation.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -19,13 +21,21 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.clipRect
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.bartozo.lifeprogress.App
 import com.bartozo.lifeprogress.R
+import com.bartozo.lifeprogress.data.AppTheme
 import com.bartozo.lifeprogress.data.Life
+import com.bartozo.lifeprogress.data.appThemes
 import com.bartozo.lifeprogress.ui.appwidgets.AppWidgetPinnedReceiver
 import com.bartozo.lifeprogress.ui.components.*
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
@@ -52,6 +62,8 @@ fun ProfileScreen(
         .collectAsState(initial = 30)
     val life: Life by viewModel.lifeFlow
         .collectAsState(initial = Life.example)
+    val appTheme: AppTheme by viewModel.appTheme
+        .collectAsState()
 
     val scrollState = rememberScrollState()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
@@ -97,7 +109,11 @@ fun ProfileScreen(
                     modifier = Modifier.padding(top = 16.dp, start = 16.dp),
                     text = "Themes"
                 )
-                WorkInProgressCard()
+                Themes(
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+                    selectedAppTheme = appTheme,
+                    onAppThemeSelected = { viewModel.updateAppTheme(it) }
+                )
                 Divider(
                     modifier = Modifier.padding(horizontal = 16.dp),
                     color = MaterialTheme.colorScheme.surfaceVariant
@@ -292,6 +308,130 @@ private fun LifeExpectancyCard(
 }
 
 @Composable
+private fun Themes(
+    modifier: Modifier = Modifier,
+    selectedAppTheme: AppTheme,
+    onAppThemeSelected: (AppTheme) -> Unit
+) {
+    val themes = appThemes
+
+    Row(modifier = modifier.fillMaxWidth()) {
+        for (theme in themes) {
+            ThemeButton(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 5.dp, vertical = 5.dp),
+                isSelected = theme == selectedAppTheme,
+                appTheme = theme,
+                onAppThemeSelected = onAppThemeSelected
+            )
+        }
+    }
+}
+
+@Composable
+private fun ThemeButton(
+    modifier: Modifier = Modifier,
+    isSelected: Boolean,
+    appTheme: AppTheme,
+    onAppThemeSelected: (AppTheme) -> Unit
+) {
+    val borderColor = if (isSelected) {
+        MaterialTheme.colorScheme.primary
+    } else {
+        MaterialTheme.colorScheme.outline
+    }
+
+    val backgroundColor = if (isSelected) {
+        MaterialTheme.colorScheme.secondaryContainer
+    } else {
+        MaterialTheme.colorScheme.surface
+    }
+
+
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1.27f)
+                .clip(RoundedCornerShape(size = 16.dp))
+                .clickable { onAppThemeSelected(appTheme) },
+            shape = RoundedCornerShape(size = 16.dp),
+            border = BorderStroke(width = 2.6.dp, color = borderColor),
+            colors = CardDefaults.cardColors(containerColor = backgroundColor),
+        ) {
+            Box(modifier = Modifier.fillMaxSize()) {
+                if (appTheme == AppTheme.SYSTEM_AUTO) {
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        LifeProgressTheme(false) {
+                            Row(modifier = Modifier
+                                .fillMaxHeight()
+                                .weight(1f)
+                                .background(MaterialTheme.colorScheme.surface)) {
+                            }
+                        }
+                        LifeProgressTheme(true) {
+                            Row(modifier = Modifier
+                                .fillMaxHeight()
+                                .weight(1f)
+                                .background(MaterialTheme.colorScheme.surface)) {
+                            }
+                        }
+                    }
+                }
+
+                if (isSelected) {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(40.dp),
+                            imageVector = Icons.Filled.Check,
+                            contentDescription = "Check icon",
+                            tint = MaterialTheme.colorScheme.onSecondaryContainer
+                        )
+                    }
+                }
+
+                if (appTheme == AppTheme.SYSTEM_AUTO && isSelected) {
+                    LifeProgressTheme(darkTheme = true) {
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            Icon(
+                                modifier = Modifier
+                                    .size(40.dp)
+                                    .drawWithContent {
+                                        clipRect(left = size.width / 2f) {
+                                            this@drawWithContent.drawContent()
+                                        }
+                                    },
+                                imageVector = Icons.Filled.Check,
+                                contentDescription = "Check icon",
+                                tint = MaterialTheme.colorScheme.onSecondaryContainer
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        Text(
+            modifier = Modifier.padding(top = 4.dp),
+            text = appTheme.getLocalizedString(),
+            style = MaterialTheme.typography.labelSmall
+        )
+    }
+}
+
+
+@Composable
 private fun AppWidgetCard(
     modifier: Modifier = Modifier,
     life: Life,
@@ -472,6 +612,29 @@ fun AppWidgetCardPreview() {
             life = Life.example,
             isRequestPinAppWidgetSupported = false,
             onPinAppWidgetClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun ThemesPreview() {
+    LifeProgressTheme {
+        Themes(
+            selectedAppTheme = AppTheme.SYSTEM_AUTO,
+            onAppThemeSelected = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun ThemeButtonPreview() {
+    LifeProgressTheme {
+        ThemeButton(
+            isSelected = true,
+            appTheme = AppTheme.LIGHT,
+            onAppThemeSelected = {}
         )
     }
 }

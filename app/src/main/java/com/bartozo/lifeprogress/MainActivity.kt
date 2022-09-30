@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -12,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
+import com.bartozo.lifeprogress.data.AppTheme
 import com.bartozo.lifeprogress.ui.navigation.LifeProgressNavigation
 import com.bartozo.lifeprogress.ui.navigation.Screen
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
@@ -34,7 +36,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            LifeProgressTheme {
+            val appTheme = viewModel.appTheme.collectAsState(initial = AppTheme.SYSTEM_AUTO)
+            val isDarkTheme = when (appTheme.value) {
+                AppTheme.SYSTEM_AUTO -> isSystemInDarkTheme()
+                AppTheme.LIGHT -> false
+                AppTheme.DARK -> true
+            }
+
+            LifeProgressTheme(darkTheme = isDarkTheme) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
