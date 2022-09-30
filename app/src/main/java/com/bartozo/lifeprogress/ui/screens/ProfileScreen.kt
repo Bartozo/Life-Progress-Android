@@ -8,8 +8,6 @@ import android.content.Intent
 import androidx.compose.animation.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -21,17 +19,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.clipRect
-import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.bartozo.lifeprogress.App
 import com.bartozo.lifeprogress.R
 import com.bartozo.lifeprogress.data.AppTheme
 import com.bartozo.lifeprogress.data.Life
@@ -616,18 +608,6 @@ fun ThemesPreview() {
     LifeProgressTheme {
         Themes(
             selectedAppTheme = AppTheme.SYSTEM_AUTO,
-            onAppThemeSelected = {}
-        )
-    }
-}
-
-@Preview
-@Composable
-fun ThemeButtonPreview() {
-    LifeProgressTheme {
-        ThemeButton(
-            isSelected = true,
-            appTheme = AppTheme.LIGHT,
             onAppThemeSelected = {}
         )
     }
