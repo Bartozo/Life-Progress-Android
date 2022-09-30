@@ -64,7 +64,10 @@ fun InformationCard(
                     )
 
                     if (onClick != null) {
-                        InfoIcon()
+                        FancyIcon(
+                            icon = Icons.Default.NorthEast,
+                            contentDescription = "Arrow Icon"
+                        )
                     }
                 }
                 Text(
@@ -75,34 +78,6 @@ fun InformationCard(
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun InfoIcon(
-    modifier: Modifier = Modifier
-) {
-    val containerAlignments = listOf(
-        Alignment.TopStart, Alignment.TopEnd,
-        Alignment.BottomStart, Alignment.BottomEnd
-    )
-
-    Box(modifier = modifier.size(30.dp)) {
-        for (i in 0..3) {
-            Box(
-                modifier = Modifier
-                    .size(20.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.secondaryContainer)
-                    .align(containerAlignments[i])
-            )
-        }
-        Icon(
-            modifier = Modifier.align(Alignment.Center),
-            imageVector = Icons.Default.NorthEast,
-            contentDescription = "Arrow Icon",
-            tint = MaterialTheme.colorScheme.onSecondaryContainer
-        )
     }
 }
 
@@ -162,13 +137,5 @@ private fun ClickableInformationCardPreview() {
             supportingText = "This idea was originally introduced in an article by Tim Urban.",
             onClick = {}
         )
-    }
-}
-
-@Preview
-@Composable
-private fun InfoIconPreview() {
-    LifeProgressTheme {
-        InfoIcon()
     }
 }
