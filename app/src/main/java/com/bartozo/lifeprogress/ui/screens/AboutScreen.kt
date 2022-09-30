@@ -1,10 +1,13 @@
 package com.bartozo.lifeprogress.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Coffee
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -55,6 +58,14 @@ fun AboutScreen(
                     life = life
                 )
                 LearnMoreSection(
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 32.dp
+                    ),
+                    onOpenUrl = { uriHandler.openUri(it) }
+                )
+                SupportSection(
                     modifier = Modifier.padding(
                         start = 16.dp,
                         end = 16.dp,
@@ -195,6 +206,44 @@ private fun LearnMoreSection(
     }
 }
 
+@Composable
+private fun SupportSection(
+    modifier: Modifier = Modifier,
+    onOpenUrl: (String) -> Unit
+) {
+    Column(modifier = modifier.fillMaxWidth()) {
+        Header(text = "Support")
+        InformationCard(
+            modifier = Modifier.padding(top = 16.dp),
+            header = {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    CircleWaveAnimation()
+                    Box(
+                        modifier = Modifier
+                            .size(30.dp)
+                            .align(Alignment.Center)
+                            .background(color = MaterialTheme.colorScheme.primary, shape = CircleShape)
+                    ) {
+                        Icon(
+                            modifier = Modifier.align(Alignment.Center),
+                            imageVector = Icons.Filled.Coffee,
+                            contentDescription = "Coffee Icon",
+                            tint = MaterialTheme.colorScheme.onPrimary
+                        )
+                    }
+                }
+            },
+            headline = "Support this project",
+            supportingText = "If you like using the project," +
+                    " and want it to have more features then please support it." +
+                    " You can support the development of this project by buying me a coffee.",
+            onClick = {
+                onOpenUrl("https://www.buymeacoffee.com/bartozo")
+            }
+        )
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
@@ -220,5 +269,13 @@ private fun HowItWorksSectionPreview() {
 private fun LearnMoreSectionPreview() {
     LifeProgressTheme{
         LearnMoreSection(onOpenUrl = {})
+    }
+}
+
+@Preview
+@Composable
+private fun SupportSectionPreview() {
+    LifeProgressTheme{
+        SupportSection(onOpenUrl = {})
     }
 }
