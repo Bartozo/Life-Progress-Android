@@ -19,6 +19,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -321,6 +322,7 @@ private fun Themes(
     }
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun ThemeButton(
     modifier: Modifier = Modifier,
@@ -328,17 +330,29 @@ private fun ThemeButton(
     appTheme: AppTheme,
     onAppThemeSelected: (AppTheme) -> Unit
 ) {
-    val borderColor = if (isSelected) {
-        MaterialTheme.colorScheme.primary
-    } else {
-        MaterialTheme.colorScheme.outline
-    }
+    val borderColor: Color by animateColorAsState(
+        if (isSelected) {
+            MaterialTheme.colorScheme.primary
+        } else {
+            MaterialTheme.colorScheme.outline
+        }
+    )
 
-    val backgroundColor = if (isSelected) {
-        MaterialTheme.colorScheme.secondaryContainer
-    } else {
-        MaterialTheme.colorScheme.surface
-    }
+    val backgroundColor: Color by animateColorAsState(
+        if (isSelected) {
+            MaterialTheme.colorScheme.secondaryContainer
+        } else {
+            MaterialTheme.colorScheme.surface
+        }
+    )
+
+    val textColor: Color by animateColorAsState(
+        if (isSelected) {
+            MaterialTheme.colorScheme.primary
+        } else {
+            MaterialTheme.colorScheme.onSurface
+        }
+    )
 
     Column(
         modifier = modifier,
@@ -393,20 +407,25 @@ private fun ThemeButton(
                         }
                     }
                 }
-
-                if (isSelected) {
-                    FancyIcon(
-                        modifier = Modifier.align(Alignment.Center),
-                        icon = Icons.Filled.Check,
-                        contentDescription = "Check icon"
-                    )
+                Column(modifier = Modifier.align(Alignment.Center)) {
+                    AnimatedVisibility(
+                        visible = isSelected,
+                        enter = fadeIn() + scaleIn(),
+                        exit = fadeOut() + scaleOut()
+                    ) {
+                        FancyIcon(
+                            icon = Icons.Filled.Check,
+                            contentDescription = "Check icon"
+                        )
+                    }
                 }
             }
         }
         Text(
             modifier = Modifier.padding(top = 4.dp),
             text = appTheme.getLocalizedString(),
-            style = MaterialTheme.typography.labelSmall
+            style = MaterialTheme.typography.labelSmall,
+            color = textColor
         )
     }
 }
