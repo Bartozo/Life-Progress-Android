@@ -395,16 +395,11 @@ private fun ThemeButton(
                 }
 
                 if (isSelected) {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        FancyIcon(
-                            icon = Icons.Filled.Check,
-                            contentDescription = "Check icon"
-                        )
-                    }
+                    FancyIcon(
+                        modifier = Modifier.align(Alignment.Center),
+                        icon = Icons.Filled.Check,
+                        contentDescription = "Check icon"
+                    )
                 }
             }
         }
