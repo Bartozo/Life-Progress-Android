@@ -3,6 +3,7 @@ package com.bartozo.lifeprogress.ui.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bartozo.lifeprogress.data.AppTheme
 import com.bartozo.lifeprogress.data.Life
 import com.bartozo.lifeprogress.repository.UserRepository
 import com.bartozo.lifeprogress.ui.appwidgets.LifeProgressWorker
@@ -28,6 +29,10 @@ class ProfileViewModel @Inject constructor(
         get() = userRepository.lifeExpectancy
             .stateIn(viewModelScope, SharingStarted.Lazily, 30)
 
+    val appTheme: StateFlow<AppTheme>
+        get() = userRepository.appTheme
+            .stateIn(viewModelScope, SharingStarted.Lazily, AppTheme.SYSTEM_AUTO)
+
     val lifeFlow = combine(
         userRepository.birthDay,
         userRepository.lifeExpectancy
@@ -46,6 +51,10 @@ class ProfileViewModel @Inject constructor(
     fun updateLifeExpectancy(lifeExpectancy: Int, context: Context) = viewModelScope.launch {
         userRepository.updateLifeExpectancy(lifeExpectancy = lifeExpectancy)
         updateAppWidget(context = context)
+    }
+
+    fun updateAppTheme(appTheme: AppTheme) = viewModelScope.launch {
+        userRepository.updateAppTheme(appTheme = appTheme)
     }
 
     private fun updateAppWidget(context: Context) {

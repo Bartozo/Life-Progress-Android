@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
+import com.bartozo.lifeprogress.data.AppTheme
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
@@ -23,6 +23,7 @@ class PrefsStoreImpl @Inject constructor(
         val BIRTH_DAY_KEY = longPreferencesKey("birth_day")
         val LIFE_EXPECTANCY_KEY = intPreferencesKey("life_expectancy")
         val DID_SEE_WELCOME_KEY = booleanPreferencesKey("did_see_welcome")
+        val APP_THEME_KEY = stringPreferencesKey("app_theme")
     }
 
     private val dataStore = appContext.dataStore
@@ -55,6 +56,21 @@ class PrefsStoreImpl @Inject constructor(
         }
     }.map { it[PreferencesKeys.DID_SEE_WELCOME_KEY] ?: false }
 
+    override fun appThemeFlow() = dataStore.data.catch { exception ->
+        if (exception is IOException) {
+            emit(emptyPreferences())
+        } else {
+            throw exception
+        }
+    }.map {
+        val savedTheme = it[PreferencesKeys.APP_THEME_KEY]
+        if (savedTheme != null) {
+            AppTheme.valueOf(savedTheme)
+        } else {
+            AppTheme.SYSTEM_AUTO
+        }
+    }
+
     override suspend fun saveBirthDay(birthDay: LocalDate) {
         val birthDayInDays = birthDay.toEpochDay()
 
@@ -72,6 +88,12 @@ class PrefsStoreImpl @Inject constructor(
     override suspend fun updatedDidSeeWelcome(didSeeWelcome: Boolean) {
         dataStore.edit {
             it[PreferencesKeys.DID_SEE_WELCOME_KEY] = didSeeWelcome
+        }
+    }
+
+    override suspend fun updateAppTheme(appTheme: AppTheme) {
+        dataStore.edit {
+            it[PreferencesKeys.APP_THEME_KEY] = appTheme.toString()
         }
     }
 }
