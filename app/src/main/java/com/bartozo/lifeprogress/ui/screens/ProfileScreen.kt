@@ -348,7 +348,6 @@ private fun ThemeButton(
         MaterialTheme.colorScheme.surface
     }
 
-
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -364,19 +363,39 @@ private fun ThemeButton(
             colors = CardDefaults.cardColors(containerColor = backgroundColor),
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
-                if (appTheme == AppTheme.SYSTEM_AUTO) {
-                    Row(modifier = Modifier.fillMaxWidth()) {
+                when (appTheme) {
+                    AppTheme.SYSTEM_AUTO -> {
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            LifeProgressTheme(false) {
+                                Row(modifier = Modifier
+                                    .fillMaxHeight()
+                                    .weight(1f)
+                                    .background(MaterialTheme.colorScheme.surface)) {
+                                }
+                            }
+                            LifeProgressTheme(true) {
+                                Row(modifier = Modifier
+                                    .fillMaxHeight()
+                                    .weight(1f)
+                                    .background(MaterialTheme.colorScheme.surface)) {
+                                }
+                            }
+                        }
+                    }
+                    AppTheme.LIGHT -> {
                         LifeProgressTheme(false) {
                             Row(modifier = Modifier
                                 .fillMaxHeight()
-                                .weight(1f)
+                                .fillMaxWidth()
                                 .background(MaterialTheme.colorScheme.surface)) {
                             }
                         }
+                    }
+                    AppTheme.DARK -> {
                         LifeProgressTheme(true) {
                             Row(modifier = Modifier
                                 .fillMaxHeight()
-                                .weight(1f)
+                                .fillMaxWidth()
                                 .background(MaterialTheme.colorScheme.surface)) {
                             }
                         }
@@ -389,35 +408,10 @@ private fun ThemeButton(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        Icon(
-                            modifier = Modifier.size(40.dp),
-                            imageVector = Icons.Filled.Check,
-                            contentDescription = "Check icon",
-                            tint = MaterialTheme.colorScheme.onSecondaryContainer
+                        FancyIcon(
+                            icon = Icons.Filled.Check,
+                            contentDescription = "Check icon"
                         )
-                    }
-                }
-
-                if (appTheme == AppTheme.SYSTEM_AUTO && isSelected) {
-                    LifeProgressTheme(darkTheme = true) {
-                        Column(
-                            modifier = Modifier.fillMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center
-                        ) {
-                            Icon(
-                                modifier = Modifier
-                                    .size(40.dp)
-                                    .drawWithContent {
-                                        clipRect(left = size.width / 2f) {
-                                            this@drawWithContent.drawContent()
-                                        }
-                                    },
-                                imageVector = Icons.Filled.Check,
-                                contentDescription = "Check icon",
-                                tint = MaterialTheme.colorScheme.onSecondaryContainer
-                            )
-                        }
                     }
                 }
             }
