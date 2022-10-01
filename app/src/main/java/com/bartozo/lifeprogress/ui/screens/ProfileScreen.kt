@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProviderInfo
 import android.content.Context
 import android.content.Intent
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -65,6 +66,11 @@ fun ProfileScreen(
     val widgetManager = AppWidgetManager.getInstance(context)
     // Get a list of our app widget providers to retrieve their info
     val widgetProviders = widgetManager.getInstalledProvidersForPackage(context.packageName, null)
+
+    BackHandler(
+        enabled = true,
+        onBack = navigateBackToHomeScreen
+    )
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),

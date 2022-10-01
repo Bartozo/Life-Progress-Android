@@ -1,5 +1,6 @@
 package com.bartozo.lifeprogress.ui.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -34,6 +35,11 @@ fun AboutScreen(
         .collectAsState(initial = Life.example)
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val uriHandler = LocalUriHandler.current
+
+    BackHandler(
+        enabled = true,
+        onBack = navigateBackToHomeScreen
+    )
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
