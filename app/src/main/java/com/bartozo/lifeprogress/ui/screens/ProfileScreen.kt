@@ -67,10 +67,7 @@ fun ProfileScreen(
     // Get a list of our app widget providers to retrieve their info
     val widgetProviders = widgetManager.getInstalledProvidersForPackage(context.packageName, null)
 
-    BackHandler(
-        enabled = true,
-        onBack = navigateBackToHomeScreen
-    )
+    BackHandler(onBack = navigateBackToHomeScreen)
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),

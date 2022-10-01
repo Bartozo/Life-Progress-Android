@@ -36,10 +36,7 @@ fun AboutScreen(
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val uriHandler = LocalUriHandler.current
 
-    BackHandler(
-        enabled = true,
-        onBack = navigateBackToHomeScreen
-    )
+    BackHandler(onBack = navigateBackToHomeScreen)
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
