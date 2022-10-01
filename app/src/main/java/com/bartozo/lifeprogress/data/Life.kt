@@ -2,6 +2,7 @@ package com.bartozo.lifeprogress.data
 
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
+import kotlin.math.abs
 
 data class Life(
     val age: Int,
@@ -14,10 +15,10 @@ data class Life(
         operator fun invoke(birthday: LocalDate, lifeExpectancy: Int): Life {
             val todayDate: LocalDate = LocalDate.now()
             val age = ChronoUnit.YEARS.between(birthday, todayDate)
-            val weekOfYear = ChronoUnit.WEEKS.between(
+            val weekOfYear = abs(ChronoUnit.WEEKS.between(
                 LocalDate.of(todayDate.year, birthday.month, birthday.dayOfMonth),
                 todayDate
-            ).toInt()
+            ).toInt())
 
             return Life(
                 age = age.toInt(),
