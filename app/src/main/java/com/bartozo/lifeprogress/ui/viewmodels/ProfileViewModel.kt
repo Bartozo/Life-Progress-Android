@@ -21,11 +21,11 @@ class ProfileViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    val birthDay: StateFlow<LocalDate?>
+    val birthDay: StateFlow<LocalDate>
         get() = userRepository.birthDay
             .stateIn(viewModelScope, SharingStarted.Lazily, LocalDate.now())
 
-    val lifeExpectancy: StateFlow<Int?>
+    val lifeExpectancy: StateFlow<Int>
         get() = userRepository.lifeExpectancy
             .stateIn(viewModelScope, SharingStarted.Lazily, 30)
 

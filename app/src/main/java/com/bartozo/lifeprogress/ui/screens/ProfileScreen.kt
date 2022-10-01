@@ -49,9 +49,9 @@ fun ProfileScreen(
     viewModel: ProfileViewModel,
     navigateBackToHomeScreen: () -> Unit
 ) {
-    val birthDay: LocalDate? by viewModel.birthDay
+    val birthDay: LocalDate by viewModel.birthDay
         .collectAsState(initial = LocalDate.now())
-    val lifeExpectancy: Int? by viewModel.lifeExpectancy
+    val lifeExpectancy: Int by viewModel.lifeExpectancy
         .collectAsState(initial = 30)
     val life: Life by viewModel.lifeFlow
         .collectAsState(initial = Life.example)
@@ -86,12 +86,12 @@ fun ProfileScreen(
                 )
                 BirthDayCard(
                     modifier = Modifier.padding(top = 16.dp),
-                    birthDay = birthDay ?: LocalDate.now(),
+                    birthDay = birthDay,
                     onBirthDaySelect = { viewModel.updateBirthDay(it, context) }
                 )
                 LifeExpectancyCard(
                     modifier = Modifier.padding(top = 30.dp),
-                    lifeExpectancy = lifeExpectancy ?: 30,
+                    lifeExpectancy = lifeExpectancy,
                     onLifeExpectancySelect = { viewModel.updateLifeExpectancy(it, context) }
                 )
                 Divider(
