@@ -1,6 +1,7 @@
 package com.bartozo.lifeprogress.ui.screens
 
 import androidx.compose.animation.*
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -10,10 +11,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.bartozo.lifeprogress.R
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.viewmodels.WelcomeEventState
 import com.bartozo.lifeprogress.ui.viewmodels.WelcomeViewModel
@@ -110,11 +113,11 @@ private fun WelcomeContent(
         horizontalAlignment = Alignment.Start
     ) {
         AppearAnimation(isVisible = isAppIconVisible) {
-            Icon(
+            Image(
                 modifier = Modifier
                     .size(120.dp)
                     .padding(bottom = 24.dp),
-                imageVector = Icons.Default.AccountBox,
+                painter = painterResource(id = R.drawable.life_progress_app_icon),
                 contentDescription = "App icon"
             )
         }
