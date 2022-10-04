@@ -197,15 +197,15 @@ private fun LearnMoreSection(
                 onOpenUrl("https://www.youtube.com/watch?v=JXeJANDKwDc")
             }
         )
-        InformationCard(
-            modifier = Modifier.padding(top = 16.dp),
-            headline = "The project is open source!",
-            supportingText = "Learn how this project was created and contribute to it." +
-                    " Check out the code on GitHub.",
-            onClick = {
-                onOpenUrl("https://github.com/Bartozo/Life-Progress-Android")
-            }
-        )
+//        InformationCard(
+//            modifier = Modifier.padding(top = 16.dp),
+//            headline = "The project is open source!",
+//            supportingText = "Learn how this project was created and contribute to it." +
+//                    " Check out the code on GitHub.",
+//            onClick = {
+//                onOpenUrl("https://github.com/Bartozo/Life-Progress-Android")
+//            }
+//        )
     }
 }
 
@@ -237,9 +237,8 @@ private fun SupportSection(
                 }
             },
             headline = "Support this project",
-            supportingText = "If you like using the project," +
-                    " and want it to have more features then please support it." +
-                    " You can support the development of this project by buying me a coffee.",
+            supportingText = "If you enjoy using this application and want it to has more features, " +
+                    "you can support the development of this project by buying me a coffee.",
             onClick = {
                 onOpenUrl("https://www.buymeacoffee.com/bartozo")
             }
