@@ -3,7 +3,7 @@
 > Friendly reminder that you're not gonna live forever.
 
 # Download
-![](assets/google-play-badge.png)(https://play.google.com/store/apps/details?id=com.bartozo.lifeprogress)
+[![](assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.bartozo.lifeprogress)
 
 # How it works
 - Each ⬜️ square you see on screen represents a week in your ❤️ life. The first square (the one at the top left) is the week you were born.
@@ -14,6 +14,7 @@
 
 The app also comes with widget created in compose glance so you can see your life progress on your home screen.
 about
+
 ![](assets/widget-screens.png)
 
 # About the project
