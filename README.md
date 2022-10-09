@@ -10,11 +10,11 @@
 - Each row of 52 weeks makes up one year.
 - The 🎨 colored squares are the weeks in the past, the gray ones are what you have left.
 
-![](assets/main-screen.png) ![](assets/profile-screen.png) ![](assets/about-screen.png)
+![](assets/app-screens.png)
 
 The app also comes with widget created in compose glance so you can see your life progress on your home screen.
 about
-![](assets/profile-screen-widget.png) ![](assets/app-widget.png)
+![](assets/widget-screens.png)
 
 # About the project
 - 😎 The project was created in Jetpack Compose. (Say goodbye to XML layouts)
