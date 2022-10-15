@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -32,7 +33,10 @@ import com.bartozo.lifeprogress.data.Life
 import com.bartozo.lifeprogress.data.appThemes
 import com.bartozo.lifeprogress.ui.appwidgets.AppWidgetPinnedReceiver
 import com.bartozo.lifeprogress.ui.components.*
+import com.bartozo.lifeprogress.ui.theme.DarkTheme
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
+import com.bartozo.lifeprogress.ui.theme.LightTheme
+import com.bartozo.lifeprogress.ui.theme.Typography
 import com.bartozo.lifeprogress.ui.viewmodels.ProfileViewModel
 import com.bartozo.lifeprogress.util.rangeOfYearsFromNowTo
 import com.vanpra.composematerialdialogs.MaterialDialog
@@ -375,14 +379,21 @@ private fun ThemeButton(
                 when (appTheme) {
                     AppTheme.SYSTEM_AUTO -> {
                         Row(modifier = Modifier.fillMaxWidth()) {
-                            LifeProgressTheme(false) {
+                            LightTheme {
                                 Row(modifier = Modifier
                                     .fillMaxHeight()
                                     .weight(1f)
                                     .background(MaterialTheme.colorScheme.surface)) {
                                 }
                             }
-                            LifeProgressTheme(true) {
+                            DarkTheme {
+                                Row(modifier = Modifier
+                                    .fillMaxHeight()
+                                    .weight(1f)
+                                    .background(MaterialTheme.colorScheme.surface)) {
+                                }
+                            }
+                            DarkTheme {
                                 Row(modifier = Modifier
                                     .fillMaxHeight()
                                     .weight(1f)
@@ -392,7 +403,7 @@ private fun ThemeButton(
                         }
                     }
                     AppTheme.LIGHT -> {
-                        LifeProgressTheme(false) {
+                        LightTheme {
                             Row(modifier = Modifier
                                 .fillMaxHeight()
                                 .fillMaxWidth()
@@ -401,7 +412,7 @@ private fun ThemeButton(
                         }
                     }
                     AppTheme.DARK -> {
-                        LifeProgressTheme(true) {
+                        DarkTheme {
                             Row(modifier = Modifier
                                 .fillMaxHeight()
                                 .fillMaxWidth()
