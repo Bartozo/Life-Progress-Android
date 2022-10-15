@@ -21,22 +21,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.glance.appwidget.GlanceAppWidgetManager
 import com.bartozo.lifeprogress.R
 import com.bartozo.lifeprogress.data.AppTheme
 import com.bartozo.lifeprogress.data.Life
+import com.bartozo.lifeprogress.data.LifeState
 import com.bartozo.lifeprogress.data.appThemes
 import com.bartozo.lifeprogress.ui.appwidgets.AppWidgetPinnedReceiver
+import com.bartozo.lifeprogress.ui.appwidgets.LifeProgressWidget
+import com.bartozo.lifeprogress.ui.appwidgets.LifeProgressWidgetReceiver
 import com.bartozo.lifeprogress.ui.components.*
 import com.bartozo.lifeprogress.ui.theme.DarkTheme
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.theme.LightTheme
-import com.bartozo.lifeprogress.ui.theme.Typography
 import com.bartozo.lifeprogress.ui.viewmodels.ProfileViewModel
 import com.bartozo.lifeprogress.util.rangeOfYearsFromNowTo
 import com.vanpra.composematerialdialogs.MaterialDialog
@@ -128,7 +130,7 @@ fun ProfileScreen(
                     isRequestPinAppWidgetSupported = widgetManager.isRequestPinAppWidgetSupported,
                     onPinAppWidgetClick = {
                         // The application has only one widget
-                        widgetProviders.first().pin(context)
+                        widgetProviders.first().pin(context, life)
                     }
                 )
             }
@@ -572,7 +574,7 @@ private fun AppWidgetCard(
  * depending on the default launcher implementation. Also, it does not callback if user cancels the
  * request.
  */
-private fun AppWidgetProviderInfo.pin(context: Context) {
+private fun AppWidgetProviderInfo.pin(context: Context, life: Life) {
     val successCallback = PendingIntent.getBroadcast(
         context,
         0,
@@ -580,7 +582,17 @@ private fun AppWidgetProviderInfo.pin(context: Context) {
         PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
     )
 
-    AppWidgetManager.getInstance(context).requestPinAppWidget(provider, null, successCallback)
+    val manager = GlanceAppWidgetManager(context)
+    manager.requestPinGlanceAppWidget(
+        receiver = LifeProgressWidgetReceiver::class.java,
+        preview = LifeProgressWidget(),
+        previewState = LifeState.Available(
+            age = life.age,
+            lifeExpectancy = life.lifeExpectancy,
+            weekOfYear = Life.totalWeeksInAYear
+        ),
+        successCallback = successCallback
+    )
 }
 
 
