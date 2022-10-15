@@ -15,14 +15,18 @@ data class Life(
         operator fun invoke(birthday: LocalDate, lifeExpectancy: Int): Life {
             val todayDate: LocalDate = LocalDate.now()
             val age = ChronoUnit.YEARS.between(birthday, todayDate)
-            val weekOfYear = abs(ChronoUnit.WEEKS.between(
+            val weekOfYear = ChronoUnit.WEEKS.between(
                 LocalDate.of(todayDate.year, birthday.month, birthday.dayOfMonth),
                 todayDate
-            ).toInt())
+            ).toInt()
 
             return Life(
                 age = age.toInt(),
-                weekOfYear = weekOfYear,
+                weekOfYear = if (weekOfYear < 0) {
+                    totalWeeksInAYear - abs(weekOfYear)
+                } else {
+                    weekOfYear
+                },
                 lifeExpectancy = lifeExpectancy
             )
         }
