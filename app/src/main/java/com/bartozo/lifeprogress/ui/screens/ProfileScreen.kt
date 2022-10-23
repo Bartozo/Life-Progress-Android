@@ -589,7 +589,7 @@ private fun AppWidgetProviderInfo.pin(context: Context, life: Life) {
         previewState = LifeState.Available(
             age = life.age,
             lifeExpectancy = life.lifeExpectancy,
-            weekOfYear = Life.totalWeeksInAYear
+            weekOfYear = life.weekOfYear
         ),
         successCallback = successCallback
     )
