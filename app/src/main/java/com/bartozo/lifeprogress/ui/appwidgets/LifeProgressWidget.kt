@@ -154,7 +154,7 @@ fun LifeCalendar(
                 }
             } else {
                 val previousGroup = AgeGroup.values().getOrNull(group.ordinal - 1)
-                if (previousGroup != null) {
+                if (previousGroup != null && color != Color.Gray) {
                     val previousGroupProportion = previousGroup.getAgeInRange().last /
                             life.lifeExpectancy.toFloat()
                     val previousGroupHeight = widgetHeight * previousGroupProportion
