@@ -126,6 +126,7 @@ fun LifeCalendar(
     val headerFontSize = MaterialTheme.typography.titleMedium.fontSize.value
     val headerSubtitleFontSize = MaterialTheme.typography.bodyMedium.fontSize.value
     val widgetHeight = size.height.value - headerFontSize - headerSubtitleFontSize - (2 * WIDGET_PADDING)
+    val widgetWidth = size.width.value - (2 * WIDGET_PADDING)
 
     Box(
         modifier = modifier
@@ -173,14 +174,17 @@ fun LifeCalendar(
                         // Current year progress
                         val currentYearHeight = groupFullHeight - groupHeight + (groupHeight * ((currentAgeInGroup.toFloat() + 1) / totalYearsInGroup.toFloat()))
                         val currentYearHeightWidth = if (life.currentYearRemainingWeeks == Life.totalWeeksInAYear) {
-                            size.width
+                            widgetWidth
                         } else {
-                            size.width * ((Life.totalWeeksInAYear - life.currentYearRemainingWeeks).toFloat() / Life.totalWeeksInAYear)
+                            widgetWidth * ((Life.totalWeeksInAYear - life.currentYearRemainingWeeks).toFloat() / Life.totalWeeksInAYear)
                         }
-                        Row(modifier = GlanceModifier.size(
-                            height = currentYearHeight.dp,
-                            width =  currentYearHeightWidth
-                        ).background(color)
+                        Row(
+                            modifier = GlanceModifier
+                                .size(
+                                    height = currentYearHeight.dp,
+                                    width =  currentYearHeightWidth.dp
+                                )
+                                .background(color)
                         ) {
 
                         }
