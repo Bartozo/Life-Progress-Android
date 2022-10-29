@@ -18,11 +18,13 @@ import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -50,6 +52,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
 
+@ExperimentalComposeUiApi
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
@@ -91,7 +94,7 @@ fun ProfileScreen(
             ) {
                 Header(
                     modifier = Modifier.padding(top = 8.dp, start = 16.dp),
-                    text = "User"
+                    text = stringResource(id = R.string.user)
                 )
                 BirthDayCard(
                     modifier = Modifier.padding(top = 16.dp),
@@ -109,7 +112,7 @@ fun ProfileScreen(
                 )
                 Header(
                     modifier = Modifier.padding(top = 16.dp, start = 16.dp),
-                    text = "Themes"
+                    text = stringResource(id = R.string.themes)
                 )
                 Themes(
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
@@ -122,7 +125,7 @@ fun ProfileScreen(
                 )
                 Header(
                     modifier = Modifier.padding(top = 16.dp, start = 16.dp),
-                    text = "App widgets"
+                    text = stringResource(id = R.string.app_widgets)
                 )
                 AppWidgetCard(
                     modifier =  Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
@@ -147,7 +150,9 @@ private fun ProfileTopBar(
 ) {
     LargeTopAppBar(
         modifier = modifier,
-        title = { Text("Profile") },
+        title = { 
+            Text(text = stringResource(id = R.string.profile))
+        },
         navigationIcon = {
             IconButton(
                 onClick = onBackButtonClick
@@ -175,13 +180,13 @@ private fun BirthDayCard(
         dialogState = dialogState,
         buttons = {
             positiveButton(
-                text = "Ok",
+                text = stringResource(id = com.google.android.material.R.string.mtrl_picker_confirm),
                 textStyle = MaterialTheme.typography.labelLarge.copy(
                     color = MaterialTheme.colorScheme.primary
                 )
             )
             negativeButton(
-                text = "Cancel",
+                text = stringResource(id = com.google.android.material.R.string.mtrl_picker_cancel),
                 textStyle = MaterialTheme.typography.labelLarge.copy(
                     color = MaterialTheme.colorScheme.secondary
                 )
@@ -222,7 +227,7 @@ private fun BirthDayCard(
         },
         headlineText = {
             Text(
-                text = "Your Birthday",
+                text = stringResource(id = R.string.your_birthday),
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.titleMedium
             )
@@ -255,7 +260,7 @@ private fun LifeExpectancyCard(
         modifier = modifier,
         headlineText = {
             Text(
-                text = "Life Expectancy",
+                text = stringResource(id = R.string.life_expectancy),
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.titleMedium
             )
@@ -439,7 +444,7 @@ private fun ThemeButton(
         }
         Text(
             modifier = Modifier.padding(top = 4.dp),
-            text = appTheme.getLocalizedString(),
+            text = stringResource(id = appTheme.getLocalizedString()),
             style = MaterialTheme.typography.labelSmall,
             color = textColor
         )
@@ -447,6 +452,7 @@ private fun ThemeButton(
 }
 
 
+@ExperimentalComposeUiApi
 @Composable
 private fun AppWidgetCard(
     modifier: Modifier = Modifier,
@@ -479,9 +485,8 @@ private fun AppWidgetCard(
         }
         InformationCard(
             modifier = Modifier.padding(top = 16.dp),
-            headline = "Life calendar as a widget",
-            supportingText = "See the current life progress with this helpful widget " +
-                    "on your home screen.",
+            headline = stringResource(id = R.string.life_calendar_card_title),
+            supportingText = stringResource(id = R.string.life_calendar_card_description),
             onClick = onPinAppWidgetClick,
             header = {
                 Box(
@@ -549,7 +554,11 @@ private fun AppWidgetCard(
                                             maxLines = 1
                                         )
                                         Text(
-                                            text = "${life.numberOfWeeksLeft} weeks left",
+                                            text = pluralStringResource(
+                                                id = R.plurals.weeks_spent,
+                                                count = life.numberOfWeeksLeft,
+                                                life.numberOfWeeksLeft
+                                            ),
                                             style = MaterialTheme.typography.bodySmall,
                                             maxLines = 1
                                         )
@@ -630,6 +639,7 @@ private fun LifeExpectancyCardPreview() {
    }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Preview
 @Composable
 fun AppWidgetCardPreview() {

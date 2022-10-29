@@ -1,6 +1,7 @@
 package com.bartozo.lifeprogress.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -23,6 +24,7 @@ sealed class Screen(val route: String) {
     object About: Screen("about")
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LifeProgressNavigation(
     modifier: Modifier = Modifier,

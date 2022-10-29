@@ -4,4 +4,54 @@
     <string name="return_to_previous_screen">Return to previous screen</string>
     <string name="app_widget_life_calendar_description">Widget for Life Calendar</string>
     <string name="pin_unavailable">Pinning is not supported in the default launcher</string>
+
+    <string name="welcome_to">Welcome to</string>
+    <string name="friendly_reminder_that">Friendly reminder that you\'re not gonna live forever.</string>
+    <string name="before_we_continue">Before we continue, let\'s set up your profile</string>
+    <string name="user">User</string>
+    <string name="your_birthday">Your Birthday</string>
+    <string name="life_expectancy">Life Expectancy</string>
+    <string name="themes">Themes</string>
+    <string name="system_auto_theme">System Auto</string>
+    <string name="light_theme">Default</string>
+    <string name="dark_theme">Default Dark</string>
+    <string name="app_widgets">App widgets</string>
+    <string name="life_calendar_card_title">Life calendar as a widget</string>
+    <string name="life_calendar_card_description">See the current life progress with this helpful widget on your home screen.</string>
+    <string name="year_progress">Year Progress: %1$s</string>
+    <string name="life_progress">Life Progress: %1$s</string>
+    <string name="profile">Profile</string>
+    <string name="about_life_progress">About Life Progress</string>
+    <string name="how_it_works">How it works</string>
+    <string name="calendar_for_your_life_title">A calendar for your life</string>
+    <string name="calendar_for_your_life_description">Each square you see on screen represents a week in your life. The first square (the one at the top left) is the week you were born.</string>
+    <string name="each_row_title">Each row of 52 weeks makes up one year</string>
+    <string name="each_row_description">This is what your current year looks like, see if you can spot it on the calendar.</string>
+    <string name="last_thing_title">Last thing!</string>
+    <string name="last_thing_description">Try tapping on the calendar and see what happens.</string>
+    <string name="learn_more">Learn more</string>
+    <string name="your_life_in_weeks_title">Your Life in Weeks</string>
+    <string name="your_life_in_weeks_description">This idea was originally introduced in an article by Tim Urban.</string>
+    <string name="what_are_you_doing_with_your_life_title">What Are You Doing With Your Life? The Tail End</string>
+    <string name="what_are_you_doing_with_your_life_description">Kurzgesagt\'s phenomenal video on the topic.</string>
+    <string name="support">Support</string>
+    <string name="support_project_title">Support this project</string>
+    <string name="support_project_description">If you enjoy using this application and want it to has more features, you can support the development of this project by buying me a coffee</string>
+
+    <plurals name="weeks_spent">
+        <item quantity="other">%1d weeks spent</item>
+    </plurals>
+
+    <plurals name="weeks_left">
+        <item quantity="other">%1d weeks left</item>
+    </plurals>
+
+    <plurals name="weeks_until_birthday">
+        <item quantity="other">%1d weeks until your birthday</item>
+    </plurals>
+
+    <!--Buttons-->
+    <string name="continue_button_text">Continue</string>
+    <string name="profile_button_text">Profile</string>
+    <string name="about_this_app_button_text">About This App</string>
 </resources>

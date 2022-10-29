@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -122,14 +123,14 @@ private fun WelcomeContent(
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             AppearAnimation(isVisible = isHeadlineVisible) {
                 Text(
-                    "Welcome to",
+                    stringResource(id = R.string.welcome_to),
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
             AppearAnimation(isVisible = isSecondHeadlineVisible) {
                 Text(
-                    "Life Progress",
+                    stringResource(id = R.string.app_name),
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.onSurface
@@ -138,7 +139,7 @@ private fun WelcomeContent(
         }
         AppearAnimation(isVisible = isDescriptionVisible) {
             Text(
-                "Friendly reminder that you're not gonna live forever.",
+                stringResource(id = R.string.friendly_reminder_that),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Start
@@ -161,7 +162,7 @@ private fun WelcomeBottomBar(
         AppearAnimation(isVisible = isCaptionVisible) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Before we continue, let's set up your profile",
+                text = stringResource(id = R.string.before_we_continue),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center
@@ -175,7 +176,7 @@ private fun WelcomeBottomBar(
                 onClick = onContinueClick
             ) {
                 Text(
-                    "Continue",
+                    text = stringResource(id = R.string.continue_button_text),
                     style = MaterialTheme.typography.labelLarge
                 )
             }

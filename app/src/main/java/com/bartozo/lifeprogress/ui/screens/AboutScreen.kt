@@ -92,7 +92,9 @@ private fun AboutTopBar(
 ) {
     LargeTopAppBar(
         modifier = modifier,
-        title = { Text("About Life Progress") },
+        title = { 
+            Text(text = stringResource(id = R.string.about_life_progress))
+        },
         navigationIcon = {
             IconButton(
                 onClick = onBackButtonClick
@@ -113,12 +115,11 @@ private fun HowItWorksSection(
     life: Life
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
-        Header(text = "How it works")
+        Header(text = stringResource(id = R.string.how_it_works))
         InformationCard(
             modifier = Modifier.padding(top = 16.dp),
-            headline = "A calendar for your life",
-            supportingText = "Each square you see on screen represents a week in your life." +
-                    " The first square (the one at the top left) is the week you were born.",
+            headline = stringResource(id = R.string.calendar_for_your_life_title),
+            supportingText = stringResource(id = R.string.calendar_for_your_life_description),
             header = {
                 Row(
                     modifier = Modifier
@@ -145,9 +146,8 @@ private fun HowItWorksSection(
         )
         InformationCard(
             modifier = Modifier.padding(top = 16.dp),
-            headline = "Each row of 52 weeks makes up one year",
-            supportingText = "This is what your current year looks like," +
-                    " see if you can spot it on the calendar.",
+            headline = stringResource(id = R.string.each_row_title),
+            supportingText = stringResource(id = R.string.each_row_description),
             header = {
                 Column {
                     Spacer(modifier = Modifier.weight(1f))
@@ -168,8 +168,8 @@ private fun HowItWorksSection(
         )
         InformationCard(
             modifier = Modifier.padding(top = 16.dp),
-            headline = "Last thing!",
-            supportingText = "Try tapping on the calendar and see what happens.",
+            headline = stringResource(id = R.string.last_thing_title),
+            supportingText = stringResource(id = R.string.last_thing_description)
         )
     }
 }
@@ -180,19 +180,19 @@ private fun LearnMoreSection(
     onOpenUrl: (String) -> Unit
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
-        Header(text = "Learn more")
+        Header(text = stringResource(id = R.string.learn_more))
         InformationCard(
             modifier = Modifier.padding(top = 16.dp),
-            headline = "Your Life in Weeks",
-            supportingText = "This idea was originally introduced in an article by Tim Urban.",
+            headline = stringResource(id = R.string.your_life_in_weeks_title),
+            supportingText = stringResource(id = R.string.your_life_in_weeks_description),
             onClick = {
                 onOpenUrl("https://waitbutwhy.com/2014/05/life-weeks.html")
             }
         )
         InformationCard(
             modifier = Modifier.padding(top = 16.dp),
-            headline = "What Are You Doing With Your Life? The Tail End",
-            supportingText = "Kurzgesagt's phenomenal video on the topic.",
+            headline = stringResource(id = R.string.what_are_you_doing_with_your_life_title),
+            supportingText = stringResource(id = R.string.what_are_you_doing_with_your_life_description),
             onClick = {
                 onOpenUrl("https://www.youtube.com/watch?v=JXeJANDKwDc")
             }
@@ -215,7 +215,7 @@ private fun SupportSection(
     onOpenUrl: (String) -> Unit
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
-        Header(text = "Support")
+        Header(text = stringResource(id = R.string.support))
         InformationCard(
             modifier = Modifier.padding(top = 16.dp),
             header = {
@@ -225,7 +225,10 @@ private fun SupportSection(
                         modifier = Modifier
                             .size(30.dp)
                             .align(Alignment.Center)
-                            .background(color = MaterialTheme.colorScheme.primary, shape = CircleShape)
+                            .background(
+                                color = MaterialTheme.colorScheme.primary,
+                                shape = CircleShape
+                            )
                     ) {
                         Icon(
                             modifier = Modifier.align(Alignment.Center),
@@ -236,9 +239,8 @@ private fun SupportSection(
                     }
                 }
             },
-            headline = "Support this project",
-            supportingText = "If you enjoy using this application and want it to has more features, " +
-                    "you can support the development of this project by buying me a coffee.",
+            headline = stringResource(id = R.string.support_project_title),
+            supportingText = stringResource(id = R.string.support_project_description),
             onClick = {
                 onOpenUrl("https://www.buymeacoffee.com/bartozo")
             }

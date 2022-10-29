@@ -9,7 +9,9 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -19,7 +21,7 @@ import com.bartozo.lifeprogress.ui.components.*
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.viewmodels.HomeViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel,
@@ -31,12 +33,27 @@ fun HomeScreen(
     val displayMode: LifeCalendarDisplayMode by viewModel.displayModeState
         .collectAsState()
     val title = when (displayMode) {
-        LifeCalendarDisplayMode.CURRENT_YEAR -> "Year Progress: ${life.formattedCurrentYearProgress}"
-        LifeCalendarDisplayMode.LIFE -> "Life Progress: ${life.formattedProgress}"
+        LifeCalendarDisplayMode.CURRENT_YEAR -> stringResource(id = R.string.year_progress, life.formattedCurrentYearProgress)
+        LifeCalendarDisplayMode.LIFE -> stringResource(id = R.string.life_progress, life.formattedProgress)
     }
     val subtitle = when (displayMode) {
-        LifeCalendarDisplayMode.CURRENT_YEAR -> "${(life.currentYearRemainingWeeks)} weeks until your birthday"
-        LifeCalendarDisplayMode.LIFE -> "${(life.numberOfWeeksSpent)} weeks spent • ${(life.numberOfWeeksLeft)} weeks left"
+        LifeCalendarDisplayMode.CURRENT_YEAR -> pluralStringResource(
+            id = R.plurals.weeks_until_birthday,
+            count = life.currentYearRemainingWeeks,
+            life.currentYearRemainingWeeks
+        )
+        LifeCalendarDisplayMode.LIFE ->
+            pluralStringResource(
+                id = R.plurals.weeks_spent,
+                count = life.numberOfWeeksSpent,
+                life.numberOfWeeksSpent
+            ) +
+            " • " +
+            pluralStringResource(
+                id = R.plurals.weeks_left,
+                count = life.numberOfWeeksLeft,
+                life.numberOfWeeksLeft
+            )
     }
 
     Scaffold(
@@ -127,7 +144,9 @@ private fun NavigationDropDownMenu(
             onDismissRequest = { isExpanded.value = false },
         ) {
             DropdownMenuItem(
-                text = { Text("Profile") },
+                text = {
+                    Text(text = stringResource(id = R.string.profile_button_text))
+                },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Person,
@@ -141,7 +160,9 @@ private fun NavigationDropDownMenu(
             )
             Divider()
             DropdownMenuItem(
-                text = { Text("About This App") },
+                text = {
+                    Text(text = stringResource(id = R.string.about_this_app_button_text))
+                },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Info,
@@ -158,13 +179,18 @@ private fun NavigationDropDownMenu(
 }
 
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Preview
 @Composable
 private fun HomeTopBarPreview() {
     LifeProgressTheme {
         HomeTopBar(
-            title = "Year Progress: ${Life.example.formattedCurrentYearProgress}",
-            subtitle = "${(Life.example.currentYearRemainingWeeks)} weeks until your birthday",
+            title = stringResource(id = R.string.year_progress, Life.example.formattedCurrentYearProgress),
+            subtitle = pluralStringResource(
+                id = R.plurals.weeks_until_birthday,
+                count = Life.example.currentYearRemainingWeeks,
+                Life.example.currentYearRemainingWeeks
+            ),
             navigateToProfileScreen = {},
             navigateToAboutScreen = {}
         )
