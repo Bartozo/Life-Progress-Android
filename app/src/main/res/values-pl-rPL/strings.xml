@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Life Progress</string>
+    <string name="welcome_to">Witaj w</string>
+    <string name="friendly_reminder_that">Przyjazny przypominacz, że nie będziesz żyć wiecznie.</string>
+    <string name="before_we_continue">Zanim przejdziemy dalej, skonfigurujmy Twój profil</string>
+    <string name="continue_button_text">Przejdź dalej</string>
+    <string name="user">Użytkownik</string>
+    <string name="pin_unavailable">Przypinanie nie jest obsługiwane w domyślnym programie uruchamiającym</string>
+    <string name="your_birthday">Twój dzień narodziń</string>
+    <string name="life_expectancy">Długość życia</string>
+    <string name="themes">Motywy</string>
+    <string name="system_auto_theme">Systemowy</string>
+    <string name="dark_theme">Domyślny ciemny</string>
+    <string name="light_theme">Domyślny</string>
+    <string name="app_widgets">Widżety aplikacji</string>
+    <string name="life_calendar_card_title">Kalendarz życia jako widget</string>
+    <string name="life_calendar_card_description">Zobacz bieżące postępy w życiu, dzięki temu przydatnemu widżetowi na ekranie głównym.</string>
+    <string name="life_progress">Progres życia: %1$s</string>
+    <string name="year_progress">Progres roku: %1$s</string>
+    <string name="profile">Profil</string>
+    <string name="about_life_progress">Czym jest Life Progress</string>
+    <string name="how_it_works">Jak to działa</string>
+    <string name="calendar_for_your_life_title">Kalendarz na całe życie</string>
+    <string name="calendar_for_your_life_description">Każdy kwadrat, który widzisz na ekranie, reprezentuje tydzień twojego życia. Pierwszy kwadrat (ten w lewym górnym rogu) to tydzień, w którym się urodziłeś.</string>
+    <string name="each_row_title">Każdy rząd 52 tygodni to jeden rok</string>
+    <string name="each_row_description">Tak wygląda Twój bieżący rok, sprawdź, czy potrafisz go dostrzec w kalendarzu.</string>
+    <string name="last_thing_title">Ostatnia rzecz!</string>
+    <string name="last_thing_description">Spróbuj kliknąć w kalendarz i zobacz, co się stanie.</string>
+    <string name="learn_more">Więcej informacji</string>
+    <string name="your_life_in_weeks_title">Twoje życie w tygodniach</string>
+    <string name="your_life_in_weeks_description">Pomysł ten został pierwotnie przedstawiony w artykule Tima Urbana.</string>
+    <string name="what_are_you_doing_with_your_life_title">What Are You Doing With Your Life? The Tail End</string>
+    <string name="what_are_you_doing_with_your_life_description">Fenomenalny film Kurzgesagta na ten temat.</string>
+    <string name="support">Wsparcie</string>
+    <string name="support_project_title">Wesprzyj ten projekt</string>
+    <string name="profile_button_text">Profil</string>
+    <string name="about_this_app_button_text">O Tej Aplikacji</string>
+    <string name="support_project_description">Jeśli lubisz korzystać z tej aplikacji i chcesz, aby zawierała więcej funkcji to możesz wesprzeć rozwój tego projektu kupując mi kawę.</string>
+
+    <plurals name="weeks_spent">
+        <item quantity="other">%1d spędzonych tygodni</item>
+    </plurals>
+
+    <plurals name="weeks_left">
+        <item quantity="other">%1d pozostałych tygodni</item>
+    </plurals>
+
+    <plurals name="weeks_until_birthday">
+        <item quantity="other">%1d tygodni do twoich urodzin</item>
+    </plurals>
+</resources>

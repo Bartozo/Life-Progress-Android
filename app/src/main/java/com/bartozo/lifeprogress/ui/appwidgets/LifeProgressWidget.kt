@@ -4,7 +4,9 @@ import android.content.Context
 import android.os.Build
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.unit.dp
 import androidx.glance.*
 import androidx.glance.action.ActionParameters
@@ -15,6 +17,7 @@ import androidx.glance.layout.*
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
+import com.bartozo.lifeprogress.R
 import com.bartozo.lifeprogress.data.AgeGroup
 import com.bartozo.lifeprogress.data.Life
 import com.bartozo.lifeprogress.data.LifeState
@@ -85,6 +88,7 @@ fun LifeCalendarThin(
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun Header(
     modifier: GlanceModifier = GlanceModifier,
@@ -104,7 +108,11 @@ fun Header(
             maxLines = 1
         )
         Text(
-            text = "${life.numberOfWeeksLeft} weeks left",
+            text = LocalContext.current.resources.getQuantityString(
+                R.plurals.weeks_spent,
+                life.numberOfWeeksLeft,
+                life.numberOfWeeksLeft
+            ),
             style = TextStyle(
                 fontWeight = FontWeight.Normal,
                 fontSize = body.fontSize,
