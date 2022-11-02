@@ -54,4 +54,6 @@
     <string name="continue_button_text">Continue</string>
     <string name="profile_button_text">Profile</string>
     <string name="about_this_app_button_text">About This App</string>
+    <string name="rate_app_button_text">Rate The App</string>
+    <string name="share_feedback_button_text">Share Feedback</string>
 </resources>
