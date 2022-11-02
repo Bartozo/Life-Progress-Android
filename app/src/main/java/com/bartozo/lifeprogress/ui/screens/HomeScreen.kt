@@ -4,13 +4,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,6 +21,7 @@ import com.bartozo.lifeprogress.data.Life
 import com.bartozo.lifeprogress.ui.components.*
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.viewmodels.HomeViewModel
+import com.bartozo.lifeprogress.util.sendMail
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
@@ -55,6 +57,8 @@ fun HomeScreen(
                 life.numberOfWeeksLeft
             )
     }
+    val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
 
     Scaffold(
         topBar = {
@@ -62,7 +66,17 @@ fun HomeScreen(
                 title = title,
                 subtitle = subtitle,
                 navigateToProfileScreen = navigateToProfileScreen,
-                navigateToAboutScreen = navigateToAboutScreen
+                navigateToAboutScreen = navigateToAboutScreen,
+                onShareFeedbackPressed = {
+                    context.sendMail(
+                        to = "bartozo.dev@gmail.com",
+                        subject = "Life Progress - Feedback",
+                        onError = {}
+                    )
+                },
+                onRateAppPressed = {
+                    uriHandler.openUri("https://play.google.com/store/apps/details?id=com.bartozo.lifeprogress")
+                }
             )
         },
         content = { innerPaddings ->
@@ -92,7 +106,9 @@ private fun HomeTopBar(
     title: String,
     subtitle: String,
     navigateToProfileScreen: () -> Unit,
-    navigateToAboutScreen: () -> Unit
+    navigateToAboutScreen: () -> Unit,
+    onShareFeedbackPressed: () -> Unit,
+    onRateAppPressed: () -> Unit,
 ) {
     Column {
         LargeTopAppBar(
@@ -106,7 +122,9 @@ private fun HomeTopBar(
             actions = {
                 NavigationDropDownMenu(
                     navigateToProfileScreen = navigateToProfileScreen,
-                    navigateToAboutScreen = navigateToAboutScreen
+                    navigateToAboutScreen = navigateToAboutScreen,
+                    onShareFeedbackPressed = onShareFeedbackPressed,
+                    onRateAppPressed = onRateAppPressed
                 )
             },
             colors = TopAppBarDefaults.largeTopAppBarColors(
@@ -128,7 +146,9 @@ private fun HomeTopBar(
 private fun NavigationDropDownMenu(
     modifier: Modifier = Modifier,
     navigateToProfileScreen: () -> Unit,
-    navigateToAboutScreen: () -> Unit
+    navigateToAboutScreen: () -> Unit,
+    onShareFeedbackPressed: () -> Unit,
+    onRateAppPressed: () -> Unit,
 ) {
     val isExpanded = remember { mutableStateOf(false) }
 
@@ -174,6 +194,38 @@ private fun NavigationDropDownMenu(
                     navigateToAboutScreen.invoke()
                 },
             )
+            Divider()
+            DropdownMenuItem(
+                text = {
+                    Text(text = stringResource(id = R.string.share_feedback_button_text))
+                },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.Mail,
+                        contentDescription = "Mail Icon"
+                    )
+                },
+                onClick = {
+                    isExpanded.value = false
+                    onShareFeedbackPressed.invoke()
+                },
+            )
+            Divider()
+            DropdownMenuItem(
+                text = {
+                    Text(text = stringResource(id = R.string.rate_app_button_text))
+                },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.StarOutline,
+                        contentDescription = "Star Icon"
+                    )
+                },
+                onClick = {
+                    isExpanded.value = false
+                    onRateAppPressed.invoke()
+                },
+            )
         }
     }
 }
@@ -192,7 +244,9 @@ private fun HomeTopBarPreview() {
                 Life.example.currentYearRemainingWeeks
             ),
             navigateToProfileScreen = {},
-            navigateToAboutScreen = {}
+            navigateToAboutScreen = {},
+            onShareFeedbackPressed = {},
+            onRateAppPressed = {}
         )
     }
 }
@@ -203,7 +257,9 @@ fun NavigationDropDownMenuPreview() {
     LifeProgressTheme {
         NavigationDropDownMenu(
             navigateToAboutScreen = {},
-            navigateToProfileScreen = {}
+            navigateToProfileScreen = {},
+            onShareFeedbackPressed = {},
+            onRateAppPressed = {}
         )
     }
 }
