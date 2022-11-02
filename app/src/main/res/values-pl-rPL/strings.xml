@@ -7,7 +7,7 @@
     <string name="continue_button_text">Przejdź dalej</string>
     <string name="user">Użytkownik</string>
     <string name="pin_unavailable">Przypinanie nie jest obsługiwane w domyślnym programie uruchamiającym</string>
-    <string name="your_birthday">Twój dzień narodziń</string>
+    <string name="your_birthday">Twój dzień narodzin</string>
     <string name="life_expectancy">Długość życia</string>
     <string name="themes">Motywy</string>
     <string name="system_auto_theme">Systemowy</string>
