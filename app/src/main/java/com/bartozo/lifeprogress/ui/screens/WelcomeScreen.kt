@@ -52,8 +52,6 @@ fun WelcomeScreen(
 
         delay(1.seconds)
         isHeadlineVisible = true
-
-        delay(1.seconds)
         isSecondHeadlineVisible = true
 
         delay(2.seconds)
@@ -61,8 +59,6 @@ fun WelcomeScreen(
 
         delay(2.seconds)
         isCaptionVisible = true
-
-        delay(1.seconds)
         isButtonVisible = true
     }
 
