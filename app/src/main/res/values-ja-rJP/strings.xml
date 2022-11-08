@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Life Progress</string>
+    <string name="pin_unavailable">デフォルト版では、ピン固定は出来ません。</string>
+    <string name="welcome_to">ようこそ</string>
+    <string name="friendly_reminder_that">「命は永遠ではない」ということは、頭のどこかで意識しておきましょう</string>
+    <string name="before_we_continue">先に進むには、まずはご自身のプロフィールをご作成ください。</string>
+    <string name="user">ユーザー名</string>
+    <string name="themes">テーマ</string>
+    <string name="your_birthday">あなたの生年月日</string>
+    <string name="life_expectancy">あなたの寿命</string>
+    <string name="system_auto_theme">オートモード</string>
+    <string name="light_theme">通常モード</string>
+    <string name="dark_theme">ダークモード</string>
+    <string name="life_calendar_card_title">ウィジェット版カレンダー</string>
+    <string name="life_calendar_card_description">ウィジェットに、現在のライフプログレスを表示させる</string>
+    <string name="app_widgets">ウィジェット</string>
+    <string name="profile">プロフィール</string>
+    <string name="life_progress">ライブプログレス: %1$s</string>
+    <string name="year_progress">この一年の経過: %1$s</string>
+    <string name="about_life_progress">ライフプログレスとは？</string>
+    <string name="how_it_works">このアプリの使い方</string>
+    <string name="calendar_for_your_life_title">人生カレンダー</string>
+    <string name="calendar_for_your_life_description">タイル一つを一週間と数えます。一番左上のタイルが、あなたが生まれた週のものです。</string>
+    <string name="each_row_title">各列は52週で構成されており、それは一年を意味します</string>
+    <string name="each_row_description">今年の経過がカレンダーに表示されます。</string>
+    <string name="last_thing_title">そして最後に！</string>
+    <string name="last_thing_description">カレンダーをクリックした時に起こる変化をご覧ください。</string>
+    <string name="learn_more">その他</string>
+    <string name="your_life_in_weeks_title">週で構成される人生全体のイメージ</string>
+    <string name="your_life_in_weeks_description">このコンセプトは、Tim Urban氏の記事で最初に紹介されました。</string>
+    <string name="what_are_you_doing_with_your_life_title">What Are You Doing With Your Life? The Tail End</string>
+    <string name="what_are_you_doing_with_your_life_description">関連トピックをKurzgesadtチャンネルで見る。</string>
+    <string name="support">ヘルプ</string>
+    <string name="support_project_title">このプロジェクトに支援する</string>
+    <string name="support_project_description">もしこのアプリが気に入りましたら、今後のさらなる発展・改善のため、コーヒーを一杯分の額でいいですからご支援いただけますと幸いです。</string>
+    <string name="profile_button_text">プロフィール</string>
+    <string name="continue_button_text">次に進む</string>
+    <string name="rate_app_button_text">このアプリを評価する</string>
+    <string name="share_feedback_button_text">このアプリについて、意見をお聞かせください。</string>
+    <string name="about_this_app_button_text">このアプリについて</string>
+
+    <plurals name="weeks_spent">
+        <item quantity="other">%1d 経過した週</item>
+    </plurals>
+
+    <plurals name="weeks_left">
+        <item quantity="other">%1d 残りの週</item>
+    </plurals>
+
+    <plurals name="weeks_until_birthday">
+        <item quantity="other">%1d 次の誕生日までの残り週</item>
+    </plurals>
+</resources>
