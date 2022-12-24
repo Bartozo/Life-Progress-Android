@@ -39,6 +39,8 @@
     <string name="support_project_description">Jeśli lubisz korzystać z tej aplikacji i chcesz, aby zawierała więcej funkcji to możesz wesprzeć rozwój tego projektu kupując mi kawę.</string>
     <string name="rate_app_button_text">Oceń Aplikację</string>
     <string name="share_feedback_button_text">Podziel Się Opinią</string>
+    <string name="open_source_card_title">Projekt jest open source!</string>
+    <string name="open_source_card_description">Dowiedz się, jak powstał ten projekt i weź udział w jego rozwoju. Sprawdź kod na GitHub.</string>
 
     <plurals name="weeks_spent">
         <item quantity="other">%1d spędzonych tygodni</item>
