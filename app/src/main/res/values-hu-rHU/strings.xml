@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Életút</string>
+    <string name="navigation">Továbbiak Menü</string>
+    <string name="return_to_previous_screen">Vissza az előző oldalra</string>
+    <string name="app_widget_life_calendar_description">Widget az Életúthoz</string>
+    <string name="pin_unavailable">A rögzítés nem támogatott az alapértelmezett indítóval</string>
+
+    <string name="welcome_to">Szia</string>
+    <string name="friendly_reminder_that">Ez egy barátságos emlékeztető, hogy nem fogsz örökké élni.</string>
+    <string name="before_we_continue">Mielőtt folytatnánk, állítsd be a felhasználói fiókod</string>
+    <string name="user">Felhasználó</string>
+    <string name="your_birthday">Születésnapod</string>
+    <string name="life_expectancy">Várható élettartamod</string>
+    <string name="themes">Téma</string>
+    <string name="system_auto_theme">Rendszer alapértelmezett</string>
+    <string name="light_theme">Alapértelmezett</string>
+    <string name="dark_theme">Alapértelmezett sötét</string>
+    <string name="app_widgets">Alkalmazás widgetek</string>
+    <string name="life_calendar_card_title">Élet naptár widgetként</string>
+    <string name="life_calendar_card_description">Az élet előrehaladásod a kezdőképernyőn egy hasznos widgettel.</string>
+    <string name="year_progress">Év: %1$s</string>
+    <string name="life_progress">Élet: %1$s</string>
+    <string name="profile">Felhasználói fiók</string>
+    <string name="about_life_progress">Az Életút</string>
+    <string name="how_it_works">Hogyan működik</string>
+    <string name="calendar_for_your_life_title">Egy naptár az életedhez</string>
+    <string name="calendar_for_your_life_description">Minden négszög egy hetet jelképez az életedből. Az első négszög (a bal felső sarokban) a hét amikor megszülettél.</string>
+    <string name="each_row_title">Minden 52 hetes sor egy évet alkot</string>
+    <string name="each_row_description">Így néz ki a jelenlegi éved, nézd meg meg tudod e találni a naptárban.</string>
+    <string name="last_thing_title">Még egy dolog!</string>
+    <string name="last_thing_description">Koppints a naptárra és nézd meg mi történik.</string>
+    <string name="learn_more">Tudj meg többet</string>
+    <string name="your_life_in_weeks_title">Az életed hetekben</string>
+    <string name="your_life_in_weeks_description">Ez az ötlet eredetileg Tim Urban egyik cikkében jelent meg.</string>
+    <string name="what_are_you_doing_with_your_life_title">Mit kezdesz az életeddel?</string>
+    <string name="what_are_you_doing_with_your_life_description">Kurzgesagt fenomenális videója a témában.</string>
+    <string name="support">Támogatás</string>
+    <string name="support_project_title">Támogasd a projektet</string>
+    <string name="support_project_description">Ha élvezed az alkalmazás használatát és szeretnéd, hogy több funkció legyen benne, támogathatod a projekt fejlesztését egy kávé vásárlásával</string>
+
+    <plurals name="weeks_spent">
+        <item quantity="other">%1d hét telt el</item>
+    </plurals>
+
+    <plurals name="weeks_left">
+        <item quantity="other">%1d hét maradt</item>
+    </plurals>
+
+    <plurals name="weeks_until_birthday">
+        <item quantity="other">%1d hét a születésnapodig</item>
+    </plurals>
+
+    <!--Buttons-->
+    <string name="continue_button_text">Folytatás</string>
+    <string name="profile_button_text">Felhasználói fiók</string>
+    <string name="about_this_app_button_text">Az alkalmazásról</string>
+    <string name="rate_app_button_text">Alkalmazás értékelése</string>
+    <string name="share_feedback_button_text">Értékelés megosztása</string>
+</resources>
