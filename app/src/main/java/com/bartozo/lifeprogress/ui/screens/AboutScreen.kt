@@ -197,15 +197,14 @@ private fun LearnMoreSection(
                 onOpenUrl("https://www.youtube.com/watch?v=JXeJANDKwDc")
             }
         )
-//        InformationCard(
-//            modifier = Modifier.padding(top = 16.dp),
-//            headline = "The project is open source!",
-//            supportingText = "Learn how this project was created and contribute to it." +
-//                    " Check out the code on GitHub.",
-//            onClick = {
-//                onOpenUrl("https://github.com/Bartozo/Life-Progress-Android")
-//            }
-//        )
+        InformationCard(
+            modifier = Modifier.padding(top = 16.dp),
+            headline = stringResource(id = R.string.open_source_card_title),
+            supportingText = stringResource(id = R.string.open_source_card_description),
+            onClick = {
+                onOpenUrl("https://github.com/Bartozo/Life-Progress-Android")
+            }
+        )
     }
 }
 
