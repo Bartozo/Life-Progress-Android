@@ -39,6 +39,8 @@
     <string name="rate_app_button_text">このアプリを評価する</string>
     <string name="share_feedback_button_text">このアプリについて、意見をお聞かせください。</string>
     <string name="about_this_app_button_text">このアプリについて</string>
+    <string name="open_source_card_title">オープンソースですので、ご自由に参照ください</string>
+    <string name="open_source_card_description">このプロジェクトの経緯と進展は、GitHubでそのコードを参照いただけます。</string>
 
     <plurals name="weeks_spent">
         <item quantity="other">%1d 経過した週</item>
