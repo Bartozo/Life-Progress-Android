@@ -22,7 +22,10 @@ about
 - 🎨 UI was created with Material Design 3 and Material You.
 - 💡 Light and Dark mode are supported.
 - 📱 The app widget was created in Compose Glance with helpful examples from [Marcel](https://twitter.com/marxallski).
-- 👨‍🎨 Creator of the app icon is [akhmadmaulidi](https://twitter.com/akhmadmaulidi) 
+- 👨‍🎨 Creator of the app icon is [akhmadmaulidi](https://twitter.com/akhmadmaulidi)
+
+# Contributors
+- [Kristóf Kékesi](https://twitter.com/KristofKekesi) Added 🇭🇺 Hungarian translations.
 
 # Thanks
 - [Tien Pham](https://twitter.com/tienphaw) for the creating iOS app. It inspired me to create an android version.
