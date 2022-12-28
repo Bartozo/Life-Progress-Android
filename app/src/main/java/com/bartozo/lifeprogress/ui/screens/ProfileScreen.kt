@@ -556,8 +556,8 @@ private fun AppWidgetCard(
                                         Text(
                                             text = pluralStringResource(
                                                 id = R.plurals.weeks_spent,
-                                                count = life.numberOfWeeksLeft,
-                                                life.numberOfWeeksLeft
+                                                count = life.numberOfWeeksSpent,
+                                                life.numberOfWeeksSpent
                                             ),
                                             style = MaterialTheme.typography.bodySmall,
                                             maxLines = 1
