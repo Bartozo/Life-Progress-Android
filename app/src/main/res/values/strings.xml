@@ -32,7 +32,7 @@
     <string name="learn_more">Learn more</string>
     <string name="your_life_in_weeks_title">Your Life in Weeks</string>
     <string name="your_life_in_weeks_description">This idea was originally introduced in an article by Tim Urban.</string>
-    <string name="what_are_you_doing_with_your_life_title">What Are You Doing With Your Life? The Tail End</string>
+    <string name="what_are_you_doing_with_your_life_title" translatable="false">What Are You Doing With Your Life? The Tail End</string>
     <string name="what_are_you_doing_with_your_life_description">Kurzgesagt\'s phenomenal video on the topic.</string>
     <string name="support">Support</string>
     <string name="support_project_title">Support this project</string>
