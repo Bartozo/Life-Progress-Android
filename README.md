@@ -27,6 +27,7 @@ about
 # Contributors
 - [Kristóf Kékesi](https://twitter.com/KristofKekesi) Added 🇭🇺 Hungarian translations.
 - [Sebastian Röhl](https://twitter.com/SebastianRoehl) Added 🇩🇪 German translations.
+- [Federico Pintaluba](https://twitter.com/fedpinx) Added 🇪🇸 Spanish translations.
 
 # Thanks
 - [Tien Pham](https://twitter.com/tienphaw) for the creating iOS app. It inspired me to create an android version.
