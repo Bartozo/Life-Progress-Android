@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Life Progress</string>
+    <string name="pin_unavailable">Fijar no es soportado en tu lanzador por defecto (launcher)</string>
+    <string name="welcome_to">Bienvenido a</string>
+    <string name="friendly_reminder_that">Un amistoso recordatorio que no vivirás por siempre.</string>
+    <string name="before_we_continue">Antes de continuar, configuremos tu perfil</string>
+    <string name="user">Usuario</string>
+    <string name="your_birthday">Tu cumpleaños</string>
+    <string name="life_expectancy">Esperanza de vida</string>
+    <string name="themes">Temas</string>
+    <string name="system_auto_theme">Sistema</string>
+    <string name="light_theme">Por defecto</string>
+    <string name="dark_theme">Oscuro</string>
+    <string name="app_widgets">Widgets de la aplicación</string>
+    <string name="life_calendar_card_title">Widget de calendario de vida</string>
+    <string name="life_calendar_card_description">Entérate del actual progreso de vida con este útil Widget en tu pantalla de inicio.</string>
+    <string name="year_progress">Year Progress: %1$s</string>
+    <string name="life_progress">Progreso de vida: %1$s</string>
+    <string name="profile">Perfil</string>
+    <string name="about_life_progress">Sobre Life Progress</string>
+    <string name="how_it_works">¿Cómo funciona?</string>
+    <string name="calendar_for_your_life_title">Un calendario para tu vida</string>
+    <string name="calendar_for_your_life_description">Cada cuadrado que ves en la pantalla representa una semana en tu vida. El primer cuadrado (el primero a la izquierda) es la semana cuando naciste.</string>
+    <string name="each_row_title">Cada fila de 52 semanas es un año</string>
+    <string name="each_row_description">Así es como luce tu año actualmente, fíjate si lo puedes encontrar en el calendario.</string>
+    <string name="last_thing_title">¡Una última cosa!</string>
+    <string name="last_thing_description">Intenta tocar sobre el calendario y mira lo que sucede.</string>
+    <string name="learn_more">Ver más</string>
+    <string name="your_life_in_weeks_title">Tu vida en semanas</string>
+    <string name="your_life_in_weeks_description">Esta idea fue originalmente introducida por un artículo de Tim Urban.</string>
+    <string name="what_are_you_doing_with_your_life_description">Interesante video de Kurzgesagt sobre el tema.</string>
+    <string name="support">Soporte</string>
+    <string name="support_project_title">Apoya este proyecto</string>
+    <string name="support_project_description">Si te gusta la aplicación y quieres que tenga más funcionalidades, puedes apoyar el desarrollo comprandome un café.</string>
+    <string name="open_source_card_title">¡Este proyecto es código abierto!</string>
+    <string name="open_source_card_description">Aprende sobre como este proyecto fue creado y contribuye. Chequea el código en GitHub.</string>
+    <string name="continue_button_text">Continuar</string>
+    <string name="profile_button_text">Perfil</string>
+    <string name="about_this_app_button_text">Acerca de esta aplicación</string>
+    <string name="rate_app_button_text">Valora esta aplicación</string>
+    <string name="share_feedback_button_text">Comparte tu opinión</string>
+
+    <plurals name="weeks_spent">
+        <item quantity="other">%1d semanas vividas</item>
+    </plurals>
+
+    <plurals name="weeks_left">
+        <item quantity="other">Te quedan %1d semanas</item>
+    </plurals>
+
+    <plurals name="weeks_until_birthday">
+        <item quantity="other">%1d semanas para tu cumpleaños</item>
+    </plurals>
+</resources>
