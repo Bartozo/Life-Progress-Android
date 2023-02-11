@@ -26,7 +26,6 @@ class MainViewModel @Inject constructor(
     val mainUiState: StateFlow<MainEventState> = _mainUiState.asStateFlow()
 
     val appTheme = userRepository.appTheme
-
     init {
         viewModelScope.launch {
             if (userRepository.didSeeWelcome.first()) {

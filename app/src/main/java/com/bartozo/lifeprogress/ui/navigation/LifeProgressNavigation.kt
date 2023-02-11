@@ -15,7 +15,6 @@ import com.bartozo.lifeprogress.ui.screens.WelcomeScreen
 import com.bartozo.lifeprogress.ui.viewmodels.AboutViewModel
 import com.bartozo.lifeprogress.ui.viewmodels.HomeViewModel
 import com.bartozo.lifeprogress.ui.viewmodels.ProfileViewModel
-import com.bartozo.lifeprogress.ui.viewmodels.WelcomeViewModel
 
 sealed class Screen(val route: String) {
     object Welcome: Screen("welcome")
@@ -37,9 +36,7 @@ fun LifeProgressNavigation(
         startDestination = startDestination.route
     ) {
         composable(Screen.Welcome.route) {
-            val viewModel = hiltViewModel<WelcomeViewModel>()
             WelcomeScreen(
-                viewModel = viewModel,
                 navigateToProfileScreen = {
                     navController.navigate(Screen.Profile.route) {
                         popUpTo(Screen.Welcome.route) { inclusive = true }
