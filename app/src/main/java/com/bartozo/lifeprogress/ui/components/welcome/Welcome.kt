@@ -1,5 +1,6 @@
 package com.bartozo.lifeprogress.ui.components.welcome
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -126,15 +127,17 @@ private fun WelcomeBottomBar(
     primaryActionColors: PrimaryActionColors,
     onPrimaryActionClicked: () -> Unit,
 ) {
-    val tonalElevation = if (listState.isAtBottom()) {
-        0.dp
-    } else {
-        4.dp
-    }
+    val tonalElevation: Float by animateFloatAsState(
+        if (listState.isAtBottom()) {
+            0f
+        } else {
+            4f
+        }
+    )
 
     Surface(
         modifier = modifier.navigationBarsPadding(),
-        tonalElevation = tonalElevation
+        tonalElevation = tonalElevation.dp
     ) {
         Row(modifier = Modifier.supportWideScreen()) {
             PrimaryAction(
