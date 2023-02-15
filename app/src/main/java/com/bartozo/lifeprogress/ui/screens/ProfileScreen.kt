@@ -86,6 +86,7 @@ fun ProfileScreen(
                     .verticalScroll(state = scrollState)
             ) {
                 UserSection(
+                    modifier = Modifier.supportWideScreen(),
                     birthDay = birthDay,
                     lifeExpectancy = lifeExpectancy,
                     onBirthDaySelected = { viewModel.updateBirthDay(it, context) },
@@ -98,6 +99,7 @@ fun ProfileScreen(
                     color = MaterialTheme.colorScheme.surfaceVariant
                 )
                 ThemesSection(
+                    modifier = Modifier.supportWideScreen(),
                     appTheme = appTheme,
                     onAppThemeSelected = { viewModel.updateAppTheme(it) }
                 )
@@ -108,6 +110,7 @@ fun ProfileScreen(
                     color = MaterialTheme.colorScheme.surfaceVariant
                 )
                 AppWidgetSection(
+                    modifier = Modifier.supportWideScreen(),
                     life = life,
                     isRequestPinAppWidgetSupported = widgetManager.isRequestPinAppWidgetSupported,
                     onPinAppWidgetClicked = {
@@ -286,13 +289,6 @@ private fun ThemeButton(
                     AppTheme.SYSTEM_AUTO -> {
                         Row(modifier = Modifier.fillMaxWidth()) {
                             LightTheme {
-                                Row(modifier = Modifier
-                                    .fillMaxHeight()
-                                    .weight(1f)
-                                    .background(MaterialTheme.colorScheme.surface)) {
-                                }
-                            }
-                            DarkTheme {
                                 Row(modifier = Modifier
                                     .fillMaxHeight()
                                     .weight(1f)
