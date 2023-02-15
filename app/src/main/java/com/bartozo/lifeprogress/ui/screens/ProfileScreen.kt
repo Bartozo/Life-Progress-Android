@@ -40,6 +40,7 @@ import com.bartozo.lifeprogress.ui.theme.DarkTheme
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.theme.LightTheme
 import com.bartozo.lifeprogress.ui.viewmodels.ProfileViewModel
+import com.bartozo.lifeprogress.util.supportWideScreen
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -84,46 +85,32 @@ fun ProfileScreen(
                     .padding(innerPaddings)
                     .verticalScroll(state = scrollState)
             ) {
-                Header(
-                    modifier = Modifier.padding(top = 8.dp, start = 16.dp),
-                    text = stringResource(id = R.string.user)
-                )
-                BirthDayCard(
-                    modifier = Modifier.padding(top = 16.dp),
+                UserSection(
                     birthDay = birthDay,
-                    onBirthDaySelect = { viewModel.updateBirthDay(it, context) }
-                )
-                LifeExpectancyCard(
-                    modifier = Modifier.padding(top = 30.dp),
                     lifeExpectancy = lifeExpectancy,
-                    onLifeExpectancySelect = { viewModel.updateLifeExpectancy(it, context) }
+                    onBirthDaySelected = { viewModel.updateBirthDay(it, context) },
+                    onLifeExpectancySelected = { viewModel.updateLifeExpectancy(it, context) }
                 )
                 Divider(
-                    modifier = Modifier.padding(horizontal = 16.dp),
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .supportWideScreen(),
                     color = MaterialTheme.colorScheme.surfaceVariant
                 )
-                Header(
-                    modifier = Modifier.padding(top = 16.dp, start = 16.dp),
-                    text = stringResource(id = R.string.themes)
-                )
-                Themes(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
-                    selectedAppTheme = appTheme,
+                ThemesSection(
+                    appTheme = appTheme,
                     onAppThemeSelected = { viewModel.updateAppTheme(it) }
                 )
                 Divider(
-                    modifier = Modifier.padding(horizontal = 16.dp),
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .supportWideScreen(),
                     color = MaterialTheme.colorScheme.surfaceVariant
                 )
-                Header(
-                    modifier = Modifier.padding(top = 16.dp, start = 16.dp),
-                    text = stringResource(id = R.string.app_widgets)
-                )
-                AppWidgetCard(
-                    modifier =  Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+                AppWidgetSection(
                     life = life,
                     isRequestPinAppWidgetSupported = widgetManager.isRequestPinAppWidgetSupported,
-                    onPinAppWidgetClick = {
+                    onPinAppWidgetClicked = {
                         // The application has only one widget
                         widgetProviders.first().pin(context, life)
                     }
@@ -157,6 +144,73 @@ private fun ProfileTopBar(
         },
         scrollBehavior = scrollBehavior
     )
+}
+
+@Composable
+private fun UserSection(
+    modifier: Modifier = Modifier,
+    birthDay: LocalDate,
+    lifeExpectancy: Int,
+    onBirthDaySelected: (LocalDate) -> Unit,
+    onLifeExpectancySelected: (Int) -> Unit
+) {
+    Column(modifier = modifier.fillMaxWidth()) {
+        Header(
+            modifier = Modifier.padding(top = 8.dp, start = 16.dp),
+            text = stringResource(id = R.string.user)
+        )
+        BirthDayCard(
+            modifier = Modifier.padding(top = 16.dp),
+            birthDay = birthDay,
+            onBirthDaySelect = onBirthDaySelected
+        )
+        LifeExpectancyCard(
+            modifier = Modifier.padding(top = 30.dp),
+            lifeExpectancy = lifeExpectancy,
+            onLifeExpectancySelect = onLifeExpectancySelected
+        )
+    }
+}
+
+@Composable
+private fun ThemesSection(
+    modifier: Modifier = Modifier,
+    appTheme: AppTheme,
+    onAppThemeSelected: (AppTheme) -> Unit
+) {
+    Column(modifier = modifier.fillMaxWidth()) {
+        Header(
+            modifier = Modifier.padding(top = 16.dp, start = 16.dp),
+            text = stringResource(id = R.string.themes)
+        )
+        Themes(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+            selectedAppTheme = appTheme,
+            onAppThemeSelected = onAppThemeSelected
+        )
+    }
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+private fun AppWidgetSection(
+    modifier: Modifier = Modifier,
+    life: Life,
+    isRequestPinAppWidgetSupported: Boolean,
+    onPinAppWidgetClicked: () -> Unit
+) {
+    Column(modifier = modifier.fillMaxWidth()) {
+        Header(
+            modifier = Modifier.padding(top = 16.dp, start = 16.dp),
+            text = stringResource(id = R.string.app_widgets)
+        )
+        AppWidgetCard(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+            life = life,
+            isRequestPinAppWidgetSupported = isRequestPinAppWidgetSupported,
+            onPinAppWidgetClick = onPinAppWidgetClicked
+        )
+    }
 }
 
 @Composable
