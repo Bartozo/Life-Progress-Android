@@ -236,11 +236,13 @@ private fun BirthDaySection(
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(
+                    modifier = Modifier.supportWideScreen(),
                     text = stringResource(id = R.string.select_your_birthday_description),
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 BirthDayCard(
+                    modifier = Modifier.supportWideScreen(),
                     birthDay = birthDay ?: LocalDate.now(),
                     onBirthDaySelect = onBirthDaySelected
                 )
@@ -292,12 +294,13 @@ private fun LifeExpectancySection(
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(
+                    modifier = Modifier.supportWideScreen(),
                     text = stringResource(id = R.string.select_your_life_expectancy_description),
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-
                 LifeExpectancyCard(
+                    modifier = Modifier.supportWideScreen(),
                     lifeExpectancy = lifeExpectancy ?: 90,
                     onLifeExpectancySelect = onLifeExpectancySelected
                 )
