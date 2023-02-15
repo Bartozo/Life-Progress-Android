@@ -1,12 +1,8 @@
 package com.bartozo.lifeprogress.ui.screens
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.Crossfade
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -73,7 +69,6 @@ fun OnboardingScreen(
     )
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun OnboardingUiScreen(
     modifier: Modifier = Modifier,
