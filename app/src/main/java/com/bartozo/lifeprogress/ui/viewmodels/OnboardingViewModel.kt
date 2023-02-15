@@ -57,7 +57,7 @@ class OnboardingViewModel @Inject constructor(
     }
 
     fun navigateToHome() = viewModelScope.launch {
-        userRepository.updateDidSeeWelcome(true)
+        userRepository.updateDidSeeOnboarding(true)
         _eventState.emit(OnboardingEventState.NavigateToHomeScreen)
     }
 }

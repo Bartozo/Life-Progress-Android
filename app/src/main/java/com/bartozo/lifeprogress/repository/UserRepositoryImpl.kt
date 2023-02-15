@@ -11,7 +11,7 @@ class UserRepositoryImpl @Inject constructor(
 ) : UserRepository {
     override val birthDay: Flow<LocalDate> = prefsStore.birthDayFlow()
     override val lifeExpectancy: Flow<Int> = prefsStore.lifeExpectancyFlow()
-    override val didSeeOnboarding: Flow<Boolean> = prefsStore.didSeeWelcomeFlow()
+    override val didSeeOnboarding: Flow<Boolean> = prefsStore.didSeeOnboardingFlow()
     override val appTheme: Flow<AppTheme> = prefsStore.appThemeFlow()
 
     override suspend fun updateBirthDay(birthDay: LocalDate) {
