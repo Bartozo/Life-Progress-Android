@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DateRange
+import androidx.compose.material.icons.outlined.Devices
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.Widgets
 import androidx.compose.material3.*
@@ -168,6 +169,11 @@ private fun WelcomeSection(
                         "the user's wallpaper, only available for android 12 or higher).",
                 image = Icons.Outlined.Palette
             ),
+            Feature(
+                title = "Different Modes",
+                subtitle = "Works in both Horizontal and Vertical mode.",
+                image = Icons.Outlined.Devices
+            )
         ),
         primaryActionColors = PrimaryActionColors(
             containerColor = MaterialTheme.colorScheme.primary,
