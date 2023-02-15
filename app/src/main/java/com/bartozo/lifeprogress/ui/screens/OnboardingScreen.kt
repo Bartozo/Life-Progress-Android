@@ -3,10 +3,13 @@ package com.bartozo.lifeprogress.ui.screens
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.Devices
@@ -18,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.unit.dp
@@ -106,9 +110,27 @@ private fun OnboardingUiScreen(
 private fun OnboardingBottomBar(
     modifier: Modifier = Modifier,
     isButtonEnabled: Boolean,
+    scrollState: ScrollState,
     onClicked: () -> Unit
 ) {
-    Surface(modifier = modifier.navigationBarsPadding()) {
+    val endReached by remember {
+        derivedStateOf {
+            scrollState.value == scrollState.maxValue
+        }
+    }
+
+    val tonalElevation: Float by animateFloatAsState(
+        if (endReached) {
+            0f
+        } else {
+            4f
+        }
+    )
+
+    Surface(
+        modifier = modifier.navigationBarsPadding(),
+        tonalElevation = tonalElevation.dp
+    ) {
         Row(modifier = Modifier.supportWideScreen()) {
             Button(
                 modifier = Modifier
@@ -192,14 +214,16 @@ private fun BirthDaySection(
     onContinueClicked: () -> Unit
 ) {
     val scrollState = rememberScrollState()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
                     Text(text = "")
                 },
+                scrollBehavior = scrollBehavior
             )
         },
         content = { innerPaddings ->
@@ -207,11 +231,8 @@ private fun BirthDaySection(
                 modifier = modifier
                     .padding(innerPaddings)
                     .fillMaxSize()
-                    .padding(
-                        horizontal = 24.dp,
-                        vertical = 32.dp
-                    )
-                    .scrollable(scrollState, orientation = Orientation.Vertical),
+                    .padding(horizontal = 32.dp)
+                    .verticalScroll(scrollState),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
@@ -233,6 +254,7 @@ private fun BirthDaySection(
         bottomBar = {
             OnboardingBottomBar(
                 isButtonEnabled = birthDay != null,
+                scrollState = scrollState,
                 onClicked = onContinueClicked
             )
         }
@@ -248,14 +270,16 @@ private fun LifeExpectancySection(
     onContinueClicked: () -> Unit
 ) {
     val scrollState = rememberScrollState()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
                     Text(text = "")
                 },
+                scrollBehavior = scrollBehavior
             )
         },
         content = { innerPaddings ->
@@ -263,11 +287,8 @@ private fun LifeExpectancySection(
                 modifier = modifier
                     .padding(innerPaddings)
                     .fillMaxSize()
-                    .padding(
-                        horizontal = 24.dp,
-                        vertical = 32.dp
-                    )
-                    .scrollable(scrollState, orientation = Orientation.Vertical),
+                    .padding(horizontal = 32.dp)
+                    .verticalScroll(scrollState),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
@@ -290,6 +311,7 @@ private fun LifeExpectancySection(
         bottomBar = {
             OnboardingBottomBar(
                 isButtonEnabled = lifeExpectancy != null,
+                scrollState = scrollState,
                 onClicked = onContinueClicked
             )
         }
