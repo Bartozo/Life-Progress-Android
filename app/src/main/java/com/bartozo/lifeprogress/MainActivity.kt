@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
                     val startDestination = when (mainUiState) {
                         MainEventState.Loading -> null
                         MainEventState.NavigateToHomeScreen -> Screen.Home
-                        MainEventState.NavigateToWelcomeScreen -> Screen.Welcome
+                        MainEventState.NavigateToOnboardingScreen -> Screen.Onboarding
                     }
 
                     if (startDestination != null) {

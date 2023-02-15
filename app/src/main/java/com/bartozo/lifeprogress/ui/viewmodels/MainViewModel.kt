@@ -14,7 +14,7 @@ import javax.inject.Inject
 sealed class MainEventState {
     object Loading : MainEventState()
     object NavigateToHomeScreen : MainEventState()
-    object NavigateToWelcomeScreen : MainEventState()
+    object NavigateToOnboardingScreen : MainEventState()
 }
 
 @HiltViewModel
@@ -28,10 +28,10 @@ class MainViewModel @Inject constructor(
     val appTheme = userRepository.appTheme
     init {
         viewModelScope.launch {
-            if (userRepository.didSeeWelcome.first()) {
+            if (userRepository.didSeeOnboarding.first()) {
                 _mainUiState.value = MainEventState.NavigateToHomeScreen
             } else {
-                _mainUiState.value = MainEventState.NavigateToWelcomeScreen
+                _mainUiState.value = MainEventState.NavigateToOnboardingScreen
             }
         }
     }
