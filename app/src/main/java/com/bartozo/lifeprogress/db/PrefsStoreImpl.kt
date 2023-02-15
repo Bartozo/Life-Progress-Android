@@ -22,7 +22,7 @@ class PrefsStoreImpl @Inject constructor(
     private object PreferencesKeys {
         val BIRTH_DAY_KEY = longPreferencesKey("birth_day")
         val LIFE_EXPECTANCY_KEY = intPreferencesKey("life_expectancy")
-        val DID_SEE_WELCOME_KEY = booleanPreferencesKey("did_see_welcome")
+        val DID_SEE_ONBOARDING_KEY = booleanPreferencesKey("did_see_onboarding")
         val APP_THEME_KEY = stringPreferencesKey("app_theme")
     }
 
@@ -48,13 +48,14 @@ class PrefsStoreImpl @Inject constructor(
         }
     }.map { it[PreferencesKeys.LIFE_EXPECTANCY_KEY] ?: 90 }
 
-    override fun didSeeWelcomeFlow() = dataStore.data.catch { exception ->
-        if (exception is IOException) {
-            emit(emptyPreferences())
-        } else {
-            throw exception
-        }
-    }.map { it[PreferencesKeys.DID_SEE_WELCOME_KEY] ?: false }
+    override fun didSeeOnboardingFlow() = dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }.map { it[PreferencesKeys.DID_SEE_ONBOARDING_KEY] ?: false }
 
     override fun appThemeFlow() = dataStore.data.catch { exception ->
         if (exception is IOException) {
@@ -85,9 +86,9 @@ class PrefsStoreImpl @Inject constructor(
         }
     }
 
-    override suspend fun updatedDidSeeWelcome(didSeeWelcome: Boolean) {
+    override suspend fun updateDidSeeOnboarding(didSeeOnboarding: Boolean) {
         dataStore.edit {
-            it[PreferencesKeys.DID_SEE_WELCOME_KEY] = didSeeWelcome
+            it[PreferencesKeys.DID_SEE_ONBOARDING_KEY] = didSeeOnboarding
         }
     }
 
