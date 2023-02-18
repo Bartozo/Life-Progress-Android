@@ -9,10 +9,12 @@ interface UserRepository {
     val lifeExpectancy: Flow<Int>
     val didSeeOnboarding: Flow<Boolean>
     val appTheme: Flow<AppTheme>
+    val isWeeklyNotificationEnabled: Flow<Boolean>
 
     suspend fun updateBirthDay(birthDay: LocalDate)
     suspend fun updateLifeExpectancy(lifeExpectancy: Int)
 
     suspend fun updateDidSeeOnboarding(didSeeOnboarding: Boolean)
     suspend fun updateAppTheme(appTheme: AppTheme)
+    suspend fun updateIsWeeklyNotificationEnabled(isEnabled: Boolean)
 }

@@ -24,6 +24,8 @@ class PrefsStoreImpl @Inject constructor(
         val LIFE_EXPECTANCY_KEY = intPreferencesKey("life_expectancy")
         val DID_SEE_ONBOARDING_KEY = booleanPreferencesKey("did_see_onboarding")
         val APP_THEME_KEY = stringPreferencesKey("app_theme")
+        val IS_WEEKLY_NOTIFICATION_ENABLED_KEY = booleanPreferencesKey(
+            "is_weekly_notification_enabled")
     }
 
     private val dataStore = appContext.dataStore
@@ -72,6 +74,16 @@ class PrefsStoreImpl @Inject constructor(
         }
     }
 
+    override fun isWeeklyNotificationEnabledFlow() = dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }.map { it[PreferencesKeys.IS_WEEKLY_NOTIFICATION_ENABLED_KEY] ?: false }
+
+
     override suspend fun saveBirthDay(birthDay: LocalDate) {
         val birthDayInDays = birthDay.toEpochDay()
 
@@ -95,6 +107,12 @@ class PrefsStoreImpl @Inject constructor(
     override suspend fun updateAppTheme(appTheme: AppTheme) {
         dataStore.edit {
             it[PreferencesKeys.APP_THEME_KEY] = appTheme.toString()
+        }
+    }
+
+    override suspend fun updateIsWeeklyNotificationEnabled(isEnabled: Boolean) {
+        dataStore.edit {
+            it[PreferencesKeys.IS_WEEKLY_NOTIFICATION_ENABLED_KEY] = isEnabled
         }
     }
 }
