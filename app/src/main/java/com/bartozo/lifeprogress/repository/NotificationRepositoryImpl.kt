@@ -4,11 +4,14 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.bartozo.lifeprogress.MainActivity
+import com.bartozo.lifeprogress.R
 import com.bartozo.lifeprogress.data.Life
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -27,7 +30,16 @@ class NotificationRepositoryImpl @Inject constructor(
         val notification = buildWeeklyNotification(life = life)
         val notificationId = System.currentTimeMillis().toInt()
 
-        NotificationManagerCompat.from(appContext).notify(notificationId, notification)
+        if (NotificationManagerCompat.from(appContext).areNotificationsEnabled()) {
+            NotificationManagerCompat.from(appContext).notify(notificationId, notification)
+        }
+    }
+
+    override fun isNotificationPolicyAccessGranted(): Boolean {
+        val notificationManager = appContext
+            .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        return notificationManager.isNotificationPolicyAccessGranted
     }
 
     private fun createWeeklyNotificationChannel() {
@@ -47,7 +59,8 @@ class NotificationRepositoryImpl @Inject constructor(
         val intent = Intent(appContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent = PendingIntent.getActivity(appContext, 0, intent, 0)
+        val pendingIntent = PendingIntent
+            .getActivity(appContext, 0, intent, FLAG_IMMUTABLE)
 
         return NotificationCompat.Builder(appContext, weeklyChannelId)
             .setContentTitle("Your weekly Life Progress")
@@ -55,8 +68,10 @@ class NotificationRepositoryImpl @Inject constructor(
                 "Life Progress: ${life.formattedProgress}," +
                         " Year Progress: ${life.formattedCurrentYearProgress}"
             )
+            .setSmallIcon(R.drawable.life_progress_app_icon)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
             .build()
     }
 }

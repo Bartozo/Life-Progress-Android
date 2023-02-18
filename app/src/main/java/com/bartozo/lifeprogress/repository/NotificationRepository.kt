@@ -8,4 +8,9 @@ interface NotificationRepository {
      * Shows a weekly notification about current life progress.
      */
     fun showWeeklyNotification(life: Life)
+
+    /**
+     * Checks the ability to modify notification do not disturb policy for the calling package.
+     */
+    fun isNotificationPolicyAccessGranted(): Boolean
 }
