@@ -7,11 +7,11 @@ import java.time.LocalDate
 interface PrefsStore {
     fun birthDayFlow(): Flow<LocalDate>
     fun lifeExpectancyFlow(): Flow<Int>
-    fun didSeeWelcomeFlow(): Flow<Boolean>
+    fun didSeeOnboardingFlow(): Flow<Boolean>
     fun appThemeFlow(): Flow<AppTheme>
 
     suspend fun saveBirthDay(birthDay: LocalDate)
     suspend fun saveLifeExpectancy(lifeExpectancy: Int)
-    suspend fun updatedDidSeeWelcome(didSeeWelcome: Boolean)
+    suspend fun updateDidSeeOnboarding(didSeeOnboarding: Boolean)
     suspend fun updateAppTheme(appTheme: AppTheme)
 }

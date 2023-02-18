@@ -12,9 +12,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.Cake
 import androidx.compose.material.icons.outlined.Error
-import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -42,15 +40,10 @@ import com.bartozo.lifeprogress.ui.theme.DarkTheme
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.theme.LightTheme
 import com.bartozo.lifeprogress.ui.viewmodels.ProfileViewModel
-import com.bartozo.lifeprogress.util.rangeOfYearsFromNowTo
-import com.vanpra.composematerialdialogs.MaterialDialog
-import com.vanpra.composematerialdialogs.datetime.date.DatePickerDefaults
-import com.vanpra.composematerialdialogs.datetime.date.datepicker
-import com.vanpra.composematerialdialogs.rememberMaterialDialogState
+import com.bartozo.lifeprogress.util.supportWideScreen
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import kotlin.math.roundToInt
 
 @ExperimentalComposeUiApi
 @OptIn(ExperimentalMaterial3Api::class)
@@ -92,46 +85,35 @@ fun ProfileScreen(
                     .padding(innerPaddings)
                     .verticalScroll(state = scrollState)
             ) {
-                Header(
-                    modifier = Modifier.padding(top = 8.dp, start = 16.dp),
-                    text = stringResource(id = R.string.user)
-                )
-                BirthDayCard(
-                    modifier = Modifier.padding(top = 16.dp),
+                UserSection(
+                    modifier = Modifier.supportWideScreen(),
                     birthDay = birthDay,
-                    onBirthDaySelect = { viewModel.updateBirthDay(it, context) }
-                )
-                LifeExpectancyCard(
-                    modifier = Modifier.padding(top = 30.dp),
                     lifeExpectancy = lifeExpectancy,
-                    onLifeExpectancySelect = { viewModel.updateLifeExpectancy(it, context) }
+                    onBirthDaySelected = { viewModel.updateBirthDay(it, context) },
+                    onLifeExpectancySelected = { viewModel.updateLifeExpectancy(it, context) }
                 )
                 Divider(
-                    modifier = Modifier.padding(horizontal = 16.dp),
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .supportWideScreen(),
                     color = MaterialTheme.colorScheme.surfaceVariant
                 )
-                Header(
-                    modifier = Modifier.padding(top = 16.dp, start = 16.dp),
-                    text = stringResource(id = R.string.themes)
-                )
-                Themes(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
-                    selectedAppTheme = appTheme,
+                ThemesSection(
+                    modifier = Modifier.supportWideScreen(),
+                    appTheme = appTheme,
                     onAppThemeSelected = { viewModel.updateAppTheme(it) }
                 )
                 Divider(
-                    modifier = Modifier.padding(horizontal = 16.dp),
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .supportWideScreen(),
                     color = MaterialTheme.colorScheme.surfaceVariant
                 )
-                Header(
-                    modifier = Modifier.padding(top = 16.dp, start = 16.dp),
-                    text = stringResource(id = R.string.app_widgets)
-                )
-                AppWidgetCard(
-                    modifier =  Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+                AppWidgetSection(
+                    modifier = Modifier.supportWideScreen(),
                     life = life,
                     isRequestPinAppWidgetSupported = widgetManager.isRequestPinAppWidgetSupported,
-                    onPinAppWidgetClick = {
+                    onPinAppWidgetClicked = {
                         // The application has only one widget
                         widgetProviders.first().pin(context, life)
                     }
@@ -167,151 +149,71 @@ private fun ProfileTopBar(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun BirthDayCard(
+private fun UserSection(
     modifier: Modifier = Modifier,
     birthDay: LocalDate,
-    onBirthDaySelect: (LocalDate) -> Unit
+    lifeExpectancy: Int,
+    onBirthDaySelected: (LocalDate) -> Unit,
+    onLifeExpectancySelected: (Int) -> Unit
 ) {
-    val dialogState = rememberMaterialDialogState()
-
-    MaterialDialog(
-        dialogState = dialogState,
-        buttons = {
-            positiveButton(
-                text = stringResource(id = com.google.android.material.R.string.mtrl_picker_confirm),
-                textStyle = MaterialTheme.typography.labelLarge.copy(
-                    color = MaterialTheme.colorScheme.primary
-                )
-            )
-            negativeButton(
-                text = stringResource(id = com.google.android.material.R.string.mtrl_picker_cancel),
-                textStyle = MaterialTheme.typography.labelLarge.copy(
-                    color = MaterialTheme.colorScheme.secondary
-                )
-            )
-        },
-        shape = RoundedCornerShape(28.dp),
-        onCloseRequest =  { dialogState.hide() },
-        backgroundColor = MaterialTheme.colorScheme.surface
-    ) {
-        datepicker(
-            initialDate = birthDay,
-            colors = DatePickerDefaults.colors(
-                headerBackgroundColor = MaterialTheme.colorScheme.surface,
-                headerTextColor = MaterialTheme.colorScheme.onSurface,
-                calendarHeaderTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                dateActiveBackgroundColor = MaterialTheme.colorScheme.primaryContainer,
-                dateActiveTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                dateInactiveBackgroundColor = MaterialTheme.colorScheme.surface,
-                dateInactiveTextColor = MaterialTheme.colorScheme.onSurface,
-            ),
-            yearRange = rangeOfYearsFromNowTo(150),
-            allowedDateValidator = {
-                it.isBefore(LocalDate.now()) || it.isEqual(LocalDate.now())
-            },
-        ) { date ->
-            onBirthDaySelect(date)
-        }
+    Column(modifier = modifier.fillMaxWidth()) {
+        Header(
+            modifier = Modifier.padding(top = 8.dp, start = 16.dp),
+            text = stringResource(id = R.string.user)
+        )
+        BirthDayCard(
+            modifier = Modifier.padding(top = 16.dp),
+            birthDay = birthDay,
+            onBirthDaySelect = onBirthDaySelected
+        )
+        LifeExpectancyCard(
+            modifier = Modifier.padding(top = 30.dp),
+            lifeExpectancy = lifeExpectancy,
+            onLifeExpectancySelect = onLifeExpectancySelected
+        )
     }
-
-    ListItem(
-        modifier = modifier.clickable { dialogState.show() },
-        leadingContent = {
-             Icon(
-                 imageVector = Icons.Outlined.Cake,
-                 contentDescription = "Cake Icon",
-                 tint = MaterialTheme.colorScheme.onSurfaceVariant
-             )
-        },
-        headlineText = {
-            Text(
-                text = stringResource(id = R.string.your_birthday),
-                color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.titleMedium
-            )
-        },
-        supportingText = {
-            Text(
-                modifier = Modifier.padding(top = 4.dp),
-                text = birthDay.toString(),
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                style = MaterialTheme.typography.bodyMedium
-            )
-         },
-    )
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
-private fun LifeExpectancyCard(
+private fun ThemesSection(
     modifier: Modifier = Modifier,
-    lifeExpectancy: Int,
-    onLifeExpectancySelect: (Int) -> Unit
+    appTheme: AppTheme,
+    onAppThemeSelected: (AppTheme) -> Unit
 ) {
-    var sliderPosition by remember { mutableStateOf(lifeExpectancy.toFloat()) }
-
-    LaunchedEffect(key1 = lifeExpectancy) {
-        sliderPosition = lifeExpectancy.toFloat()
+    Column(modifier = modifier.fillMaxWidth()) {
+        Header(
+            modifier = Modifier.padding(top = 16.dp, start = 16.dp),
+            text = stringResource(id = R.string.themes)
+        )
+        Themes(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+            selectedAppTheme = appTheme,
+            onAppThemeSelected = onAppThemeSelected
+        )
     }
+}
 
-    ListItem(
-        modifier = modifier,
-        headlineText = {
-            Text(
-                text = stringResource(id = R.string.life_expectancy),
-                color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.titleMedium
-            )
-        },
-        leadingContent = {
-            Icon(
-                imageVector = Icons.Outlined.Face,
-                contentDescription = "Face Icon",
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        },
-        trailingContent = {
-            AnimatedContent(
-                targetState = lifeExpectancy,
-                transitionSpec = {
-                    if (targetState > initialState) {
-                        slideInVertically { height -> height } + fadeIn() with
-                                slideOutVertically { height -> -height } + fadeOut()
-                    } else {
-                        slideInVertically { height -> -height } + fadeIn() with
-                                slideOutVertically { height -> height } + fadeOut()
-                    }.using(
-                        SizeTransform(clip = false)
-                    )
-                }
-            ) { targetCount ->
-                Text(
-                    modifier = Modifier.width(25.dp),
-                    text = "$targetCount",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
-        },
-        supportingText = {
-            Slider(
-                modifier = Modifier.offset(
-                    x = (-8).dp
-                ),
-                value = sliderPosition,
-                onValueChange = {
-                    sliderPosition = it
-                    onLifeExpectancySelect(it.roundToInt())
-                },
-                valueRange = 18f..150f,
-                onValueChangeFinished = {
-                    onLifeExpectancySelect(sliderPosition.roundToInt())
-                },
-            )
-        }
-    )
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+private fun AppWidgetSection(
+    modifier: Modifier = Modifier,
+    life: Life,
+    isRequestPinAppWidgetSupported: Boolean,
+    onPinAppWidgetClicked: () -> Unit
+) {
+    Column(modifier = modifier.fillMaxWidth()) {
+        Header(
+            modifier = Modifier.padding(top = 16.dp, start = 16.dp),
+            text = stringResource(id = R.string.app_widgets)
+        )
+        AppWidgetCard(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+            life = life,
+            isRequestPinAppWidgetSupported = isRequestPinAppWidgetSupported,
+            onPinAppWidgetClick = onPinAppWidgetClicked
+        )
+    }
 }
 
 @Composable
@@ -387,13 +289,6 @@ private fun ThemeButton(
                     AppTheme.SYSTEM_AUTO -> {
                         Row(modifier = Modifier.fillMaxWidth()) {
                             LightTheme {
-                                Row(modifier = Modifier
-                                    .fillMaxHeight()
-                                    .weight(1f)
-                                    .background(MaterialTheme.colorScheme.surface)) {
-                                }
-                            }
-                            DarkTheme {
                                 Row(modifier = Modifier
                                     .fillMaxHeight()
                                     .weight(1f)
@@ -615,28 +510,6 @@ private fun ProfileTopBarPreview() {
             onBackButtonClick = {}
         )
     }
-}
-
-@Preview
-@Composable
-private fun BirthDayCardPreview() {
-    LifeProgressTheme {
-        BirthDayCard(
-            birthDay = LocalDate.now(),
-            onBirthDaySelect = {}
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun LifeExpectancyCardPreview() {
-   LifeProgressTheme {
-       LifeExpectancyCard(
-           lifeExpectancy = 100,
-           onLifeExpectancySelect = {}
-       )
-   }
 }
 
 @OptIn(ExperimentalComposeUiApi::class)

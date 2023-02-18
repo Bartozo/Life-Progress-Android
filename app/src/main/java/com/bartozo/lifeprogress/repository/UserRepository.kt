@@ -7,11 +7,12 @@ import java.time.LocalDate
 interface UserRepository {
     val birthDay: Flow<LocalDate>
     val lifeExpectancy: Flow<Int>
-    val didSeeWelcome: Flow<Boolean>
+    val didSeeOnboarding: Flow<Boolean>
     val appTheme: Flow<AppTheme>
 
     suspend fun updateBirthDay(birthDay: LocalDate)
     suspend fun updateLifeExpectancy(lifeExpectancy: Int)
-    suspend fun updateDidSeeWelcome(didSeeWelcome: Boolean)
+
+    suspend fun updateDidSeeOnboarding(didSeeOnboarding: Boolean)
     suspend fun updateAppTheme(appTheme: AppTheme)
 }
