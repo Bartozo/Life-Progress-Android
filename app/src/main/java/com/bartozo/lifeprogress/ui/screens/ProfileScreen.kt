@@ -1,19 +1,21 @@
 package com.bartozo.lifeprogress.ui.screens
 
+import android.Manifest
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProviderInfo
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.Cake
-import androidx.compose.material.icons.outlined.Doorbell
 import androidx.compose.material.icons.outlined.Error
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.*
@@ -43,6 +45,7 @@ import com.bartozo.lifeprogress.ui.theme.DarkTheme
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.theme.LightTheme
 import com.bartozo.lifeprogress.ui.viewmodels.ProfileViewModel
+import com.bartozo.lifeprogress.util.hasNotificationPermission
 import com.bartozo.lifeprogress.util.supportWideScreen
 import java.time.LocalDate
 import java.time.LocalTime
@@ -55,6 +58,11 @@ fun ProfileScreen(
     viewModel: ProfileViewModel,
     navigateBackToHomeScreen: () -> Unit
 ) {
+    val context = LocalContext.current
+    val widgetManager = AppWidgetManager.getInstance(context)
+    // Get a list of our app widget providers to retrieve their info
+    val widgetProviders = widgetManager.getInstalledProvidersForPackage(context.packageName, null)
+
     val birthDay: LocalDate by viewModel.birthDay
         .collectAsState(initial = LocalDate.now())
     val lifeExpectancy: Int by viewModel.lifeExpectancy
@@ -66,13 +74,18 @@ fun ProfileScreen(
     val isWeeklyNotificationEnabled: Boolean by viewModel.isWeeklyNotificationEnabled
         .collectAsState()
 
+    var isNotificationPermissionGranted by remember {
+        mutableStateOf(context.hasNotificationPermission())
+    }
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        isNotificationPermissionGranted = isGranted
+    }
+
     val scrollState = rememberScrollState()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
-    val context = LocalContext.current
-    val widgetManager = AppWidgetManager.getInstance(context)
-    // Get a list of our app widget providers to retrieve their info
-    val widgetProviders = widgetManager.getInstalledProvidersForPackage(context.packageName, null)
 
     BackHandler(onBack = navigateBackToHomeScreen)
 
@@ -95,9 +108,14 @@ fun ProfileScreen(
                     birthDay = birthDay,
                     lifeExpectancy = lifeExpectancy,
                     isWeeklyNotificationEnabled = isWeeklyNotificationEnabled,
+                    areNotificationsEnabled = context.hasNotificationPermission(),
                     onBirthDaySelected = { viewModel.updateBirthDay(it, context) },
                     onLifeExpectancySelected = { viewModel.updateLifeExpectancy(it, context) },
                     onIsWeeklyNotificationEnabledChanged = {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                        }
+
                         viewModel.updateIsWeeklyNotificationEnabled(it, context)
                     }
                 )
@@ -165,6 +183,7 @@ private fun UserSection(
     birthDay: LocalDate,
     lifeExpectancy: Int,
     isWeeklyNotificationEnabled: Boolean,
+    areNotificationsEnabled: Boolean,
     onBirthDaySelected: (LocalDate) -> Unit,
     onLifeExpectancySelected: (Int) -> Unit,
     onIsWeeklyNotificationEnabledChanged: (Boolean) -> Unit
@@ -184,11 +203,34 @@ private fun UserSection(
             lifeExpectancy = lifeExpectancy,
             onLifeExpectancySelect = onLifeExpectancySelected
         )
+        if (!areNotificationsEnabled) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(MaterialTheme.colorScheme.error)
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Error,
+                    contentDescription = "Error Icon",
+                    tint = MaterialTheme.colorScheme.onError
+                )
+                Spacer(modifier = Modifier.padding(8.dp))
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = "Notifications are disabled, because permission was not granted.",
+                    color = MaterialTheme.colorScheme.onError
+                )
+            }
+        }
         ListItem(
             modifier = Modifier
                 .padding(top = 8.dp, bottom = 16.dp)
-                .clickable {
-
+                .clickable(enabled = areNotificationsEnabled) {
+                    onIsWeeklyNotificationEnabledChanged(!isWeeklyNotificationEnabled)
                 },
             leadingContent = {
                 Icon(
@@ -214,6 +256,7 @@ private fun UserSection(
             },
             trailingContent = {
                 Switch(
+                    enabled = areNotificationsEnabled,
                     checked = isWeeklyNotificationEnabled,
                     onCheckedChange = onIsWeeklyNotificationEnabledChanged
                 )
