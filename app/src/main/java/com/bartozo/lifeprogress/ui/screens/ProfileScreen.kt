@@ -12,7 +12,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.Cake
+import androidx.compose.material.icons.outlined.Doorbell
 import androidx.compose.material.icons.outlined.Error
+import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -60,6 +63,8 @@ fun ProfileScreen(
         .collectAsState(initial = Life.example)
     val appTheme: AppTheme by viewModel.appTheme
         .collectAsState()
+    val isWeeklyNotificationEnabled: Boolean by viewModel.isWeeklyNotificationEnabled
+        .collectAsState()
 
     val scrollState = rememberScrollState()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
@@ -89,8 +94,12 @@ fun ProfileScreen(
                     modifier = Modifier.supportWideScreen(),
                     birthDay = birthDay,
                     lifeExpectancy = lifeExpectancy,
+                    isWeeklyNotificationEnabled = isWeeklyNotificationEnabled,
                     onBirthDaySelected = { viewModel.updateBirthDay(it, context) },
-                    onLifeExpectancySelected = { viewModel.updateLifeExpectancy(it, context) }
+                    onLifeExpectancySelected = { viewModel.updateLifeExpectancy(it, context) },
+                    onIsWeeklyNotificationEnabledChanged = {
+                        viewModel.updateIsWeeklyNotificationEnabled(it, context)
+                    }
                 )
                 Divider(
                     modifier = Modifier
@@ -149,13 +158,16 @@ private fun ProfileTopBar(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun UserSection(
     modifier: Modifier = Modifier,
     birthDay: LocalDate,
     lifeExpectancy: Int,
+    isWeeklyNotificationEnabled: Boolean,
     onBirthDaySelected: (LocalDate) -> Unit,
-    onLifeExpectancySelected: (Int) -> Unit
+    onLifeExpectancySelected: (Int) -> Unit,
+    onIsWeeklyNotificationEnabledChanged: (Boolean) -> Unit
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Header(
@@ -168,9 +180,44 @@ private fun UserSection(
             onBirthDaySelect = onBirthDaySelected
         )
         LifeExpectancyCard(
-            modifier = Modifier.padding(top = 30.dp),
+            modifier = Modifier.padding(top = 16.dp),
             lifeExpectancy = lifeExpectancy,
             onLifeExpectancySelect = onLifeExpectancySelected
+        )
+        ListItem(
+            modifier = Modifier
+                .padding(top = 8.dp, bottom = 16.dp)
+                .clickable {
+
+                },
+            leadingContent = {
+                Icon(
+                    imageVector = Icons.Outlined.Notifications,
+                    contentDescription = "Notifications Icon",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            },
+            headlineText = {
+                Text(
+                    text = "Weekly notification",
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleMedium
+                )
+            },
+            supportingText = {
+                Text(
+                    modifier = Modifier.padding(top = 4.dp),
+                    text = "Receive a weekly notification with your current life progress",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            },
+            trailingContent = {
+                Switch(
+                    checked = isWeeklyNotificationEnabled,
+                    onCheckedChange = onIsWeeklyNotificationEnabledChanged
+                )
+            }
         )
     }
 }
