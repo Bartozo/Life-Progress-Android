@@ -8,17 +8,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.bartozo.lifeprogress.ui.screens.AboutScreen
-import com.bartozo.lifeprogress.ui.screens.HomeScreen
-import com.bartozo.lifeprogress.ui.screens.ProfileScreen
-import com.bartozo.lifeprogress.ui.screens.WelcomeScreen
+import com.bartozo.lifeprogress.ui.screens.*
 import com.bartozo.lifeprogress.ui.viewmodels.AboutViewModel
 import com.bartozo.lifeprogress.ui.viewmodels.HomeViewModel
+import com.bartozo.lifeprogress.ui.viewmodels.OnboardingViewModel
 import com.bartozo.lifeprogress.ui.viewmodels.ProfileViewModel
-import com.bartozo.lifeprogress.ui.viewmodels.WelcomeViewModel
 
 sealed class Screen(val route: String) {
-    object Welcome: Screen("welcome")
+    object Onboarding: Screen("onboarding")
     object Home: Screen("home")
     object Profile: Screen("profile")
     object About: Screen("about")
@@ -29,20 +26,20 @@ sealed class Screen(val route: String) {
 fun LifeProgressNavigation(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: Screen = Screen.Welcome,
+    startDestination: Screen = Screen.Onboarding,
 ) {
     NavHost(
         modifier = modifier,
         navController = navController,
         startDestination = startDestination.route
     ) {
-        composable(Screen.Welcome.route) {
-            val viewModel = hiltViewModel<WelcomeViewModel>()
-            WelcomeScreen(
+        composable(Screen.Onboarding.route) {
+            val viewModel = hiltViewModel<OnboardingViewModel>()
+            OnboardingScreen(
                 viewModel = viewModel,
-                navigateToProfileScreen = {
-                    navController.navigate(Screen.Profile.route) {
-                        popUpTo(Screen.Welcome.route) { inclusive = true }
+                navigateToHomeScreen = {
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Onboarding.route) { inclusive = true }
                     }
                 }
             )

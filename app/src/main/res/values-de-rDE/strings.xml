@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Life Progress</string>
+    <string name="pin_unavailable">Anpinnen wird nicht vom Standard-Launcher unterstützt.</string>
+    <string name="welcome_to">Willkommen zu</string>
+    <string name="friendly_reminder_that">Deine Erinnerung, dass du nicht ewig lebst.</string>
+    <string name="before_we_continue">Setze dein Profil auf bevor es losgeht</string>
+    <string name="user">Benutzer</string>
+    <string name="your_birthday">Dein Geburtstag</string>
+    <string name="life_expectancy">Lebenserwartung</string>
+    <string name="themes">Farbschema</string>
+    <string name="system_auto_theme">System Auto</string>
+    <string name="light_theme">Standard</string>
+    <string name="dark_theme">Standard Dunkel</string>
+    <string name="app_widgets">App Widget</string>
+    <string name="life_calendar_card_title">Lebenskalender als Widget</string>
+    <string name="life_calendar_card_description">Sieh deinen Fortschritt mit einem hilfreichen Widget auf deinem Home Screen.</string>
+    <string name="year_progress">Jahresfortschritt: %1$s</string>
+    <string name="life_progress">Lebensfortschritt: %1$s</string>
+    <string name="profile">Profil</string>
+    <string name="about_life_progress">Über Life Progress</string>
+    <string name="how_it_works">Wie es funktioniert</string>
+    <string name="calendar_for_your_life_title">Ein Kalender für dein Leben</string>
+    <string name="calendar_for_your_life_description">Jeder Kasten auf dem Bildschirm stell eine Woche deines Lebens dar. Der erste Kasten (oben links) ist die Woche in der du geboren wurdest.</string>
+    <string name="each_row_title">Jede Reihe mit 52 Wochen stellt ein Jahr dar.</string>
+    <string name="each_row_description">So sieht dein aktuelles Jahr aus. Versuche es im Kalender zu finden.</string>
+    <string name="last_thing_title">Eine letzte Sache noch!</string>
+    <string name="last_thing_description">Berühre den Kalender und sieh was passiert.</string>
+    <string name="learn_more">Erfahre mehr</string>
+    <string name="your_life_in_weeks_title">Dein Leben in Wochen</string>
+    <string name="your_life_in_weeks_description">Diese Idee wurde in einem Artikel von Tim Urban eingeführt</string>
+    <string name="what_are_you_doing_with_your_life_description">Das phänomenale Video von Kurzgesagt über dieses Thema.</string>
+    <string name="support">Unterstützung</string>
+    <string name="support_project_title">Unterstütze dieses Projekt</string>
+    <string name="support_project_description">Wenn dir diese App gefällt und du willst, dass sie mehr Funktionen bekomment, kannst du das Projekt unterstützen indem du mir einen Kaffee kaufst.</string>
+    <string name="open_source_card_title">Der Code für dieses Projekt ist frei zugänglich!</string>
+    <string name="open_source_card_description">Erfahre wie dieses Projekt erstellt wurde und wie man dazu beitragen kann. Check den Code auf GitHub aus.</string>
+    <string name="continue_button_text">Weiter</string>
+    <string name="profile_button_text">Profil</string>
+    <string name="about_this_app_button_text">Über die App</string>
+    <string name="rate_app_button_text">Bewerte die App</string>
+    <string name="share_feedback_button_text">Sende Feedback</string>
+
+    <plurals name="weeks_spent">
+        <item quantity="other">%1d Wochen vergangen</item>
+    </plurals>
+
+    <plurals name="weeks_left">
+        <item quantity="other">%1d Wochen übrig</item>
+    </plurals>
+
+    <plurals name="weeks_until_birthday">
+        <item quantity="other">%1d Wochen bis zu deinem Geburtstag</item>
+    </plurals>
+</resources>

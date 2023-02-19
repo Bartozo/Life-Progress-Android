@@ -30,7 +30,6 @@
     <string name="learn_more">Więcej informacji</string>
     <string name="your_life_in_weeks_title">Twoje życie w tygodniach</string>
     <string name="your_life_in_weeks_description">Pomysł ten został pierwotnie przedstawiony w artykule Tima Urbana.</string>
-    <string name="what_are_you_doing_with_your_life_title">What Are You Doing With Your Life? The Tail End</string>
     <string name="what_are_you_doing_with_your_life_description">Fenomenalny film Kurzgesagta na ten temat.</string>
     <string name="support">Wsparcie</string>
     <string name="support_project_title">Wesprzyj ten projekt</string>
@@ -39,6 +38,8 @@
     <string name="support_project_description">Jeśli lubisz korzystać z tej aplikacji i chcesz, aby zawierała więcej funkcji to możesz wesprzeć rozwój tego projektu kupując mi kawę.</string>
     <string name="rate_app_button_text">Oceń Aplikację</string>
     <string name="share_feedback_button_text">Podziel Się Opinią</string>
+    <string name="open_source_card_title">Projekt jest open source!</string>
+    <string name="open_source_card_description">Dowiedz się, jak powstał ten projekt i weź udział w jego rozwoju. Sprawdź kod na GitHub.</string>
 
     <plurals name="weeks_spent">
         <item quantity="other">%1d spędzonych tygodni</item>

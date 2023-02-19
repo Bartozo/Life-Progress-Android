@@ -110,8 +110,8 @@ fun Header(
         Text(
             text = LocalContext.current.resources.getQuantityString(
                 R.plurals.weeks_spent,
-                life.numberOfWeeksLeft,
-                life.numberOfWeeksLeft
+                life.numberOfWeeksSpent,
+                life.numberOfWeeksSpent
             ),
             style = TextStyle(
                 fontWeight = FontWeight.Normal,

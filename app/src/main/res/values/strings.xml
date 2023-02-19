@@ -32,12 +32,18 @@
     <string name="learn_more">Learn more</string>
     <string name="your_life_in_weeks_title">Your Life in Weeks</string>
     <string name="your_life_in_weeks_description">This idea was originally introduced in an article by Tim Urban.</string>
-    <string name="what_are_you_doing_with_your_life_title">What Are You Doing With Your Life? The Tail End</string>
+    <string name="what_are_you_doing_with_your_life_title" translatable="false">What Are You Doing With Your Life? The Tail End</string>
     <string name="what_are_you_doing_with_your_life_description">Kurzgesagt\'s phenomenal video on the topic.</string>
     <string name="support">Support</string>
     <string name="support_project_title">Support this project</string>
-    <string name="support_project_description">If you enjoy using this application and want it to has more features, you can support the development of this project by buying me a coffee</string>
-
+    <string name="support_project_description">If you enjoy using this application and want it to has more features, you can support the development of this project by buying me a coffee.</string>
+    <string name="open_source_card_title">The project is open source!</string>
+    <string name="open_source_card_description">Learn how this project was created and contribute to it. Check out the code on GitHub.</string>
+    <string name="select_your_birthday_title">Select your Birthday</string>
+    <string name="select_your_birthday_description">Hi there! We\'re glad to have you on board. Before we can tailor your experience, please let us know your date of birth.</string>
+    <string name="select_your_life_expectancy_title">Select your Life Expectancy</string>
+    <string name="select_your_life_expectancy_description"> "One of the things we need to know is your estimated life expectancy, which is the number of years you expect to live based on various factors such as your lifestyle, family history, and overall health. By knowing your life expectancy, we can calculate progress in your Life Calendar.</string>
+`
     <plurals name="weeks_spent">
         <item quantity="other">%1d weeks spent</item>
     </plurals>

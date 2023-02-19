@@ -23,6 +23,7 @@ import com.bartozo.lifeprogress.data.Life
 import com.bartozo.lifeprogress.ui.components.*
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.viewmodels.AboutViewModel
+import com.bartozo.lifeprogress.util.supportWideScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,28 +54,34 @@ fun AboutScreen(
                     .verticalScroll(state = scrollState)
             ) {
                 HowItWorksSection(
-                    modifier = Modifier.padding(
-                        start = 16.dp,
-                        end = 16.dp,
-                        top = 8.dp,
-                    ),
+                    modifier = Modifier
+                        .padding(
+                            start = 16.dp,
+                            end = 16.dp,
+                            top = 8.dp
+                        )
+                        .supportWideScreen(),
                     life = life
                 )
                 LearnMoreSection(
-                    modifier = Modifier.padding(
-                        start = 16.dp,
-                        end = 16.dp,
-                        top = 32.dp
-                    ),
+                    modifier = Modifier
+                        .padding(
+                            start = 16.dp,
+                            end = 16.dp,
+                            top = 32.dp
+                        )
+                        .supportWideScreen(),
                     onOpenUrl = { uriHandler.openUri(it) }
                 )
                 SupportSection(
-                    modifier = Modifier.padding(
-                        start = 16.dp,
-                        end = 16.dp,
-                        top = 32.dp,
-                        bottom = 16.dp
-                    ),
+                    modifier = Modifier
+                        .padding(
+                            start = 16.dp,
+                            end = 16.dp,
+                            top = 32.dp,
+                            bottom = 16.dp
+                        )
+                        .supportWideScreen(),
                     onOpenUrl = { uriHandler.openUri(it) }
                 )
                 Spacer(modifier = Modifier.height(32.dp))
@@ -197,15 +204,14 @@ private fun LearnMoreSection(
                 onOpenUrl("https://www.youtube.com/watch?v=JXeJANDKwDc")
             }
         )
-//        InformationCard(
-//            modifier = Modifier.padding(top = 16.dp),
-//            headline = "The project is open source!",
-//            supportingText = "Learn how this project was created and contribute to it." +
-//                    " Check out the code on GitHub.",
-//            onClick = {
-//                onOpenUrl("https://github.com/Bartozo/Life-Progress-Android")
-//            }
-//        )
+        InformationCard(
+            modifier = Modifier.padding(top = 16.dp),
+            headline = stringResource(id = R.string.open_source_card_title),
+            supportingText = stringResource(id = R.string.open_source_card_description),
+            onClick = {
+                onOpenUrl("https://github.com/Bartozo/Life-Progress-Android")
+            }
+        )
     }
 }
 
