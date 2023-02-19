@@ -42,6 +42,9 @@ class NotificationRepositoryImpl @Inject constructor(
         return notificationManager.isNotificationPolicyAccessGranted
     }
 
+    override fun areNotificationsEnabled() = NotificationManagerCompat.from(appContext)
+        .areNotificationsEnabled()
+
     private fun createWeeklyNotificationChannel() {
         val name = "Weekly Notification Channel"
         val descriptionText = "Receive weekly notification with current life progress"

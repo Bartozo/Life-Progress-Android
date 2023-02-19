@@ -82,6 +82,11 @@ fun ProfileScreen(
     ) { isGranted ->
         isNotificationPermissionGranted = isGranted
     }
+    LaunchedEffect(Unit) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
 
     val scrollState = rememberScrollState()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
@@ -108,14 +113,10 @@ fun ProfileScreen(
                     birthDay = birthDay,
                     lifeExpectancy = lifeExpectancy,
                     isWeeklyNotificationEnabled = isWeeklyNotificationEnabled,
-                    areNotificationsEnabled = context.hasNotificationPermission(),
+                    areNotificationsEnabled = isNotificationPermissionGranted,
                     onBirthDaySelected = { viewModel.updateBirthDay(it, context) },
                     onLifeExpectancySelected = { viewModel.updateLifeExpectancy(it, context) },
                     onIsWeeklyNotificationEnabledChanged = {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                            permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-                        }
-
                         viewModel.updateIsWeeklyNotificationEnabled(it, context)
                     }
                 )

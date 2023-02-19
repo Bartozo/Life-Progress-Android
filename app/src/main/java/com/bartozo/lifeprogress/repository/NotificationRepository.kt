@@ -13,4 +13,9 @@ interface NotificationRepository {
      * Checks the ability to modify notification do not disturb policy for the calling package.
      */
     fun isNotificationPolicyAccessGranted(): Boolean
+
+    /**
+     * Checks if notifications are enabled and can be sent.
+     */
+    fun areNotificationsEnabled(): Boolean
 }
