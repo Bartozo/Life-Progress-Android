@@ -39,10 +39,6 @@
     <string name="support_project_description">If you enjoy using this application and want it to has more features, you can support the development of this project by buying me a coffee.</string>
     <string name="open_source_card_title">The project is open source!</string>
     <string name="open_source_card_description">Learn how this project was created and contribute to it. Check out the code on GitHub.</string>
-    <string name="select_your_birthday_title">Select your Birthday</string>
-    <string name="select_your_birthday_description">Hi there! We\'re glad to have you on board. Before we can tailor your experience, please let us know your date of birth.</string>
-    <string name="select_your_life_expectancy_title">Select your Life Expectancy</string>
-    <string name="select_your_life_expectancy_description"> "One of the things we need to know is your estimated life expectancy, which is the number of years you expect to live based on various factors such as your lifestyle, family history, and overall health. By knowing your life expectancy, we can calculate progress in your Life Calendar.</string>
 `
     <plurals name="weeks_spent">
         <item quantity="other">%1d weeks spent</item>
@@ -62,4 +58,26 @@
     <string name="about_this_app_button_text">About This App</string>
     <string name="rate_app_button_text">Rate The App</string>
     <string name="share_feedback_button_text">Share Feedback</string>
+
+    <!--Onboarding-->
+    <string name="measure_life_feature_title">Measure your Life Progress</string>
+    <string name="measure_life_feature_description">See the progress of your life and current year with easy to use calendar.</string>
+    <string name="widget_feature_title">Widget</string>
+    <string name="widget_feature_description">Always be up to date with your life progress with super handy and useful widget on your home screen.</string>
+    <string name="theme_feature_title">App Theme</string>
+    <string name="theme_feature_description">Material You (The application color palette is generated based on the user\'s wallpaper, only available for android 12 or higher).</string>
+    <string name="orientations_feature_title">Different Modes</string>
+    <string name="orientations_feature_description">Works in both Horizontal and Vertical mode.</string>
+    <string name="select_your_birthday_title">Select your Birthday</string>
+    <string name="select_your_birthday_description">Hi there! We\'re glad to have you on board. Before we can tailor your experience, please let us know your date of birth.</string>
+    <string name="select_your_life_expectancy_title">Select your Life Expectancy</string>
+    <string name="select_your_life_expectancy_description"> "One of the things we need to know is your estimated life expectancy, which is the number of years you expect to live based on various factors such as your lifestyle, family history, and overall health. By knowing your life expectancy, we can calculate progress in your Life Calendar.</string>
+
+    <!--Weekly Notifications-->
+    <string name="weekly_notification_channel_name">Weekly Notification</string>
+    <string name="weekly_notification_channel_description">Receive weekly notification with current life progress.</string>
+    <string name="weekly_notification_title">Your weekly Life Progress</string>
+    <string name="notifications_disabled_description">Notifications are disabled, because permission was not granted.</string>
+    <string name="weekly_notification">Weekly notification</string>
+    <string name="weekly_notification_description">Receive a weekly notification with your current life progress.</string>
 </resources>

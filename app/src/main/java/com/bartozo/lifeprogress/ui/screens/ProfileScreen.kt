@@ -222,7 +222,7 @@ private fun UserSection(
                 Spacer(modifier = Modifier.padding(8.dp))
                 Text(
                     modifier = Modifier.weight(1f),
-                    text = "Notifications are disabled, because permission was not granted.",
+                    text = stringResource(id = R.string.notifications_disabled_description),
                     color = MaterialTheme.colorScheme.onError
                 )
             }
@@ -242,7 +242,7 @@ private fun UserSection(
             },
             headlineText = {
                 Text(
-                    text = "Weekly notification",
+                    text = stringResource(id = R.string.weekly_notification),
                     color = MaterialTheme.colorScheme.onSurface,
                     style = MaterialTheme.typography.titleMedium
                 )
@@ -250,7 +250,7 @@ private fun UserSection(
             supportingText = {
                 Text(
                     modifier = Modifier.padding(top = 4.dp),
-                    text = "Receive a weekly notification with your current life progress",
+                    text = stringResource(id = R.string.weekly_notification_description),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodyMedium
                 )

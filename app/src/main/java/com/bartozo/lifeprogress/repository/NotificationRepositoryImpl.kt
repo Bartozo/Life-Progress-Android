@@ -8,6 +8,8 @@ import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.bartozo.lifeprogress.MainActivity
@@ -46,8 +48,8 @@ class NotificationRepositoryImpl @Inject constructor(
         .areNotificationsEnabled()
 
     private fun createWeeklyNotificationChannel() {
-        val name = "Weekly Notification Channel"
-        val descriptionText = "Receive weekly notification with current life progress"
+        val name = appContext.getString(R.string.weekly_notification_channel_name)
+        val descriptionText = appContext.getString(R.string.weekly_notification_channel_description)
         val importance = NotificationManager.IMPORTANCE_DEFAULT
         val channel = NotificationChannel(weeklyChannelId, name, importance).apply {
             description = descriptionText
@@ -66,10 +68,11 @@ class NotificationRepositoryImpl @Inject constructor(
             .getActivity(appContext, 0, intent, FLAG_IMMUTABLE)
 
         return NotificationCompat.Builder(appContext, weeklyChannelId)
-            .setContentTitle("Your weekly Life Progress")
+            .setContentTitle(appContext.getString(R.string.weekly_notification_title))
             .setContentText(
-                "Life Progress: ${life.formattedProgress}," +
-                        " Year Progress: ${life.formattedCurrentYearProgress}"
+                appContext.getString(R.string.life_progress, life.formattedProgress) +
+                        " " +
+                appContext.getString(R.string.year_progress, life.formattedCurrentYearProgress)
             )
             .setSmallIcon(R.drawable.life_progress_app_icon)
             .setContentIntent(pendingIntent)
