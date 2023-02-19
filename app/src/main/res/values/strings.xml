@@ -71,7 +71,7 @@
     <string name="select_your_birthday_title">Select your Birthday</string>
     <string name="select_your_birthday_description">Hi there! We\'re glad to have you on board. Before we can tailor your experience, please let us know your date of birth.</string>
     <string name="select_your_life_expectancy_title">Select your Life Expectancy</string>
-    <string name="select_your_life_expectancy_description"> "One of the things we need to know is your estimated life expectancy, which is the number of years you expect to live based on various factors such as your lifestyle, family history, and overall health. By knowing your life expectancy, we can calculate progress in your Life Calendar.</string>
+    <string name="select_your_life_expectancy_description">One of the things we need to know is your estimated life expectancy, which is the number of years you expect to live based on various factors such as your lifestyle, family history, and overall health. By knowing your life expectancy, we can calculate progress in your Life Calendar.</string>
 
     <!--Weekly Notifications-->
     <string name="weekly_notification_channel_name">Weekly Notification</string>
