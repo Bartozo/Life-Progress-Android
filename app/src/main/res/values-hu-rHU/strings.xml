@@ -37,6 +37,8 @@
     <string name="support">Támogatás</string>
     <string name="support_project_title">Támogasd a projektet</string>
     <string name="support_project_description">Ha élvezed az alkalmazás használatát és szeretnéd, hogy több funkció legyen benne, támogathatod a projekt fejlesztését egy kávé vásárlásával</string>
+    <string name="open_source_card_title">A projekt nyílt forráskódú!</string>
+    <string name="open_source_card_description">Tudd meg hogyan készült a projekt, és hogyan lehet hozzájárulni a készítéséhez. A kód megtekinthető GitHub-on.</string>
 
     <plurals name="weeks_spent">
         <item quantity="other">%1d hét telt el</item>
@@ -56,4 +58,26 @@
     <string name="about_this_app_button_text">Az alkalmazásról</string>
     <string name="rate_app_button_text">Alkalmazás értékelése</string>
     <string name="share_feedback_button_text">Értékelés megosztása</string>
+
+    <!--Onboarding-->
+    <string name="measure_life_feature_title">Nézd meg az életutad</string>
+    <string name="measure_life_feature_description">Lásd az életutad és a mostani éved egy egyszerűen használható naptárral.</string>
+    <string name="widget_feature_title">Widget</string>
+    <string name="widget_feature_description">Legyél mindig naprakész az életutaddal a hasznos életút widgettel a főképernyődön.</string>
+    <string name="theme_feature_title">Téma</string>
+    <string name="theme_feature_description">Material You (Az alkalmazás szín palettája a felhasználó háttérképe alapján lesz generálva. Csak android 12-től elérhető).</string>
+    <string name="orientations_feature_title">Különböző orientációk</string>
+    <string name="orientations_feature_description">Vízszintes és függőleges módban is működik.</string>
+    <string name="select_your_birthday_title">Válaszd ki a születésnapodat</string>
+    <string name="select_your_birthday_description">Szia! Örülünk hogy itt vagy. Mielőtt személyre szabhatnánk az alkalmazást, kérjük add meg a születési dátumodat.</string>
+    <string name="select_your_life_expectancy_title">Válaszd ki a várható élettartamodat</string>
+    <string name="select_your_life_expectancy_description">Tudnunk kell, hogy mennyire becsülöd a várható élettartamod, ami függ az életmódodtól, családi előzményeidtől, egészségügyi állapotodtól. A várható élettartamod alapján jelenítjük meg az életutad.</string>
+    
+    <!--Weekly Notifications-->
+    <string name="weekly_notification_channel_name">Heti értesítések</string>
+    <string name="weekly_notification_channel_description">Kapj heti értesítést az aktuális életutadról.</string>
+    <string name="weekly_notification_title">A heti életutad</string>
+    <string name="notifications_disabled_description">Az értesítések le vannak tiltva, mert még nem adtál rájuk engedélyt.</string>
+    <string name="weekly_notification">Heti értesítések</string>
+    <string name="weekly_notification_description">Kapj heti értesítést az aktuális életutadról.</string>
 </resources>
