@@ -32,7 +32,7 @@ class WeeklyNotificationWorker @AssistedInject constructor(
         fun enqueue(context: Context, force: Boolean = false) {
             val manager = WorkManager.getInstance(context)
             val requestBuilder = PeriodicWorkRequestBuilder<WeeklyNotificationWorker>(
-                Duration.ofMinutes(1)
+                Duration.ofDays(7)
             )
             var workPolicy = ExistingPeriodicWorkPolicy.KEEP
 
