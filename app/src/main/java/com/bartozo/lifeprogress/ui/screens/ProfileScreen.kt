@@ -1,11 +1,15 @@
 package com.bartozo.lifeprogress.ui.screens
 
+import android.Manifest
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProviderInfo
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -13,6 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.Error
+import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -40,6 +45,7 @@ import com.bartozo.lifeprogress.ui.theme.DarkTheme
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.theme.LightTheme
 import com.bartozo.lifeprogress.ui.viewmodels.ProfileViewModel
+import com.bartozo.lifeprogress.util.hasNotificationPermission
 import com.bartozo.lifeprogress.util.supportWideScreen
 import java.time.LocalDate
 import java.time.LocalTime
@@ -52,6 +58,11 @@ fun ProfileScreen(
     viewModel: ProfileViewModel,
     navigateBackToHomeScreen: () -> Unit
 ) {
+    val context = LocalContext.current
+    val widgetManager = AppWidgetManager.getInstance(context)
+    // Get a list of our app widget providers to retrieve their info
+    val widgetProviders = widgetManager.getInstalledProvidersForPackage(context.packageName, null)
+
     val birthDay: LocalDate by viewModel.birthDay
         .collectAsState(initial = LocalDate.now())
     val lifeExpectancy: Int by viewModel.lifeExpectancy
@@ -60,14 +71,26 @@ fun ProfileScreen(
         .collectAsState(initial = Life.example)
     val appTheme: AppTheme by viewModel.appTheme
         .collectAsState()
+    val isWeeklyNotificationEnabled: Boolean by viewModel.isWeeklyNotificationEnabled
+        .collectAsState()
+
+    var isNotificationPermissionGranted by remember {
+        mutableStateOf(context.hasNotificationPermission())
+    }
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        isNotificationPermissionGranted = isGranted
+    }
+    LaunchedEffect(Unit) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
 
     val scrollState = rememberScrollState()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
-    val context = LocalContext.current
-    val widgetManager = AppWidgetManager.getInstance(context)
-    // Get a list of our app widget providers to retrieve their info
-    val widgetProviders = widgetManager.getInstalledProvidersForPackage(context.packageName, null)
 
     BackHandler(onBack = navigateBackToHomeScreen)
 
@@ -89,8 +112,13 @@ fun ProfileScreen(
                     modifier = Modifier.supportWideScreen(),
                     birthDay = birthDay,
                     lifeExpectancy = lifeExpectancy,
+                    isWeeklyNotificationEnabled = isWeeklyNotificationEnabled,
+                    areNotificationsEnabled = isNotificationPermissionGranted,
                     onBirthDaySelected = { viewModel.updateBirthDay(it, context) },
-                    onLifeExpectancySelected = { viewModel.updateLifeExpectancy(it, context) }
+                    onLifeExpectancySelected = { viewModel.updateLifeExpectancy(it, context) },
+                    onIsWeeklyNotificationEnabledChanged = {
+                        viewModel.updateIsWeeklyNotificationEnabled(it, context)
+                    }
                 )
                 Divider(
                     modifier = Modifier
@@ -149,13 +177,17 @@ private fun ProfileTopBar(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun UserSection(
     modifier: Modifier = Modifier,
     birthDay: LocalDate,
     lifeExpectancy: Int,
+    isWeeklyNotificationEnabled: Boolean,
+    areNotificationsEnabled: Boolean,
     onBirthDaySelected: (LocalDate) -> Unit,
-    onLifeExpectancySelected: (Int) -> Unit
+    onLifeExpectancySelected: (Int) -> Unit,
+    onIsWeeklyNotificationEnabledChanged: (Boolean) -> Unit
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Header(
@@ -168,9 +200,68 @@ private fun UserSection(
             onBirthDaySelect = onBirthDaySelected
         )
         LifeExpectancyCard(
-            modifier = Modifier.padding(top = 30.dp),
+            modifier = Modifier.padding(top = 16.dp),
             lifeExpectancy = lifeExpectancy,
             onLifeExpectancySelect = onLifeExpectancySelected
+        )
+        if (!areNotificationsEnabled) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(MaterialTheme.colorScheme.error)
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Error,
+                    contentDescription = "Error Icon",
+                    tint = MaterialTheme.colorScheme.onError
+                )
+                Spacer(modifier = Modifier.padding(8.dp))
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = stringResource(id = R.string.notifications_disabled_description),
+                    color = MaterialTheme.colorScheme.onError
+                )
+            }
+        }
+        ListItem(
+            modifier = Modifier
+                .padding(top = 8.dp, bottom = 16.dp)
+                .clickable(enabled = areNotificationsEnabled) {
+                    onIsWeeklyNotificationEnabledChanged(!isWeeklyNotificationEnabled)
+                },
+            leadingContent = {
+                Icon(
+                    imageVector = Icons.Outlined.Notifications,
+                    contentDescription = "Notifications Icon",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            },
+            headlineText = {
+                Text(
+                    text = stringResource(id = R.string.weekly_notification),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleMedium
+                )
+            },
+            supportingText = {
+                Text(
+                    modifier = Modifier.padding(top = 4.dp),
+                    text = stringResource(id = R.string.weekly_notification_description),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            },
+            trailingContent = {
+                Switch(
+                    enabled = areNotificationsEnabled,
+                    checked = isWeeklyNotificationEnabled,
+                    onCheckedChange = onIsWeeklyNotificationEnabledChanged
+                )
+            }
         )
     }
 }

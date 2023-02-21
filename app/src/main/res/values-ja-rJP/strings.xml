@@ -52,4 +52,22 @@
     <plurals name="weeks_until_birthday">
         <item quantity="other">%1d 次の誕生日までの残り週</item>
     </plurals>
+    <string name="measure_life_feature_title">あなたのライフプログレスを測ります。</string>
+    <string name="measure_life_feature_description">あなたの人生の進捗と現在の年を使いやすいカレンダーで確認します。</string>
+    <string name="widget_feature_title">ウィジェット</string>
+    <string name="widget_feature_description">ホームスクリーンに置く大変手軽で便利なウィジェットでいつもあなたのライフプログレスを常に最新に保てます。</string>
+    <string name="theme_feature_title">アプリテーマ</string>
+    <string name="theme_feature_description">Material You「アプリケーションのカラーパレットはユーザの壁紙を元に作成されます．これは android 12 以降で有効です」。</string>
+    <string name="orientations_feature_title">異なるモード</string>
+    <string name="orientations_feature_description">水平モードと垂直モードの両方に対応します。</string>
+    <string name="select_your_birthday_title">あなたの誕生日を選んで下さい</string>
+    <string name="select_your_birthday_description">こんにちは．あなたが参加してくれて私たちは嬉しいです．私たちがあなたの体験を調整するために、まずあなたの誕生を教えてください。</string>
+    <string name="select_your_life_expectancy_title">あなたの平均余命を選択してください</string>
+    <string name="select_your_life_expectancy_description">私たちが知る必要があることの 1 つは、あなたの推定余命です。これは、ライフスタイル、家族歴、全体的な健康状態などのさまざまな要因に基づいて予想される寿命です。あなたの平均余命を知ることで、ライフカレンダーで進捗状況を計算できます。</string>
+    <string name="weekly_notification_channel_name">週ごとの通知</string>
+    <string name="weekly_notification_channel_description">現在のライフプログレスで週ごとの通知を受け取る。</string>
+    <string name="weekly_notification_title">あなたの週ごとのライフプログレス</string>
+    <string name="notifications_disabled_description">許可されていないため、通知は無効になっています。</string>
+    <string name="weekly_notification">週ごとの通知</string>
+    <string name="weekly_notification_description">あなたの現在のライフプログレスで週ごとの通知を受け取ります。</string>
 </resources>

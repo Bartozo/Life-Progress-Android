@@ -152,9 +152,9 @@ private fun WelcomeSection(
 ) {
     Welcome(
         modifier = modifier,
-        title = "Welcome to",
+        title = stringResource(id = R.string.welcome_to),
         titleTextStyle = MaterialTheme.typography.displaySmall,
-        secondaryTitle = "Life Progress",
+        secondaryTitle = stringResource(id = R.string.app_name),
         secondaryTextStyle = MaterialTheme.typography.displaySmall.copy(
             brush  = Brush.linearGradient(
                 colors = listOf(
@@ -170,25 +170,23 @@ private fun WelcomeSection(
         ),
         features = listOf(
             Feature(
-                title = "Measure your Life Progress",
-                subtitle = "See the progress of your life and current year with easy to use calendar.",
+                title = stringResource(id = R.string.measure_life_feature_title),
+                subtitle = stringResource(id = R.string.measure_life_feature_description),
                 image = Icons.Outlined.DateRange
             ),
             Feature(
-                title = "Widget",
-                subtitle = "Always be up to date with your life progress with super handy " +
-                        "and useful widget on your home screen.",
+                title = stringResource(id = R.string.widget_feature_title),
+                subtitle = stringResource(id = R.string.widget_feature_description),
                 image = Icons.Outlined.Widgets
             ),
             Feature(
-                title = "App Theme",
-                subtitle = "Material You (The application color palette is generated based on " +
-                        "the user's wallpaper, only available for android 12 or higher).",
+                title = stringResource(id = R.string.theme_feature_title),
+                subtitle = stringResource(id = R.string.theme_feature_description),
                 image = Icons.Outlined.Palette
             ),
             Feature(
-                title = "Different Modes",
-                subtitle = "Works in both Horizontal and Vertical mode.",
+                title = stringResource(id = R.string.orientations_feature_title),
+                subtitle = stringResource(id = R.string.orientations_feature_description),
                 image = Icons.Outlined.Devices
             )
         ),

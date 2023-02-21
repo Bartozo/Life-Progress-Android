@@ -13,6 +13,8 @@ class UserRepositoryImpl @Inject constructor(
     override val lifeExpectancy: Flow<Int> = prefsStore.lifeExpectancyFlow()
     override val didSeeOnboarding: Flow<Boolean> = prefsStore.didSeeOnboardingFlow()
     override val appTheme: Flow<AppTheme> = prefsStore.appThemeFlow()
+    override val isWeeklyNotificationEnabled: Flow<Boolean> = prefsStore
+        .isWeeklyNotificationEnabledFlow()
 
     override suspend fun updateBirthDay(birthDay: LocalDate) {
         prefsStore.saveBirthDay(birthDay)
@@ -28,5 +30,9 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun updateAppTheme(appTheme: AppTheme) {
         prefsStore.updateAppTheme(appTheme)
+    }
+
+    override suspend fun updateIsWeeklyNotificationEnabled(isEnabled: Boolean) {
+        prefsStore.updateIsWeeklyNotificationEnabled(isEnabled)
     }
 }

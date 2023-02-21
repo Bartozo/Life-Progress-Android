@@ -7,6 +7,7 @@ import com.bartozo.lifeprogress.data.AppTheme
 import com.bartozo.lifeprogress.data.Life
 import com.bartozo.lifeprogress.repository.UserRepository
 import com.bartozo.lifeprogress.ui.appwidgets.LifeProgressWorker
+import com.bartozo.lifeprogress.worker.WeeklyNotificationWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -33,6 +34,10 @@ class ProfileViewModel @Inject constructor(
         get() = userRepository.appTheme
             .stateIn(viewModelScope, SharingStarted.Lazily, AppTheme.SYSTEM_AUTO)
 
+    val isWeeklyNotificationEnabled: StateFlow<Boolean>
+        get() = userRepository.isWeeklyNotificationEnabled
+            .stateIn(viewModelScope, SharingStarted.Lazily, false)
+
     val lifeFlow = combine(
         userRepository.birthDay,
         userRepository.lifeExpectancy
@@ -57,7 +62,20 @@ class ProfileViewModel @Inject constructor(
         userRepository.updateAppTheme(appTheme = appTheme)
     }
 
+    fun updateIsWeeklyNotificationEnabled(isEnabled: Boolean, context: Context) = viewModelScope.launch {
+        userRepository.updateIsWeeklyNotificationEnabled(isEnabled = isEnabled)
+        updateWeeklyNotificationWorker(isEnabled = isEnabled, context = context)
+    }
+
     private fun updateAppWidget(context: Context) {
-        LifeProgressWorker.enqueue(context, true)
+        LifeProgressWorker.enqueue(context = context, force = true)
+    }
+
+    private fun updateWeeklyNotificationWorker(isEnabled: Boolean, context: Context) {
+        if (isEnabled) {
+            WeeklyNotificationWorker.enqueue(context = context, force = true)
+        } else {
+            WeeklyNotificationWorker.cancel(context = context)
+        }
     }
 }

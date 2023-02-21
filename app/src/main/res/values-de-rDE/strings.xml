@@ -52,4 +52,22 @@
     <plurals name="weeks_until_birthday">
         <item quantity="other">%1d Wochen bis zu deinem Geburtstag</item>
     </plurals>
+    <string name="measure_life_feature_title">Messe deinen Lebensfortschritt</string>
+    <string name="measure_life_feature_description">Sieh deinen Lebensfortschritt und das aktuelle Jahr in einem einfach zu bedienenden Kalender.</string>
+    <string name="widget_feature_title">Widget</string>
+    <string name="widget_feature_description">Sei immer aktuell mit praktischen Widgets auf deinem Startbildschirm.</string>
+    <string name="theme_feature_title">App Thema</string>
+    <string name="theme_feature_description">Material You (The Farbpalette wird auf Basis deines Hintergrundbildes generiert. Nur vorhanden für Android 12).</string>
+    <string name="orientations_feature_title">Unterschiedliche Modi</string>
+    <string name="orientations_feature_description">Arbeite im horizontalen oder vertikalen Modus</string>
+    <string name="select_your_birthday_title">Gib deinen Geburtstag an</string>
+    <string name="select_your_birthday_description">Hallo! Wir sind froh, dich an Board zu haben. Bevor wir starten können, lass uns bitte deinen Geburtstag wissen.</string>
+    <string name="select_your_life_expectancy_title">Wähle deinen Lebenserwartung</string>
+    <string name="select_your_life_expectancy_description">Wir benötigen deine Lebenserwartung, welche die Anzahl der gelebten Jahre auf Basis deines Lifestyles, deiner Familie, Geschichte und Gesundheit ist. Damit berechnen wir deinen Fortschritt in deinem Lebenskalender.</string>
+    <string name="weekly_notification_channel_name">Wöchentliche Benachrichtigung</string>
+    <string name="weekly_notification_channel_description">Erhalte wöchentliche Benachrichtigungen über deinen aktuellen Lebensfortschritt</string>
+    <string name="weekly_notification_title">Dein wöchentlicher Lebensfortschritt</string>
+    <string name="notifications_disabled_description">Benachrichtigungen sind deaktiviert, weil die Erlaubnis nicht erteilt wurde</string>
+    <string name="weekly_notification">Wöchentliche Benachrichtigung</string>
+    <string name="weekly_notification_description">Erhalte wöchentliche Benachrichtigungen über deinen aktuellen Lebensfortschritt</string>
 </resources>

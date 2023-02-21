@@ -9,9 +9,11 @@ interface PrefsStore {
     fun lifeExpectancyFlow(): Flow<Int>
     fun didSeeOnboardingFlow(): Flow<Boolean>
     fun appThemeFlow(): Flow<AppTheme>
+    fun isWeeklyNotificationEnabledFlow(): Flow<Boolean>
 
     suspend fun saveBirthDay(birthDay: LocalDate)
     suspend fun saveLifeExpectancy(lifeExpectancy: Int)
     suspend fun updateDidSeeOnboarding(didSeeOnboarding: Boolean)
     suspend fun updateAppTheme(appTheme: AppTheme)
+    suspend fun updateIsWeeklyNotificationEnabled(isEnabled: Boolean)
 }

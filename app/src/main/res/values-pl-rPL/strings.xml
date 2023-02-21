@@ -52,4 +52,22 @@
     <plurals name="weeks_until_birthday">
         <item quantity="other">%1d tygodni do twoich urodzin</item>
     </plurals>
+    <string name="measure_life_feature_title">Zmierz swój postęp w życiu</string>
+    <string name="measure_life_feature_description">Zobacz postęp swojego życia i bieżący rok za pomocą łatwego w obsłudze kalendarza.</string>
+    <string name="widget_feature_title">Widget</string>
+    <string name="widget_feature_description">Bądź zawsze na bieżąco z postępami swojego życia dzięki super poręcznemu i przydatnemu widżetowi na ekranie głównym.</string>
+    <string name="theme_feature_title">Motyw aplikacji</string>
+    <string name="theme_feature_description">Material You (Paleta kolorów aplikacji jest generowana na podstawie tapety użytkownika, dostępne tylko dla Androida 12 lub nowszego).</string>
+    <string name="orientations_feature_title">Różne tryby</string>
+    <string name="orientations_feature_description">Działa zarówno w trybie poziomym, jak i pionowym.</string>
+    <string name="select_your_birthday_title">Podaj datę urodzenia</string>
+    <string name="select_your_birthday_description">Cześć! Cieszymy się, że jesteś na pokładzie. Zanim będziemy mogli dostosować Twoje wrażenia, podaj nam swoją datę urodzenia.</string>
+    <string name="select_your_life_expectancy_title">Wybierz swoją oczekiwaną długość życia</string>
+    <string name="select_your_life_expectancy_description">Jedną z rzeczy, które musimy wiedzieć, jest szacowana oczekiwana długość życia, czyli liczba lat, jaką możesz przeżyć na podstawie różnych czynników, takich jak styl życia, historia rodziny i ogólny stan zdrowia. Znając oczekiwaną długość życia, możemy obliczyć postępy w Twoim kalendarzu życia.</string>
+    <string name="weekly_notification_channel_name">Cotygodniowe powiadomienia</string>
+    <string name="weekly_notification_channel_description">Otrzymuj cotygodniowe powiadomienie z aktualnym progresem w życiu.</string>
+    <string name="weekly_notification_title">Twój tygodniowy postęp w życiu</string>
+    <string name="notifications_disabled_description">Powiadomienia są wyłączone, ponieważ nie udzielono pozwolenia.</string>
+    <string name="weekly_notification">Cotygodniowe powiadomienie</string>
+    <string name="weekly_notification_description">Otrzymuj cotygodniowe powiadomienie z aktualnym progresem w życiu.</string>
 </resources>

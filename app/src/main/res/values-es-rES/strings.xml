@@ -52,4 +52,22 @@
     <plurals name="weeks_until_birthday">
         <item quantity="other">%1d semanas para tu cumpleaños</item>
     </plurals>
+    <string name="measure_life_feature_title">Mide tu progreso de vida</string>
+    <string name="measure_life_feature_description">Descubre el progreso de tu vida y del año actual con un calendario muy fácil de usar.</string>
+    <string name="widget_feature_title">Widget</string>
+    <string name="widget_feature_description">Esté siempre al día con su progreso de vida con una widget muy útil para su pantalla de inicio.</string>
+    <string name="theme_feature_title">Tema de la aplicación</string>
+    <string name="theme_feature_description">Material You (La paleta de color de la aplicación es generada basada en el fondo de pantalla del usuario, solo disponible en android 12 y posterior.</string>
+    <string name="orientations_feature_title">Diferentes modos</string>
+    <string name="orientations_feature_description">Funciona en ambos modos, horizontal y vertical.</string>
+    <string name="select_your_birthday_title">Selecciona tu cumpleaños</string>
+    <string name="select_your_birthday_description">Hola! Estamos contentos de tenerte aquí. Antes de que podamos personalizar tu experiencia, por favor dinos cual es tu fecha de nacimiento.</string>
+    <string name="select_your_life_expectancy_title">Selecciona tu expectativa de vida</string>
+    <string name="select_your_life_expectancy_description">Una de las cosas que necesitamos saber es tu expectativa de viad, que es la cantidad de años que tu esperas vivir basado en diferentes factores como estilo de vida, historia familiar, y tu salud en general. Sabiendo tu expectativa de vida, podemos calcular el progreso en tu calendario de viad.</string>
+    <string name="weekly_notification_channel_name">Notificación semanal</string>
+    <string name="weekly_notification_channel_description">Recibe notificaciones semanales con el actual progreso de vida.</string>
+    <string name="weekly_notification_title">Tu progreso de vida semanal</string>
+    <string name="notifications_disabled_description">Las notificaciones estan deshabilitadas, porque no has aceptado los permisos.</string>
+    <string name="weekly_notification">Notificación semanal</string>
+    <string name="weekly_notification_description">Recibe notificaciones semanales con el actual progreso de vida.</string>
 </resources>
