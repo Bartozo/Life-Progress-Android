@@ -25,9 +25,11 @@ about
 - 👨‍🎨 Creator of the app icon is [akhmadmaulidi](https://twitter.com/akhmadmaulidi)
 
 # Contributors
+- Yoichi Iida Added 🇯🇵 Japanese translations.
 - [Kristóf Kékesi](https://twitter.com/KristofKekesi) Added 🇭🇺 Hungarian translations.
 - [Sebastian Röhl](https://twitter.com/SebastianRoehl) Added 🇩🇪 German translations.
 - [Federico Pintaluba](https://twitter.com/fedpinx) Added 🇪🇸 Spanish translations.
+- [Yasuhito Nagatomo](https://twitter.com/AtarayoSD) Added 🇯🇵 Japanese translations.
 
 # Thanks
 - [Tien Pham](https://twitter.com/tienphaw) for the creating iOS app. It inspired me to create an android version.
