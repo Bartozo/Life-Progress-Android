@@ -66,7 +66,7 @@
     <string name="select_your_life_expectancy_description">Una de las cosas que necesitamos saber es tu expectativa de viad, que es la cantidad de años que tu esperas vivir basado en diferentes factores como estilo de vida, historia familiar, y tu salud en general. Sabiendo tu expectativa de vida, podemos calcular el progreso en tu calendario de viad.</string>
     <string name="weekly_notification_channel_name">Notificación semanal</string>
     <string name="weekly_notification_channel_description">Recibe notificaciones semanales con el actual progreso de vida.</string>
-    <string name="weekly_notification_title">Notificación semanal</string>
+    <string name="weekly_notification_title">Tu progreso de vida semanal</string>
     <string name="notifications_disabled_description">Las notificaciones estan deshabilitadas, porque no has aceptado los permisos.</string>
     <string name="weekly_notification">Notificación semanal</string>
     <string name="weekly_notification_description">Recibe notificaciones semanales con el actual progreso de vida.</string>
