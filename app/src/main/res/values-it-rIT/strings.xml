@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Life Progress</string>
+    <string name="return_to_previous_screen">Torna alla schermata precedente</string>
+    <string name="app_widget_life_calendar_description">Widget del calendario della vita</string>
+    <string name="pin_unavailable">Il fissaggio non è supportato nel lancher di default</string>
+    <string name="welcome_to">Benvenuto su</string>
+    <string name="friendly_reminder_that">Promemoria amichevole che non vivrai per sempre.</string>
+    <string name="before_we_continue">Prima di continuare, configura il tuo profilo.</string>
+    <string name="user">Utente</string>
+    <string name="your_birthday">Il tuo compleanno</string>
+    <string name="life_expectancy">Aspettativa di vita</string>
+    <string name="themes">Temi</string>
+    <string name="system_auto_theme">Tema del sistema</string>
+    <string name="light_theme">Predefinito</string>
+    <string name="dark_theme">Predefinito scuro</string>
+    <string name="app_widgets">Widget dell\'app</string>
+    <string name="life_calendar_card_title">Calendario della vita come widget</string>
+    <string name="life_calendar_card_description">Visualizza il completamento della tua vita con questo utile widget sulla tua home screen.</string>
+    <string name="year_progress">Completamento anno: %1$s</string>
+    <string name="life_progress">Completamento vita: %1$s</string>
+    <string name="profile">Profilo</string>
+    <string name="about_life_progress">Informazioni su Life Progress</string>
+    <string name="how_it_works">Come funziona</string>
+    <string name="calendar_for_your_life_title">Un calendario della tua vita</string>
+    <string name="calendar_for_your_life_description">Ciascuna casella che vedi sullo schermo rappresenta una settimana della tua vita. La prima casella (in alto a sinistra) è la settimana in cui sei nato.</string>
+    <string name="each_row_title">Ciascuna riga di 52 caselle rappresenta un anno.</string>
+    <string name="each_row_description">Questo è come appare il tuo anno corrente, vedi se riesci a trovarlo sul calendario.</string>
+    <string name="last_thing_title">Ultima cosa!</string>
+    <string name="last_thing_description">Prova a fare tap sul calendario e vedere cosa succede.</string>
+    <string name="learn_more">Scopri di più</string>
+    <string name="your_life_in_weeks_title">La tua vita in settimane</string>
+    <string name="your_life_in_weeks_description">Questa idea è stata originariamente introdotta in un articolo di Tim Urban.</string>
+    <string name="what_are_you_doing_with_your_life_description">Il video fenomenale di Kurzgesagt su questo argomento (in inglese).</string>
+    <string name="support">Supporto</string>
+    <string name="support_project_title">Supporta il progetto</string>
+    <string name="support_project_description">Se ti piace usare questa applicazione e vorresti che avesse nuove funzionalità, puoi supportare lo sviluppo di questo progetto offrendomi un caffè.</string>
+    <string name="open_source_card_title">Il progetto è open source!</string>
+    <string name="open_source_card_description">Guarda come è stato creato questo progetto e contribuisci allo sviluppo. Consulta il codice su GitHub.</string>
+    <string name="continue_button_text">Continua</string>
+    <string name="profile_button_text">Profilo</string>
+    <string name="about_this_app_button_text">Informazioni su questa app</string>
+    <string name="rate_app_button_text">Valuta questa app</string>
+    <string name="share_feedback_button_text">Invia un feedback</string>
+    <string name="measure_life_feature_title">Misura il completamento della tua vita</string>
+    <string name="measure_life_feature_description">Visualizza il completamento della tua vita e dell\'anno corrente con un calendario facile da utilizzare.</string>
+    <string name="widget_feature_title">Widget</string>
+    <string name="widget_feature_description">Rimani sempre aggiornato sul il completamento della tua vita con widget super maneggiabili nella tua home screen.</string>
+    <string name="theme_feature_title">Tema dell\'app</string>
+    <string name="theme_feature_description">Material You (la palette dei colori dell\'applicazione è generata sulla base dello sfondo dell\'utente, disponibile solo su Android 12 o superiore).</string>
+    <string name="orientations_feature_title">Diversi orientamenti</string>
+    <string name="orientations_feature_description">Funziona sia in orientamento orizzontale sia in verticale.</string>
+    <string name="select_your_birthday_title">Seleziona il tuo compleanno</string>
+    <string name="select_your_birthday_description">Ciao! Siamo lieti di averti a bordo. Prima di poter personalizzare la tua esperienza, permettici di sapere la tua data di nascita.</string>
+    <string name="select_your_life_expectancy_title">Seleziona la tua aspettativa di vita</string>
+    <string name="select_your_life_expectancy_description">Una delle cose che abbiamo bisogno di sapere è la stima della durata della tua vita, che è il numero di anni che ti aspetti di vivere basandoti su vari aspetti come il tuo stile di vita, la storia della tua famiglia e il tuo stato di salute. Conoscendo la tua aspettativa di vita, possiamo calcolare il completamento nel tuo calendario della vita.</string>
+    <string name="weekly_notification_channel_name">Notifiche settimanali</string>
+    <string name="weekly_notification_channel_description">Ricevi notifiche settimanali con il completamento corrente della tua vita.</string>
+    <string name="weekly_notification_title">Il tuo completamento della vita settimanale</string>
+    <string name="notifications_disabled_description">Le notifiche sono disabilitate perché l\'autorizzazione non è stata concessa.</string>
+    <string name="weekly_notification">Notifiche settimanali</string>
+    <string name="weekly_notification_description">Ricevi una notifica settimanale con il completamento corrente della tua vita</string>
+
+    <plurals name="weeks_spent">
+        <item quantity="other">%1d settimane trascorse</item>
+    </plurals>
+
+    <plurals name="weeks_left">
+        <item quantity="other">%1d settimana rimanenti</item>
+    </plurals>
+
+    <plurals name="weeks_until_birthday">
+        <item quantity="other">%1d settimane al tuo compleanno</item>
+    </plurals>
+
+</resources>
