@@ -14,10 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.bartozo.lifeprogress.R
 import com.bartozo.lifeprogress.ui.screens.*
 import com.bartozo.lifeprogress.util.supportWideScreen
 
@@ -150,7 +152,7 @@ private fun WelcomeBottomBar(
                 onClick = onPrimaryActionClicked,
                 colors = primaryActionColors
             ) {
-                Text("Continue")
+                Text(stringResource(id = R.string.continue_button_text))
             }
         }
     }
