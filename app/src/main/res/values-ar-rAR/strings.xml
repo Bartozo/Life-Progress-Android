@@ -1,5 +1,5 @@
 <resources>
-	<string name="app_name">التقدم الحياتي</string>
+	<string name="app_name">Life Progress</string>
 	<string name="navigation">قائمة "المزيد"</string>
 	<string name="return_to_previous_screen">العودة إلى الشاشة السابقة</string>
 	<string name="app_widget_life_calendar_description">القطعة لتقويم الحياة</string>
@@ -38,9 +38,6 @@
 	<string name="support_project_description">إذا كنت تستمتع باستخدام هذا التطبيق وتريده أن يحتوي على المزيد من الميزات، فيمكنك دعم تطوير هذا المشروع عن طريق شراء قهوة لي.</string>
 	<string name="open_source_card_title">المشروع مفتوح المصدر!</string>
 	<string name="open_source_card_description">تعرف على كيفية إنشاء هذا المشروع والمساهمة فيه. تحقق من الرمز على GitHub.</string>
-	<string name="weeks_spent" />
-	<string name="weeks_left" />
-	<string name="weeks_until_birthday" />
 	<string name="continue_button_text">متابعة</string>
 	<string name="profile_button_text">الملف الشخصي</string>
 	<string name="about_this_app_button_text">حول هذا التطبيق</string>
@@ -58,7 +55,7 @@
 	<string name="select_your_birthday_description">مرحباً! يسعدنا انضمامك إلينا. قبل أن نتمكن من تخصيص تجربة سفرك، يررجى إخبارنا بتاريخ ميلادك.</string>
 	<string name="select_your_life_expectancy_title">حدد متوسط العمر المتوقع</string>
 	<string name="select_your_life_expectancy_description">أحد الأشياء التي نحتاج إلى معرفتها هو متوسط العمر المتوقع، وهو عدد السنوات التي تتوقع أن تعيشها بناءً على عوامل مختلفة مثل نمط ححياتك وتاريخ عائلتك وصحتك العامة. من خلال معرفة متوسط العمر المتوقع، يمكننا حساب التقدم في تقويم حياتك.</string>
-	<string name="weekly_notification_channel_name">إشعار NFA الأسبوعي</string>
+	<string name="weekly_notification_channel_name">إشعار الأسبوعي</string>
 	<string name="weekly_notification_channel_description">تلقي إشعار أسبوعي مع تقدم الحياة الحالية.</string>
 	<string name="weekly_notification_title">تقدم حياتك الأسبوعي</string>
 	<string name="notifications_disabled_description">تم تعطيل الإشعارات، لأنه لم يتم منح الإذن.</string>
