@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Life Progress</string>
+    <string name="navigation">قائمة "المزيد"</string>
+    <string name="return_to_previous_screen">العودة إلى الشاشة السابقة</string>
+    <string name="app_widget_life_calendar_description">القطعة لتقويم الحياة</string>
+    <string name="pin_unavailable">التثبيت غير مدعوم في المشغل الافتراضي</string>
+    <string name="welcome_to">اهلاً وسهلاً بك في</string>
+    <string name="friendly_reminder_that">تذكير ودي بأنك لن تعيش ش إلى الأبد.</string>
+    <string name="before_we_continue">قبل المتابعة، لنقم بإعداد ملفك الشخصي</string>
+    <string name="user">المستخدِم</string>
+    <string name="your_birthday">تاريخ ميلادك</string>
+    <string name="life_expectancy">العمر المتوقع</string>
+    <string name="themes">المحاور</string>
+    <string name="system_auto_theme">النظام تلقائي</string>
+    <string name="light_theme">التخلف عن السداد</string>
+    <string name="dark_theme">ظلام افتراضي</string>
+    <string name="app_widgets">ودجات التطبيق</string>
+    <string name="life_calendar_card_title">تقويم الحياة كقطعة</string>
+    <string name="life_calendar_card_description">شاهد تقدم الحياة الحالي باستخدام هذه الأداة المفيدة على شاشتك الرئيسية.</string>
+    <string name="year_progress">سنة التقدم: %1$s</string>
+    <string name="life_progress">تقدم الحياة: %1$s</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="about_life_progress">نبذة عن Life Progress</string>
+    <string name="how_it_works">طريقة العمل</string>
+    <string name="calendar_for_your_life_title">تقويم لحياتك</string>
+    <string name="calendar_for_your_life_description">كل مربع تراه على الشاشة يمثل أسبوعًا في حيياتك. المربع الأول (الموجود في أعلى اليسار) هو الأسبوع الذي ولدت فيه.</string>
+    <string name="each_row_title">كل صف من 52 أسبوعا يشكل سنة واحدة.</string>
+    <string name="each_row_description">هذا هو ما تبدو عليه السنة الحالية، ومعرفة ما إذا كان يمكنك اكتشافها في التقويم.</string>
+    <string name="last_thing_title">آخر شيء</string>
+    <string name="last_thing_description">حاول النقر على التقويم وشاهد ما يحدث.</string>
+    <string name="learn_more">تعرف على المزيد</string>
+    <string name="your_life_in_weeks_title">حياتك في أسابيع</string>
+    <string name="your_life_in_weeks_description">تم تقديم هذه الفكرة في الأصل في مقال بقلم تيم أوربان.</string>
+    <string name="what_are_you_doing_with_your_life_description">فيديو Kurzgesagt الهائل حول هذا الموضوع.</string>
+    <string name="support">الدعم</string>
+    <string name="support_project_title">ادعم هذا المشروع</string>
+    <string name="support_project_description">إذا كنت تستمتع باستخدام هذا التطبيق وتريده أن يحتوي على المزيد من الميزات، فيمكنك دعم تطوير هذا المشروع عن طريق شراء قهوة لي.</string>
+    <string name="open_source_card_title">المشروع مفتوح المصدر!</string>
+    <string name="open_source_card_description">تعرف على كيفية إنشاء هذا المشروع والمساهمة فيه. تحقق من الرمز على GitHub.</string>
+    <string name="continue_button_text">متابعة</string>
+    <string name="profile_button_text">الملف الشخصي</string>
+    <string name="about_this_app_button_text">حول هذا التطبيق</string>
+    <string name="rate_app_button_text">تقييم التطبيق</string>
+    <string name="share_feedback_button_text">مشاركة الملاحظات. </string>
+    <string name="measure_life_feature_title">قياس تقدم حياتك</string>
+    <string name="measure_life_feature_description">شاهد تقدم حياتك والسنة الحالية باستخدام تقويم سهل الاستخدام.</string>
+    <string name="widget_feature_title">ويدجات</string>
+    <string name="widget_feature_description">كن دائمًا على اطلاع دائم بتقدم ححياتك باستخدام أداة سهلة الاستخدام ومفيدة للغاية على شاشتك الرئيسية.</string>
+    <string name="theme_feature_title">قالب التطبيق</string>
+    <string name="theme_feature_description">المواد أنت (يتم إنشاء لوحة ألوان التطبيق استنادًا إلى خلفيةة المستخدم، وهي متوفرة فقط لنظام Android 12 أو أعلى).</string>
+    <string name="orientations_feature_title">أوضاع مختلفة</string>
+    <string name="orientations_feature_description">يعمل في كل من الوضع الأفقي والرأسي.</string>
+    <string name="select_your_birthday_title">اختر تاريخ ميلادك</string>
+    <string name="select_your_birthday_description">مرحباً! يسعدنا انضمامك إلينا. قبل أن نتمكن من تخصيص تجربة سفرك، يررجى إخبارنا بتاريخ ميلادك.</string>
+    <string name="select_your_life_expectancy_title">حدد متوسط العمر المتوقع</string>
+    <string name="select_your_life_expectancy_description">أحد الأشياء التي نحتاج إلى معرفتها هو متوسط العمر المتوقع، وهو عدد السنوات التي تتوقع أن تعيشها بناءً على عوامل مختلفة مثل نمط ححياتك وتاريخ عائلتك وصحتك العامة. من خلال معرفة متوسط العمر المتوقع، يمكننا حساب التقدم في تقويم حياتك.</string>
+    <string name="weekly_notification_channel_name">إشعار الأسبوعي</string>
+    <string name="weekly_notification_channel_description">تلقي إشعار أسبوعي مع تقدم الحياة الحالية.</string>
+    <string name="weekly_notification_title">تقدم حياتك الأسبوعي</string>
+    <string name="notifications_disabled_description">تم تعطيل الإشعارات، لأنه لم يتم منح الإذن.</string>
+    <string name="weekly_notification">إشعار NFA الأسبوعي</string>
+    <string name="weekly_notification_description">تلقي إشعار أسبوعي مع تقدم حياتك الحالية.</string>
+
+    <plurals name="weeks_spent">
+        <item quantity="other">%1d قضى أسابيع</item>
+    </plurals>
+
+    <plurals name="weeks_left">
+        <item quantity="other">%1d أسابيع متبقية</item>
+    </plurals>
+
+    <plurals name="weeks_until_birthday">
+        <item quantity="other">%1d أسابيع حتى عيد ميلادك</item>
+    </plurals>
+</resources>
