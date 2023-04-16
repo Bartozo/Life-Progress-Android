@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">Hayat Yolculuğu</string>
+    <string name="navigation">Menü</string>
+    <string name="return_to_previous_screen">Önceki ekrana geri dön</string>
+    <string name="app_widget_life_calendar_description">Yaşam takvimi için eklenti</string>
+    <string name="pin_unavailable">İğneleme özelliği başlatıcı tarafından desteklenmiyor</string>
+
+    <string name="welcome_to">Hoş geldiniz</string>
+    <string name="friendly_reminder_that">Unutmayın, sonsuza kadar yaşamayacaksınız.</string>
+    <string name="before_we_continue">Devam etmeden önce profilinizi oluşturalım.</string>
+    <string name="user">Kullanıcı</string>
+    <string name="your_birthday">Doğum tarihin</string>
+    <string name="life_expectancy">Beklenen yaşam süresi</string>
+    <string name="themes">Temalar</string>
+    <string name="system_auto_theme">Sistem</string>
+    <string name="light_theme">Varsayılan</string>
+    <string name="dark_theme">Karanlık</string>
+    <string name="app_widgets">Uygulama eklentileri</string>
+    <string name="life_calendar_card_title">Eklenti olarak yaşam takvimi</string>
+    <string name="life_calendar_card_description">Bu eklenti ile mevcut yaşam ilerlemenizi ana ekranınızda görüntüleyin.</string>
+    <string name="year_progress">Yıllık ilerleme: %1$s</string>
+    <string name="life_progress">Hayat Yolculuğu: %1$s</string>
+    <string name="profile">Profil</string>
+    <string name="about_life_progress">Hayat Yolculuğu Hakkında</string>
+    <string name="how_it_works">Nasıl çalışır</string>
+    <string name="calendar_for_your_life_title">Hayatınız için bir takvim</string>
+    <string name="calendar_for_your_life_description">EKranınızda gördüğünüz her kara, hayatınızdaki bir haftayı temsil eder. İlk kare (sol üstteki) doğduğunuz haftadır.</string>
+    <string name="each_row_title">52 haftalık her satır bir yılı oluşturur</string>
+    <string name="each_row_description">İşte bu yılın görünümü. Bakalım takvimde onu bulabilecek misiniz?</string>
+    <string name="last_thing_title">Son şey!</string>
+    <string name="last_thing_description">Takvime dokunmayı deneyin ve ne olduğunu görün.</string>
+    <string name="learn_more">Daha fazla</string>
+    <string name="your_life_in_weeks_title">Haftalarla Senin Yaşamın</string>
+    <string name="your_life_in_weeks_description">Bu fikir ilk olarak Tim Urban tarafından yazılan bir makalede tanıtılmıştır.</string>
+    <string name="what_are_you_doing_with_your_life_title" translatable="false">Hayatınızda ne yapıyorsunuz? Bir Son</string>
+    <string name="what_are_you_doing_with_your_life_description">Konuyla ilgili Kurzgesagt\'ın olağanüstü videosu.</string>
+    <string name="support">Destek</string>
+    <string name="support_project_title">Bu projeyi destekle</string>
+    <string name="support_project_description">Eğer bu uygulamayı kullanmaktan keyif alıyorsanız ve daha fazla özellik istiyorsanız, bu projenin gelişimine destek olmak için bana bir kahve alabilirsiniz.</string>
+    <string name="open_source_card_title">Bu proje açık kaynaklıdır!</string>
+    <string name="open_source_card_description">Bu projenin nasıl oluşturulduğunu öğrenin ve katkıda bulunun. Kodları GitHub'da inceleyin.</string>
+`
+    <plurals name="weeks_spent">
+        <item quantity="other">%1d hafta harcanmış</item>
+    </plurals>
+
+    <plurals name="weeks_left">
+        <item quantity="other">%1d hafta kalmış</item>
+    </plurals>
+
+    <plurals name="weeks_until_birthday">
+        <item quantity="other">Doğum gününüze %1d hafta kaldı</item>
+    </plurals>
+
+    <!--Buttons-->
+    <string name="continue_button_text">Devam et</string>
+    <string name="profile_button_text">Profil</string>
+    <string name="about_this_app_button_text">Uygulama Hakkında</string>
+    <string name="rate_app_button_text">Puan Ver</string>
+    <string name="share_feedback_button_text">Geribildirim</string>
+
+    <!--Onboarding-->
+    <string name="measure_life_feature_title">Hayat İlerlemenizi Ölçün</string>
+    <string name="measure_life_feature_description">Kullanımı kolay takvim ile hayatınızın ilerlemesini ve mevcut yılınızı görün.</string>
+    <string name="widget_feature_title">Eklenti</string>
+    <string name="widget_feature_description">Ana ekranınızdaki son derece kullanışlı ve faydalı eklenti ile hayatınızın ilerlemesinden her zaman haberdar olun.</string>
+    <string name="theme_feature_title">Uygulama Teması</string>
+    <string name="theme_feature_description">Material You (Uygulama renkleri duvar kağıdına göre üretilir. Sadece Android 12 ve üzerindeki sürümlerde geçerlidir).</string>
+    <string name="orientations_feature_title">Farklı Modlar</string>
+    <string name="orientations_feature_description">Hem yatay hem de dikey modda çalışır.</string>
+    <string name="select_your_birthday_title">Doğum tarihinizi seçin</string>
+    <string name="select_your_birthday_description">Merhaba! Aramızda olduğunuz için mutluyuz. Deneyiminizi kişiselleştirebilmemiz için lütfen doğum tarihinizi bize bildirin.</string>
+    <string name="select_your_life_expectancy_title">Beklenen yaşam süresini seçin</string>
+    <string name="select_your_life_expectancy_description">Bilmemiz gereken şeylerden biri, tahmini yaşam sürenizdir. Yaşam tarzınız, aile geçmişiniz ve genel sağlık durumunuz gibi çeşitli faktörlere dayanarak tahmin ettiğiniz yaşam yılı sayısıdır. Yaşam beklentinizi bilerek, Yaşam Takviminizdeki ilerlemeyi hesaplayabiliriz.</string>
+
+    <!--Weekly Notifications-->
+    <string name="weekly_notification_channel_name">Haftalık Bildirim</string>
+    <string name="weekly_notification_channel_description">Mevcut yaşam ilerlemenizle ilgili haftalık bildirimler alın.</string>
+    <string name="weekly_notification_title">Haftalık Hayat Yolculuğunuz</string>
+    <string name="notifications_disabled_description">İzin verilmediği için bildirimler devre dışı bırakıldı.</string>
+    <string name="weekly_notification">Haftalık Bildirim</string>
+    <string name="weekly_notification_description">Mevcut yaşam ilerlemenizle ilgili haftalık bildirimler alın.</string>
+</resources>
