@@ -32,6 +32,7 @@ about
 - [Yasuhito Nagatomo](https://twitter.com/AtarayoSD) Added 🇯🇵 Japanese translations.
 - [Lorenzo Vainigli](https://twitter.com/lorenzovngl_dev) Added 🇮🇹 Italian translations and helped in fixing bugs.
 - [Abdul Muizz](https://twitter.com/abdulmuizz_0903) Added 🇦🇪 Arabic translations.
+- [Emre Çoban](https://github.com/emrecoban) Added 🇹🇷 Turkish translations.
 
 # Thanks
 - [Tien Pham](https://twitter.com/tienphaw) for the creating iOS app. It inspired me to create an android version.
