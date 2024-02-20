@@ -32,8 +32,14 @@ class LifeProgressWidget : GlanceAppWidget() {
     // Override the state definition to use our custom one using Kotlin serialization
     override val stateDefinition = LifeProgressStateDefinition
 
+    override suspend fun provideGlance(context: Context, id: GlanceId) {
+        provideContent {
+            Content()
+        }
+    }
+
     @Composable
-    override fun Content() {
+    fun Content() {
         // Get the stored stated based on our custom state definition.
         val lifeState = currentState<LifeState>()
 

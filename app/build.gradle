@@ -46,6 +46,7 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    namespace 'com.bartozo.lifeprogress'
 }
 
 dependencies {
@@ -93,7 +94,8 @@ dependencies {
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.26.3-beta"
 
     // Glance
-    implementation("androidx.glance:glance-appwidget:1.0.0-alpha05")
+    implementation("androidx.glance:glance-appwidget:1.0.0")
+    implementation "androidx.glance:glance-material3:1.0.0"
 
     // WorkManager
     implementation "androidx.work:work-runtime-ktx:2.7.1"
