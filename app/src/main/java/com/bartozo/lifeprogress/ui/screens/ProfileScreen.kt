@@ -47,6 +47,7 @@ import com.bartozo.lifeprogress.ui.theme.LightTheme
 import com.bartozo.lifeprogress.ui.viewmodels.ProfileViewModel
 import com.bartozo.lifeprogress.util.hasNotificationPermission
 import com.bartozo.lifeprogress.util.supportWideScreen
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -90,6 +91,7 @@ fun ProfileScreen(
 
     val scrollState = rememberScrollState()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    val coroutineScope = rememberCoroutineScope()
 
 
     BackHandler(onBack = navigateBackToHomeScreen)
@@ -143,7 +145,9 @@ fun ProfileScreen(
                     isRequestPinAppWidgetSupported = widgetManager.isRequestPinAppWidgetSupported,
                     onPinAppWidgetClicked = {
                         // The application has only one widget
-                        widgetProviders.first().pin(context, life)
+                        coroutineScope.launch {
+                            widgetProviders.first().pin(context, life)
+                        }
                     }
                 )
             }
@@ -569,7 +573,7 @@ private fun AppWidgetCard(
  * depending on the default launcher implementation. Also, it does not callback if user cancels the
  * request.
  */
-private fun AppWidgetProviderInfo.pin(context: Context, life: Life) {
+private suspend fun AppWidgetProviderInfo.pin(context: Context, life: Life) {
     val successCallback = PendingIntent.getBroadcast(
         context,
         0,
