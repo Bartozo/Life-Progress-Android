@@ -78,14 +78,14 @@ fun BirthDayCard(
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
         },
-        headlineText = {
+        headlineContent = {
             Text(
                 text = stringResource(id = com.bartozo.lifeprogress.R.string.your_birthday),
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.titleMedium
             )
         },
-        supportingText = {
+        supportingContent = {
             Text(
                 modifier = Modifier.padding(top = 4.dp),
                 text = birthDay.toString(),

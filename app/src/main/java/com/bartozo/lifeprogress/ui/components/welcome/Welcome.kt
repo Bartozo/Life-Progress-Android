@@ -198,10 +198,10 @@ private fun FeatureListItem(
                 contentDescription = null
             )
         },
-        headlineText = {
+        headlineContent = {
             Text(feature.title)
         },
-        supportingText = {
+        supportingContent = {
             Text(feature.subtitle)
         }
     )

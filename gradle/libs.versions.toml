@@ -1,0 +1,118 @@
+[versions]
+# Kotlin
+kotlin = "2.0.21"
+
+# Android
+androidGradlePlugin = "8.9.0"
+compileSdk = "36"
+minSdk = "26"
+targetSdk = "36"
+
+# Core dependencies
+core-ktx = "1.16.0"
+lifecycle-runtime-ktx = "2.9.2"
+kotlinx-serialization = "1.5.1"
+kotlinx-coroutines-play-services = "1.8.1"
+
+# Testing
+junit = "4.13.2"
+androidx-test-ext = "1.1.5"
+androidx-test-espresso = "3.5.1"
+
+# Compose
+navigation-compose = "2.9.3"
+compose-ui = "1.9.0"
+activity-compose = "1.10.1"
+constraintlayout-compose = "1.1.1"
+compose-material3 = "1.3.2"
+material = "1.12.0"
+compose-material-icons = "1.7.8"
+compose-material-dialogs = "0.9.0"
+
+# DataStore
+datastore-preferences = "1.1.7"
+
+# Dependency Injection - Hilt
+hilt-android = "2.56.2"
+hilt-navigation-compose = "1.2.0"
+hilt-work = "1.2.0"
+
+# Accompanist
+accompanist-systemuicontroller = "0.32.0"
+
+# Glance
+glance-appwidget = "1.0.0-alpha05"
+
+# WorkManager
+work-runtime-ktx = "2.10.3"
+
+# Splash screen
+core-splashscreen = "1.0.1"
+
+# KSP
+ksp = "2.0.21-1.0.26"
+
+[libraries]
+# Kotlin
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "kotlinx-coroutines-play-services" }
+
+# Testing
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext" }
+androidx-test-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-test-espresso" }
+
+# Compose
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose-ui" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose-ui" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
+androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose-ui" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose-ui" }
+androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose-ui" }
+androidx-constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintlayout-compose" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose-material3" }
+google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-compose-material-icons = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "compose-material-icons" }
+compose-material-dialogs-datetime = { group = "io.github.vanpra.compose-material-dialogs", name = "datetime", version.ref = "compose-material-dialogs" }
+
+# DataStore
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore-preferences" }
+
+# Dependency Injection - Hilt
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt-android" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt-android" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
+androidx-hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hilt-work" }
+androidx-hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hilt-work" }
+
+# Accompanist
+accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist-systemuicontroller" }
+
+# Glance
+androidx-glance-appwidget = { group = "androidx.glance", name = "glance-appwidget", version.ref = "glance-appwidget" }
+
+# WorkManager
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work-runtime-ktx" }
+
+# Splash screen
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "core-splashscreen" }
+
+[plugins]
+# Android
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+
+# Kotlin
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+# KSP
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+# Hilt
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt-android" }

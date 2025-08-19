@@ -30,7 +30,7 @@ fun LifeExpectancyCard(
 
     ListItem(
         modifier = modifier,
-        headlineText = {
+        headlineContent = {
             Text(
                 text = stringResource(id = R.string.life_expectancy),
                 color = MaterialTheme.colorScheme.onSurface,
@@ -67,7 +67,7 @@ fun LifeExpectancyCard(
                 )
             }
         },
-        supportingText = {
+        supportingContent = {
             Slider(
                 modifier = Modifier.offset(
                     x = (-8).dp

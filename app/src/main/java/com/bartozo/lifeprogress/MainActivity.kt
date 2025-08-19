@@ -20,28 +20,23 @@ import com.bartozo.lifeprogress.ui.navigation.Screen
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.viewmodels.MainEventState
 import com.bartozo.lifeprogress.ui.viewmodels.MainViewModel
-import com.google.android.play.core.appupdate.AppUpdateInfo
-import com.google.android.play.core.appupdate.AppUpdateManager
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.appupdate.testing.FakeAppUpdateManager
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.android.play.core.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    /*
     companion object {
         private const val APP_UPDATE_TYPE_SUPPORTED = AppUpdateType.IMMEDIATE
         private const val REQUEST_UPDATE = 100
     }
+    */
 
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        checkForUpdates()
+        // checkForUpdates()
         installSplashScreen().apply {
             setKeepOnScreenCondition {
                 viewModel.mainUiState.value == MainEventState.Loading
@@ -79,6 +74,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    /*
     private fun checkForUpdates() {
         val appUpdateManager : AppUpdateManager
         if (BuildConfig.DEBUG) {
@@ -133,4 +129,5 @@ class MainActivity : ComponentActivity() {
             }
             .create().show()
     }
+    */
 }

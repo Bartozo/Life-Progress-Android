@@ -240,14 +240,14 @@ private fun UserSection(
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             },
-            headlineText = {
+            headlineContent = {
                 Text(
                     text = stringResource(id = R.string.weekly_notification),
                     color = MaterialTheme.colorScheme.onSurface,
                     style = MaterialTheme.typography.titleMedium
                 )
             },
-            supportingText = {
+            supportingContent = {
                 Text(
                     modifier = Modifier.padding(top = 4.dp),
                     text = stringResource(id = R.string.weekly_notification_description),
